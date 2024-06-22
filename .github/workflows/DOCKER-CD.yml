@@ -47,8 +47,8 @@ jobs:
 
       - name: docker image 빌드 및 푸시
         run: |
-          docker build --platform linux/amd64 -t lynydoh/nowsopt .
-          docker push lynydoh/nowsopt
+          docker build --platform linux/amd64 -t pickple/PICKPLE-server .
+          docker push pickple/PICKPLE-server
         working-directory: ${{ env.working-directory }}
 
   cd:
