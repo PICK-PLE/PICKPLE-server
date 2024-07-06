@@ -46,6 +46,9 @@ dependencies {
 
 	//junit
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	//sentry
+	implementation 'io.sentry:sentry-spring-boot-starter-jakarta:7.6.0'
 }
 
 tasks.named('test') {
