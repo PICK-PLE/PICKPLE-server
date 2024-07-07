@@ -65,6 +65,9 @@ dependencies {
     //Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
+    
+    //sentry
+    implementation 'io.sentry:sentry-spring-boot-starter-jakarta:7.6.0'
 }
 
 tasks.named('test') {
