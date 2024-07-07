@@ -7,8 +7,12 @@ import org.springframework.http.HttpStatus;
 @Getter
 @AllArgsConstructor
 public enum SuccessCode {
-    TEST_OK_SUCCESS(20000, HttpStatus.OK, "test 조회 성공"),
-    TEST_CREATE_SUCCESS(20100, HttpStatus.CREATED, "test 생성 성공");
+
+    // 200 OK
+    LOGIN_SUCCESS(20000, HttpStatus.OK, "소셜 로그인 성공"),
+    ISSUE_ACCESS_TOKEN_SUCCESS(20001, HttpStatus.OK, "액세스 토큰 재발급 성공"),
+    USER_DELETE_SUCCESS(20002, HttpStatus.OK, "회원 삭제 성공"),
+    LOGOUT_SUCCESS(20003, HttpStatus.OK, "로그아웃 성공");
 
     private final int code;
     private final HttpStatus httpStatus;
