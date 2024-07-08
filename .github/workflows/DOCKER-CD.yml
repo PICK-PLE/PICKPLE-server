@@ -48,8 +48,8 @@ jobs:
 
       - name: docker image 빌드 및 푸시
         run: |
-          docker build --platform linux/amd64 -t pickple/sopt-seminar .
-          docker push pickple/sopt-seminar
+          docker build --platform linux/amd64 -t pickple/pickple-server .
+          docker push pickple/pickple-server
         working-directory: ${{ env.working-directory }}
 
   cd:
