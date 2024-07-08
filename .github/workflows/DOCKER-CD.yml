@@ -2,8 +2,6 @@ name: DOCKER-CD
 on:
   push:
     branches: ["develop"]
-  pull_request:
-    branches: ["develop"]
 jobs:
   ci:
     runs-on: ubuntu-22.04
