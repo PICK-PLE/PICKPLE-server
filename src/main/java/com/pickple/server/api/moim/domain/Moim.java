@@ -49,7 +49,8 @@ public class Moim {
     @Enumerated(EnumType.STRING)
     private MoimState moimState;
 
-    public static Moim of(
+    @Builder
+    public Moim(
             final Long hostId,
             final Category category,
             final boolean isOffline,
@@ -63,19 +64,17 @@ public class Moim {
             final String imageList,
             final MoimState moimState
     ){
-        return Moim.builder()
-                .hostId(hostId)
-                .category(category)
-                .isOffline(isOffline)
-                .spot(spot)
-                .dateList(dateList)
-                .maxGuest(maxGuest)
-                .fee(fee)
-                .questionList(questionList)
-                .title(title)
-                .description(description)
-                .imageList(imageList)
-                .moimState(moimState)
-                .build();
+        this.hostId = hostId;
+        this.category = category;
+        this.isOffline = isOffline;
+        this.spot = spot;
+        this.dateList = dateList;
+        this.maxGuest = maxGuest;
+        this.fee = fee;
+        this.questionList = questionList;
+        this.title = title;
+        this.description = description;
+        this.imageList = imageList;
+        this.moimState = moimState;
     }
 }

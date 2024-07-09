@@ -1,5 +1,6 @@
 package com.pickple.server.api.moimapplication.domain;
 
+import com.pickple.server.api.moim.domain.Moim;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -7,11 +8,11 @@ import org.hibernate.type.SqlTypes;
 
 @Entity
 @Getter
-@Table(name = "moimApplications")
+@Table(name = "moimSubmission")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class MoimApplication {
+public class MoimSubmission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,17 +27,16 @@ public class MoimApplication {
     @JdbcTypeCode(SqlTypes.JSON)
     private String accountList;
 
-    public static MoimApplication of(
+    @Builder
+    public MoimSubmission(
             final Long guestId,
             final Long moimId,
             final String answerList,
             final String accountList
     ){
-        return MoimApplication.builder()
-                .guestId(guestId)
-                .moimId(moimId)
-                .answerList(answerList)
-                .accountList(accountList)
-                .build();
+        this.guestId = guestId;
+        this.moimId = moimId;
+        this.answerList = answerList;
+        this.accountList = accountList;
     }
 }

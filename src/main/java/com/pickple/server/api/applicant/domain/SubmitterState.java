@@ -1,13 +1,13 @@
 package com.pickple.server.api.applicant.domain;
 
-public enum ApplicantState {
+public enum SubmitterState {
     PENDING("pending"),
     APPROVE("approve"),
     REJECT("reject");
 
     public String applicantState;
 
-    ApplicantState(String applicantState){
+    SubmitterState(String applicantState){
         this.applicantState = applicantState;
     }
 }

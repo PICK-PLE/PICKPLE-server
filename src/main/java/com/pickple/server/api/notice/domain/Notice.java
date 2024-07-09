@@ -22,17 +22,16 @@ public class Notice {
 
     private String imageUrl;
 
-    public static Notice of(
-            final Long moimId,
-            final String title,
-            final String content,
-            final String imageUrl
+
+    @Builder
+    public Notice(final Long moimId,
+                  final String title,
+                  final String content,
+                  final String imageUrl
     ){
-        return Notice.builder()
-                .moimId(moimId)
-                .title(title)
-                .content(content)
-                .imageUrl(imageUrl)
-                .build();
+        this.moimId = moimId;
+        this.title = title;
+        this.content = content;
+        this.imageUrl = imageUrl;
     }
 }

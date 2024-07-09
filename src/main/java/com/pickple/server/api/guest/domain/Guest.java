@@ -21,15 +21,14 @@ public class Guest {
 
     private String imageUrl;
 
-    public static Guest of(
+    @Builder
+    public Guest(
             final Long userId,
             final String nickname,
             final String imageUrl
     ){
-        return Guest.builder()
-                .userId(userId)
-                .nickname(nickname)
-                .imageUrl(imageUrl)
-                .build();
+        this.userId = userId;
+        this.nickname = nickname;
+        this.imageUrl = imageUrl;
     }
 }

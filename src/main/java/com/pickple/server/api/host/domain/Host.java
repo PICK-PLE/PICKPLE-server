@@ -21,15 +21,15 @@ public class Host {
 
     private String imageUrl;
 
-    public static Host of(
+
+    @Builder
+    public Host(
             final Long userId,
             final String nickname,
             final String imageUrl
     ){
-        return Host.builder()
-                .userId(userId)
-                .nickname(nickname)
-                .imageUrl(imageUrl)
-                .build();
+        this.userId = userId;
+        this.nickname = nickname;
+        this.imageUrl = imageUrl;
     }
 }
