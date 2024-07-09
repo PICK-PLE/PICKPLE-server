@@ -68,6 +68,10 @@ dependencies {
     
     //sentry
     implementation 'io.sentry:sentry-spring-boot-starter-jakarta:7.6.0'
+
+    //multipart file
+    implementation("software.amazon.awssdk:bom:2.21.0")
+    implementation("software.amazon.awssdk:s3:2.21.0")
 }
 
 tasks.named('test') {
