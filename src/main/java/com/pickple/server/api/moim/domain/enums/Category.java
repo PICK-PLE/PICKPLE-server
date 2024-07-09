@@ -1,6 +1,7 @@
 package com.pickple.server.api.moim.domain.enums;
 
 public enum Category {
+
     NJOB("njob"),
     INVESTMENT("investment"),
     STARTUP("startup"),

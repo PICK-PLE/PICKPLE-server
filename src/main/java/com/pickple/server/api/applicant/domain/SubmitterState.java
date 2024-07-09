@@ -1,6 +1,7 @@
 package com.pickple.server.api.applicant.domain;
 
 public enum SubmitterState {
+
     PENDING("pending"),
     APPROVE("approve"),
     REJECT("reject");
