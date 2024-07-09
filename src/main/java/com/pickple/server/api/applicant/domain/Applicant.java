@@ -1,7 +1,6 @@
 package com.pickple.server.api.applicant.domain;
 
-import com.pickple.server.api.enums.ApplicantState;
-import com.pickple.server.api.enums.Category;
+import com.pickple.server.api.moim.domain.enums.Category;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
