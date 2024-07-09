@@ -2,6 +2,7 @@ package com.pickple.server.api.applicant.domain;
 
 import com.pickple.server.api.guest.domain.Guest;
 import com.pickple.server.api.moim.domain.enums.Category;
+import com.pickple.server.global.common.domain.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
@@ -14,7 +15,7 @@ import org.hibernate.type.SqlTypes;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Submitter {
+public class Submitter extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

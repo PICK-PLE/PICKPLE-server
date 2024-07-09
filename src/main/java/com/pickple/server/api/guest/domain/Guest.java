@@ -2,6 +2,7 @@ package com.pickple.server.api.guest.domain;
 
 import com.pickple.server.api.applicant.domain.Submitter;
 import com.pickple.server.api.user.domain.User;
+import com.pickple.server.global.common.domain.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Guest {
+public class Guest extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

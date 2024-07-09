@@ -1,6 +1,7 @@
 package com.pickple.server.api.moimapplication.domain;
 
 import com.pickple.server.api.moim.domain.Moim;
+import com.pickple.server.global.common.domain.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -12,7 +13,7 @@ import org.hibernate.type.SqlTypes;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class MoimSubmission {
+public class MoimSubmission extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -5,6 +5,7 @@ import com.pickple.server.api.moim.domain.enums.Category;
 import com.pickple.server.api.moim.domain.enums.MoimState;
 import com.pickple.server.api.moimapplication.domain.MoimSubmission;
 import com.pickple.server.api.notice.domain.Notice;
+import com.pickple.server.global.common.domain.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -20,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 
-public class Moim {
+public class Moim extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
