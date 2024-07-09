@@ -1,9 +1,9 @@
 package com.pickple.server.api.enums;
 
 public enum ApplicantState {
-    PENDING("PENDING"),
-    APPROVE("APPROVE"),
-    REJECT("REJECT");
+    PENDING("pending"),
+    APPROVE("approve"),
+    REJECT("reject");
 
     public String applicantState;
 
