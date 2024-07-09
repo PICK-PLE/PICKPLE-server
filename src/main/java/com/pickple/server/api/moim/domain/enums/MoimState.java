@@ -1,4 +1,4 @@
-package com.pickple.server.api.enums;
+package com.pickple.server.api.moim.domain.enums;
 
 public enum MoimState {
     PENDING_PAYMENT("pendinigPayment"),

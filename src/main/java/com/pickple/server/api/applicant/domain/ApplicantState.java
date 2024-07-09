@@ -1,4 +1,4 @@
-package com.pickple.server.api.enums;
+package com.pickple.server.api.applicant.domain;
 
 public enum ApplicantState {
     PENDING("pending"),
