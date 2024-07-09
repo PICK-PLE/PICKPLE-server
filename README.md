@@ -1,4 +1,4 @@
-# PICK!PLE
+# ❕ PICK!PLE
 내가 PICK!한 바로 '그 사람'과 함께하는 클래스 모임
 
 
