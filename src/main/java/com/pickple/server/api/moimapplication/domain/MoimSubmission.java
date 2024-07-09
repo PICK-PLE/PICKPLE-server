@@ -13,13 +13,16 @@ import org.hibernate.type.SqlTypes;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MoimSubmission {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long guestId;
 
-    private Long moimId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "moim_id")
+    private Moim moim;
 
     @JdbcTypeCode(SqlTypes.JSON)
     private String answerList;
@@ -30,12 +33,12 @@ public class MoimSubmission {
     @Builder
     public MoimSubmission(
             final Long guestId,
-            final Long moimId,
+            final Moim moim,
             final String answerList,
             final String accountList
     ){
         this.guestId = guestId;
-        this.moimId = moimId;
+        this.moim = moim;
         this.answerList = answerList;
         this.accountList = accountList;
     }

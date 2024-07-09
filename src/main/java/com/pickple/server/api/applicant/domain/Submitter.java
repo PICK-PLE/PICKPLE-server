@@ -1,8 +1,10 @@
 package com.pickple.server.api.applicant.domain;
 
+import com.pickple.server.api.guest.domain.Guest;
 import com.pickple.server.api.moim.domain.enums.Category;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -13,11 +15,14 @@ import org.hibernate.type.SqlTypes;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Submitter {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long guestId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "guest_id")
+    private Guest guest;
 
     private String intro;
 
@@ -39,7 +44,7 @@ public class Submitter {
 
 
     @Builder
-    public Submitter(final Long guestId,
+    public Submitter(final Guest guest,
                      final String intro,
                      final String goal,
                      final String link,
@@ -49,7 +54,7 @@ public class Submitter {
                      final String email,
                      final SubmitterState submitterState
     ){
-        this.guestId = guestId;
+        this.guest = guest;
         this.intro = intro;
         this.goal = goal;
         this.link = link;

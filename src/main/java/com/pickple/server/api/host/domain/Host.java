@@ -1,7 +1,12 @@
 package com.pickple.server.api.host.domain;
 
+import com.pickple.server.api.moim.domain.Moim;
+import com.pickple.server.api.user.domain.User;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,20 +20,24 @@ public class Host {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private String nickname;
 
     private String imageUrl;
 
+    @OneToMany(mappedBy = "host", cascade = CascadeType.REMOVE)
+    private List<Moim> moims = new ArrayList<>();
 
     @Builder
     public Host(
-            final Long userId,
+            final User user,
             final String nickname,
             final String imageUrl
     ){
-        this.userId = userId;
+        this.user = user;
         this.nickname = nickname;
         this.imageUrl = imageUrl;
     }

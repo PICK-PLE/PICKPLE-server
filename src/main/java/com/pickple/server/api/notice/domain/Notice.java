@@ -1,5 +1,6 @@
 package com.pickple.server.api.notice.domain;
 
+import com.pickple.server.api.moim.domain.Moim;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,11 +11,14 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Notice {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long moimId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "moim_id")
+    private Moim moim;
 
     private String title;
 
@@ -24,12 +28,12 @@ public class Notice {
 
 
     @Builder
-    public Notice(final Long moimId,
+    public Notice(final Moim moim,
                   final String title,
                   final String content,
                   final String imageUrl
     ){
-        this.moimId = moimId;
+        this.moim = moim;
         this.title = title;
         this.content = content;
         this.imageUrl = imageUrl;
