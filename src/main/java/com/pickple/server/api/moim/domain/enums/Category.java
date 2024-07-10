@@ -14,7 +14,7 @@ public enum Category {
     LANGUAGE("language");
     public String category;
 
-    Category(String category){
+    Category(String category) {
         this.category = category;
     }
 }
