@@ -1,7 +1,6 @@
 package com.pickple.server.api.submitter.domain;
 
 import com.pickple.server.api.guest.domain.Guest;
-import com.pickple.server.api.moim.domain.enums.Category;
 import com.pickple.server.global.common.domain.BaseTimeEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -24,7 +23,6 @@ import org.hibernate.type.SqlTypes;
 @Entity
 @Getter
 @Table(name = "submitters")
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Submitter extends BaseTimeEntity {
@@ -46,7 +44,7 @@ public class Submitter extends BaseTimeEntity {
     private String nickname;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    private Category category;
+    private SubmitterCategoryInfo category;
 
     private String plan;
 
@@ -55,14 +53,13 @@ public class Submitter extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private SubmitterState submitterState;
 
-
     @Builder
     public Submitter(final Guest guest,
                      final String intro,
                      final String goal,
                      final String link,
                      final String nickname,
-                     final Category category,
+                     final SubmitterCategoryInfo category,
                      final String plan,
                      final String email,
                      final SubmitterState submitterState
