@@ -26,10 +26,10 @@ public class SecurityConfig {
             "/api/v1/user/login",
             "/api/v1/user/token-refresh",
             "/actuator/health",
-            "/api/v1/v3/api-docs/**",
-            "/api/v1/swagger-ui/**",
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
             "/api/v1/swagger-resources/**",
-            "test"
+            "/test"
     };
 
 
