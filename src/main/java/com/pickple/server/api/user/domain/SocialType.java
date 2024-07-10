@@ -8,5 +8,5 @@ import lombok.Getter;
 public enum SocialType {
     KAKAO("KAKAO"),
     ;
-    private String type;
+    private final String type;
 }

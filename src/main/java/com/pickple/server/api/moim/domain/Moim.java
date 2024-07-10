@@ -3,16 +3,30 @@ package com.pickple.server.api.moim.domain;
 import com.pickple.server.api.host.domain.Host;
 import com.pickple.server.api.moim.domain.enums.Category;
 import com.pickple.server.api.moim.domain.enums.MoimState;
-import com.pickple.server.api.moimapplication.domain.MoimSubmission;
+import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.api.notice.domain.Notice;
 import com.pickple.server.global.common.domain.BaseTimeEntity;
-import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
-
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Entity
 @Getter
@@ -77,7 +91,7 @@ public class Moim extends BaseTimeEntity {
             final String description,
             final String imageList,
             final MoimState moimState
-    ){
+    ) {
         this.host = host;
         this.category = category;
         this.isOffline = isOffline;
