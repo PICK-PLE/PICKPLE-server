@@ -4,7 +4,7 @@ public enum MoimState {
     ONGOING("ONGOING"),
     COMPLETED("COMPLETED");
 
-    public String moimState;
+    public final String moimState;
 
     MoimState(String moimState) {
         this.moimState = moimState;

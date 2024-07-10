@@ -12,7 +12,7 @@ public enum Category {
     MIND("mind"),
     HOBBY("hobby"),
     LANGUAGE("language");
-    public String category;
+    public final String category;
 
     Category(String category) {
         this.category = category;

@@ -9,7 +9,7 @@ public enum MoimSubmissionState {
     REFUNDED("refunded"),
     COMPLETED("completed");
 
-    public String moimSubmissionState;
+    public final String moimSubmissionState;
 
     MoimSubmissionState(String moimSubmissionState) {
         this.moimSubmissionState = moimSubmissionState;
