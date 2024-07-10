@@ -18,10 +18,10 @@ public interface UserControllerDocs {
     @Operation(summary = "소셜 로그인")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "소셜 로그인이 완료되었습니다."),
-                    @ApiResponse(responseCode = "400", description =
-                            "1. 요청한 값이 유효하지 않습니다.\n" + "2. 인가 코드가 만료되었습니다.\n"),
-                    @ApiResponse(responseCode = "500", description = "서버 내부 오류입니다.")
+                    @ApiResponse(responseCode = "20000", description = "소셜 로그인 성공"),
+                    @ApiResponse(responseCode = "40000", description = "요청한 값이 유효하지 않습니다.\n"),
+                    @ApiResponse(responseCode = "40001", description = "인가 코드가 만료되었습니다.\n"),
+                    @ApiResponse(responseCode = "50000", description = "서버 내부 오류입니다.")
             }
     )
     ApiResponseDto<LoginSuccessResponse> login(
@@ -32,10 +32,10 @@ public interface UserControllerDocs {
     @Operation(summary = "액세스 토큰 재발급")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "액세스 토큰 재발급이 완료되었습니다."),
-                    @ApiResponse(responseCode = "401", description = "리프레시 토큰이 유효하지 않습니다."),
-                    @ApiResponse(responseCode = "404", description = "해당 유저의 리프레시 토큰이 존재하지 않습니다."),
-                    @ApiResponse(responseCode = "500", description = "서버 내부 오류입니다.")
+                    @ApiResponse(responseCode = "20001", description = "액세스 토큰 재발급 성공"),
+                    @ApiResponse(responseCode = "40102", description = "리프레시 토큰이 유효하지 않습니다."),
+                    @ApiResponse(responseCode = "40404", description = "해당 유저의 리프레시 토큰이 존재하지 않습니다."),
+                    @ApiResponse(responseCode = "50000", description = "서버 내부 오류입니다.")
             }
     )
     ApiResponseDto<AccessTokenGetSuccess> refreshToken(
@@ -45,11 +45,9 @@ public interface UserControllerDocs {
     @Operation(summary = "회원 탈퇴")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "회원 삭제가 완료되었습니다."),
-                    @ApiResponse(responseCode = "404", description =
-                            "1. 해당 유저의 리프레시 토큰이 존재하지 않습니다.\n" +
-                                    "2. 해당 유저는 존재하지 않습니다."
-                    )
+                    @ApiResponse(responseCode = "20002", description = "회원 삭제가 완료되었습니다."),
+                    @ApiResponse(responseCode = "40402", description = "회원 삭제가 완료되었습니다."),
+                    @ApiResponse(responseCode = "40401", description = "해당 유저는 존재하지 않습니다.")
             }
     )
     ApiResponseDto deleteUser(
@@ -59,8 +57,8 @@ public interface UserControllerDocs {
     @Operation(summary = "로그아웃")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "로그아웃이 완료되었습니다."),
-                    @ApiResponse(responseCode = "404", description = "해당 유저의 리프레시 토큰이 존재하지 않습니다.")
+                    @ApiResponse(responseCode = "20003", description = "로그아웃이 완료되었습니다."),
+                    @ApiResponse(responseCode = "40402", description = "해당 유저의 리프레시 토큰이 존재하지 않습니다.")
             }
     )
     ApiResponseDto logout(
