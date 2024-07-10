@@ -1,6 +1,6 @@
 package com.pickple.server.global.config;
 
-import com.pickple.server.global.common.annotation.UserIdResolver;
+import com.pickple.server.global.common.annotation.resolver.UserIdResolver;
 import java.util.Arrays;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

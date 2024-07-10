@@ -1,5 +1,8 @@
-package com.pickple.server.global.common.annotation;
+package com.pickple.server.global.common.annotation.resolver;
 
+import com.pickple.server.global.common.annotation.UserId;
+import com.pickple.server.global.exception.CustomException;
+import com.pickple.server.global.response.enums.ErrorCode;
 import java.security.Principal;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -24,7 +27,7 @@ public class UserIdResolver implements HandlerMethodArgumentResolver {
                                   WebDataBinderFactory binderFactory) {
         final Principal principal = webRequest.getUserPrincipal();
         if (principal == null) {
-            //throw new CustomException(ErrorMessage.EMPTY_PRINCIPAL);
+            throw new CustomException(ErrorCode.EMPTY_PRINCIPAL);
         }
         return Long.valueOf(principal.getName());
     }
