@@ -6,9 +6,9 @@ public enum SubmitterState {
     APPROVE("approve"),
     REJECT("reject");
 
-    public String applicantState;
+    public String submittertState;
 
-    SubmitterState(String applicantState) {
-        this.applicantState = applicantState;
+    SubmitterState(String submittertState) {
+        this.submittertState = submittertState;
     }
 }
