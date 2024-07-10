@@ -16,11 +16,13 @@ public enum ErrorCode {
     // 401 Unauthorized
     ACCESS_TOKEN_EXPIRED(40100, HttpStatus.UNAUTHORIZED, "액세스 토큰이 만료되었습니다."),
     TOKEN_INCORRECT_ERROR(40102, HttpStatus.UNAUTHORIZED, "리프레시 토큰이 유효하지 않습니다."),
+    EMPTY_PRINCIPAL(40103, HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다"),
 
     // 404 Not Found
     NOT_FOUND_END_POINT(40400, HttpStatus.NOT_FOUND, "존재하지 않는 API입니다."),
     USER_NOT_FOUND(40401, HttpStatus.NOT_FOUND, "해당 유저는 존재하지 않습니다."),
     REFRESH_TOKEN_NOT_FOUND(40402, HttpStatus.NOT_FOUND, "해당 유저의 리프레시 토큰이 존재하지 않습니다."),
+    GUEST_NOT_FOUND(40403, HttpStatus.NOT_FOUND, "존재하지 않는 게스트입니다"),
 
     // 500 Internal Server Error
     INTERNAL_SERVER_ERROR(50000, HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류입니다.");
