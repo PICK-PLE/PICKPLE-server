@@ -24,6 +24,7 @@ repositories {
 }
 
 dependencies {
+
     // Spring
     implementation 'org.springframework.boot:spring-boot-starter-web'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -32,7 +33,6 @@ dependencies {
     //db
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.7.3'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
 
     // Lombok
     compileOnly 'org.projectlombok:lombok'
@@ -53,7 +53,6 @@ dependencies {
     //Swagger
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 
-
     //JWT
     implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
     implementation group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
@@ -65,7 +64,7 @@ dependencies {
     //Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
-    
+
     //sentry
     implementation 'io.sentry:sentry-spring-boot-starter-jakarta:7.6.0'
 
