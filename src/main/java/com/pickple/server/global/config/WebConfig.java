@@ -13,7 +13,6 @@ public class WebConfig implements WebMvcConfigurer {
                         "https://pick-ple.com:5173")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
-                .allowCredentials(true)
                 .maxAge(3000);
     }
 }
