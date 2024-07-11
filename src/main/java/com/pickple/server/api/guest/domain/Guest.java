@@ -24,7 +24,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @Table(name = "guests")
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Guest extends BaseTimeEntity {
