@@ -18,7 +18,10 @@ public enum SuccessCode {
     MOIM_DETAIL_GET_SUCCESS(20006, HttpStatus.OK, "모임 상세 정보 조회 성공"),
     HOST_DETAIL_GET_SUCCESS(20007, HttpStatus.OK, "호스트 정보 조회 성공"),
     MOIM_SUBMISSION_POST_SUCCESS(20007, HttpStatus.OK, "모임 참여 신청 성공"),
-    SUBMITTED_MOIM_DETAIL_GET_SUCCESS(20008, HttpStatus.OK, "신청한 모임 상세 정보 조회 성공");
+    PRESIGNED_URL_GET_SUCCESS(20008, HttpStatus.OK, "presigned url 발급 성공"),
+    SUBMITTED_MOIM_DETAIL_GET_SUCCESS(20008, HttpStatus.OK, "신청한 모임 상세 정보 조회 성공")
+  
+  ;
 
     private final int code;
     private final HttpStatus httpStatus;

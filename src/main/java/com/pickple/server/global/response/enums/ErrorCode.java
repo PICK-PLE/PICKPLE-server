@@ -35,10 +35,9 @@ public enum ErrorCode {
     METHOD_NOT_ALLOWED(40500, HttpStatus.METHOD_NOT_ALLOWED, "지원하지 않는 메소드입니다."),
 
     // 500 Internal Server Error
-    INTERNAL_SERVER_ERROR(50000, HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류입니다.")
-      
-      
-    ;
+    INTERNAL_SERVER_ERROR(50000, HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류입니다."),
+    PRESIGNED_URL_GET_ERROR(50001, HttpStatus.INTERNAL_SERVER_ERROR, "S3 presigned url을 받아오기에 실패했습니다."),
+    IMAGE_DELETE_ERROR(50002, HttpStatus.INTERNAL_SERVER_ERROR, "S3 이미지 삭제가 실패했습니다.");
 
 
     private final int code;
