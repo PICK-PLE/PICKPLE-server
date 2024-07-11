@@ -18,4 +18,5 @@ public class DateInfo {
 
     @JsonFormat(pattern = "HH:mm")
     private LocalTime endTime;
+
 }

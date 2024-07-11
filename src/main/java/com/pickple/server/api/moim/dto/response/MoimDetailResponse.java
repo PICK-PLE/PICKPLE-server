@@ -54,4 +54,5 @@ public record MoimDetailResponse(
                 .hostId(hostId)
                 .build();
     }
+
 }

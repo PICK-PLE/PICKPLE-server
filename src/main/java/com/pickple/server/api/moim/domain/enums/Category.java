@@ -27,4 +27,5 @@ public enum Category {
                 .map(category -> category.category)
                 .collect(Collectors.toList());
     }
+
 }

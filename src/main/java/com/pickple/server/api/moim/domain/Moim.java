@@ -103,4 +103,5 @@ public class Moim extends BaseTimeEntity {
         this.imageList = imageList;
         this.moimState = moimState;
     }
+
 }

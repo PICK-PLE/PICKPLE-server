@@ -10,4 +10,5 @@ public class CategoryInfo {
     private String category2;
 
     private String category3;
+
 }

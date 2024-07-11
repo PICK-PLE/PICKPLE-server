@@ -9,4 +9,5 @@ public class ImageInfo {
     private String imageUrl2;
 
     private String imageUrl3;
+
 }
