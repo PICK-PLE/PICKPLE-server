@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 public class KakaoSocialService implements SocialService {
 
     private static final String AUTH_CODE = "authorization_code";
-    private static final String REDIRECT_URI = "http://localhost:8080/kakao/callback";
+    private static final String REDIRECT_URI = "http://localhost:5173/kakao/redirection";
 
     @Value("${kakao.clientId}")
     private String clientId;
