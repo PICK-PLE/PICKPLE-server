@@ -18,16 +18,17 @@ public class MoimQueryService {
 
     public MoimDetailResponse getMoimDetail(final Long moimId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
-        return MoimDetailResponse.of(
-                DateUtil.calculateDayOfDay(moim.getDateList().getDate()),
-                moim.getTitle(),
-                moim.getDateList(),
-                moim.isOffline(),
-                moim.getSpot(),
-                moim.getMaxGuest(),
-                moim.getFee(),
-                moim.getImageList(),
-                moim.getHost().getId());
+        return MoimDetailResponse.builder()
+                .dayOfDay(DateUtil.calculateDayOfDay(moim.getDateList().getDate()))
+                .title(moim.getTitle())
+                .dateList(moim.getDateList())
+                .isOffline(moim.isOffline())
+                .spot(moim.getSpot())
+                .maxGuest(moim.getMaxGuest())
+                .fee(moim.getFee())
+                .imageList(moim.getImageList())
+                .hostId(moim.getHost().getId())
+                .build();
     }
 
     public SubmittedMoimResponse getSubmittedMoimDetail(final Long moimId) {
