@@ -1,5 +1,6 @@
 package com.pickple.server.global.config;
 
+import com.pickple.server.global.common.annotation.resolver.GuestIdResolver;
 import com.pickple.server.global.common.annotation.resolver.UserIdResolver;
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
 
     private final UserIdResolver userIdResolver;
+    private final GuestIdResolver guestIdResolver;
 
     @Bean
     public CorsFilter corsFilter() {
@@ -36,5 +38,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.add(userIdResolver);
+        resolvers.add(guestIdResolver);
     }
 }

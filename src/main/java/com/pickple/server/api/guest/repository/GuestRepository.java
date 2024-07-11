@@ -10,6 +10,8 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
 
     Optional<Guest> findGuestById(Long id);
 
+    Guest findGuestByUserId(Long userId);
+
     default Guest findGuestByIdOrThrow(Long id) {
         return findGuestById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.GUEST_NOT_FOUND));
