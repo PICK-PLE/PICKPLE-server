@@ -39,10 +39,10 @@ public class MoimSubmission extends BaseTimeEntity {
     private Moim moim;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    private String answerList;
+    private AnswerInfo answerList;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    private String accountList;
+    private AccountInfo accountList;
 
     @Enumerated(EnumType.STRING)
     private MoimSubmissionState moimSubmissionState;
@@ -51,8 +51,8 @@ public class MoimSubmission extends BaseTimeEntity {
     public MoimSubmission(
             final Long guestId,
             final Moim moim,
-            final String answerList,
-            final String accountList,
+            final AnswerInfo answerList,
+            final AccountInfo accountList,
             final MoimSubmissionState moimSubmissionState
     ) {
         this.guestId = guestId;
