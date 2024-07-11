@@ -16,6 +16,7 @@ public enum ErrorCode {
     BAD_REQUEST(40004, HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
     MISSING_REQUIRED_HEADER(40005, HttpStatus.BAD_REQUEST, "필수 헤더가 누락되었습니다."),
     MISSING_REQUIRED_PARAMETER(40006, HttpStatus.BAD_REQUEST, "필수 파라미터가 누락되었습니다."),
+    DUPLICATION_MOIM_SUBMISSION(40007, HttpStatus.BAD_REQUEST, "이미 대기중인 모임입니다."),
 
     // 401 Unauthorized
     ACCESS_TOKEN_EXPIRED(40100, HttpStatus.UNAUTHORIZED, "액세스 토큰이 만료되었습니다."),
@@ -28,7 +29,7 @@ public enum ErrorCode {
     REFRESH_TOKEN_NOT_FOUND(40402, HttpStatus.NOT_FOUND, "해당 유저의 리프레시 토큰이 존재하지 않습니다."),
     GUEST_NOT_FOUND(40403, HttpStatus.NOT_FOUND, "존재하지 않는 게스트입니다"),
     MOIM_NOT_FOUND(40404, HttpStatus.NOT_FOUND, "존재하지 않는 모임입니다."),
-  
+
     // Method Not Allowed Error 405
     METHOD_NOT_ALLOWED(40500, HttpStatus.METHOD_NOT_ALLOWED, "지원하지 않는 메소드입니다."),
 
