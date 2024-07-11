@@ -7,7 +7,7 @@ public class DateUtil {
 
     public static int calculateDayOfDay(LocalDate date) {
         LocalDate today = LocalDate.now();
-        int dday = (int) ChronoUnit.DAYS.between(today, date);
+        int dday = (int) ChronoUnit.DAYS.between(today, date) - 3;
         return dday;
     }
 }
