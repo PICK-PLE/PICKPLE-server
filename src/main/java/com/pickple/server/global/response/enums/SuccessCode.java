@@ -13,7 +13,8 @@ public enum SuccessCode {
     ISSUE_ACCESS_TOKEN_SUCCESS(20001, HttpStatus.OK, "액세스 토큰 재발급 성공"),
     USER_DELETE_SUCCESS(20002, HttpStatus.OK, "회원 삭제 성공"),
     LOGOUT_SUCCESS(20003, HttpStatus.OK, "로그아웃 성공"),
-    ALL_CATEGORY_GET_SUCCESS(20004, HttpStatus.OK, "카테고리 전체 조회 성공");
+    ALL_CATEGORY_GET_SUCCESS(20004, HttpStatus.OK, "카테고리 전체 조회 성공"),
+    MOIM_DETAIL_GET_SUCCESS(20005, HttpStatus.OK, "모임 상세 조회 성공");
 
     private final int code;
     private final HttpStatus httpStatus;
