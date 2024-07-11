@@ -2,7 +2,6 @@ package com.pickple.server.api.moimsubmission.dto.request;
 
 import com.pickple.server.api.moimsubmission.domain.AccountInfo;
 import com.pickple.server.api.moimsubmission.domain.AnswerInfo;
-import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -17,12 +16,10 @@ public record MoimSubmitRequest(
 
             @Size(max = 200, message = "답변은 200자 이내로 작성해주세요.")
             @NotBlank(message = "답변이 비어있습니다.")
-            @Nullable
             String answer2,
 
             @Size(max = 200, message = "답변은 200자 이내로 작성해주세요.")
             @NotBlank(message = "답변이 비어있습니다.")
-            @Nullable
             String answer3
     ) {
     }
