@@ -2,6 +2,7 @@ package com.pickple.server.api.moim.service;
 
 import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
+import com.pickple.server.api.moim.dto.response.SubmittedMoimResponse;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.global.util.DateUtil;
 import lombok.RequiredArgsConstructor;
@@ -27,5 +28,19 @@ public class MoimQueryService {
                 moim.getFee(),
                 moim.getImageList(),
                 moim.getHost().getId());
+    }
+
+    public SubmittedMoimResponse getSubmittedMoimDetail(final Long moimId) {
+        Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
+        return SubmittedMoimResponse.of(
+                moim.getTitle(),
+                moim.getHost().getNickname(),
+                moim.isOffline(),
+                moim.getSpot(),
+                moim.getDateList(),
+                moim.getFee(),
+                moim.getHost().getImageUrl(),
+                moim.getImageList().getImageUrl1()
+        );
     }
 }
