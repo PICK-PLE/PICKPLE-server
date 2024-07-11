@@ -12,16 +12,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class S3Controller implements S3ControllerSwagger {
+public class S3Controller implements S3ControllerDocs {
     private final S3Service s3Service;
 
     @GetMapping("/moim-image-list/upload/{count}")
     @Override
-    public ApiResponseDto<List<PreSignedUrlResponse>> getPreSignedUrl(
+    public ApiResponseDto<List<PreSignedUrlResponse>> getMoimPreSignedUrl(
             @PathVariable int count
     ) {
         return ApiResponseDto.success(SuccessCode.PRESIGNED_URL_GET_SUCCESS,
                 s3Service.getUploadPreSignedUrlList(S3BucketDirectory.MOIM_PREFIX, count));
+    }
+
+    @GetMapping("/notice-image-list/upload/{count}")
+    @Override
+    public ApiResponseDto<List<PreSignedUrlResponse>> getNoticePreSignedUrl(
+            @PathVariable int count
+    ) {
+        return ApiResponseDto.success(SuccessCode.PRESIGNED_URL_GET_SUCCESS,
+                s3Service.getUploadPreSignedUrlList(S3BucketDirectory.NOTICE_PREFIX, count));
     }
 }
 
