@@ -5,16 +5,16 @@ import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.openfeign.FeignAutoConfiguration;
-import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @EnableFeignClients
 @SpringBootApplication
 @ImportAutoConfiguration(FeignAutoConfiguration.class)
-@EnableScheduling
+@EnableJpaAuditing
 public class PickpleServerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PickpleServerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PickpleServerApplication.class, args);
+    }
 
 }
