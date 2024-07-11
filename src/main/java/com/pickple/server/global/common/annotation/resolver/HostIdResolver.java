@@ -1,8 +1,8 @@
 package com.pickple.server.global.common.annotation.resolver;
 
-import com.pickple.server.api.guest.domain.Guest;
-import com.pickple.server.api.guest.repository.GuestRepository;
-import com.pickple.server.global.common.annotation.GuestId;
+import com.pickple.server.api.host.domain.Host;
+import com.pickple.server.api.host.repository.HostRepository;
+import com.pickple.server.global.common.annotation.HostId;
 import com.pickple.server.global.exception.CustomException;
 import com.pickple.server.global.response.enums.ErrorCode;
 import java.security.Principal;
@@ -16,14 +16,14 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 @AllArgsConstructor
 @Component
-public class GuestIdResolver implements HandlerMethodArgumentResolver {
+public class HostIdResolver implements HandlerMethodArgumentResolver {
 
-    private final GuestRepository guestRepository;
+    private final HostRepository hostRepository;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         return parameter.getParameterType().equals(Long.class)
-                && parameter.hasParameterAnnotation(GuestId.class);
+                && parameter.hasParameterAnnotation(HostId.class);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class GuestIdResolver implements HandlerMethodArgumentResolver {
         if (principal == null) {
             throw new CustomException(ErrorCode.EMPTY_PRINCIPAL);
         }
-        Guest guest = guestRepository.findGuestByUserId(Long.valueOf(principal.getName()));
-        return guest.getId();
+        Host host = hostRepository.findHostByUserId(Long.valueOf(principal.getName()));
+        return host.getId();
     }
 }
