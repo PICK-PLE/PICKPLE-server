@@ -1,7 +1,6 @@
 package com.pickple.server.api.moim.domain;
 
 import com.pickple.server.api.host.domain.Host;
-import com.pickple.server.api.moim.domain.enums.Category;
 import com.pickple.server.api.moim.domain.enums.MoimState;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.api.notice.domain.Notice;
@@ -31,7 +30,6 @@ import org.hibernate.type.SqlTypes;
 @Entity
 @Getter
 @Table(name = "moims")
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Moim extends BaseTimeEntity {
@@ -45,28 +43,28 @@ public class Moim extends BaseTimeEntity {
     private Host host;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    private Category category;
+    private CategoryInfo category;
 
     private boolean isOffline;
 
     private String spot;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    private String dateList;
+    private DateInfo dateList;
 
     private int maxGuest;
 
     private int fee;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    private String questionList;
+    private QuestionInfo questionList;
 
     private String title;
 
     private String description;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    private String imageList;
+    private ImageInfo imageList;
 
     @Enumerated(EnumType.STRING)
     private MoimState moimState;
@@ -80,16 +78,16 @@ public class Moim extends BaseTimeEntity {
     @Builder
     public Moim(
             final Host host,
-            final Category category,
+            final CategoryInfo category,
             final boolean isOffline,
             final String spot,
-            final String dateList,
+            final DateInfo dateList,
             final int maxGuest,
             final int fee,
-            final String questionList,
+            final QuestionInfo questionList,
             final String title,
             final String description,
-            final String imageList,
+            final ImageInfo imageList,
             final MoimState moimState
     ) {
         this.host = host;
@@ -105,4 +103,5 @@ public class Moim extends BaseTimeEntity {
         this.imageList = imageList;
         this.moimState = moimState;
     }
+
 }
