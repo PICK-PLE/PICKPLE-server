@@ -44,7 +44,7 @@ public class Submitter extends BaseTimeEntity {
     private String nickname;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    private SubmitterCategoryInfo category;
+    private SubmitterCategoryInfo categoryList;
 
     private String plan;
 
@@ -59,7 +59,7 @@ public class Submitter extends BaseTimeEntity {
                      final String goal,
                      final String link,
                      final String nickname,
-                     final SubmitterCategoryInfo category,
+                     final SubmitterCategoryInfo categoryList,
                      final String plan,
                      final String email,
                      final SubmitterState submitterState
@@ -69,7 +69,7 @@ public class Submitter extends BaseTimeEntity {
         this.goal = goal;
         this.link = link;
         this.nickname = nickname;
-        this.category = category;
+        this.categoryList = categoryList;
         this.plan = plan;
         this.email = email;
         this.submitterState = submitterState;

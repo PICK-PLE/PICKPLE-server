@@ -29,7 +29,7 @@ public class SubmitterCommandService {
                 .goal(request.goal())
                 .link(request.link())
                 .nickname(request.nickname())
-                .category(request.categoryList())
+                .categoryList(request.categoryList())
                 .email(request.email())
                 .plan(request.plan())
                 .submitterState(SubmitterState.PENDING)
