@@ -32,15 +32,15 @@ public class MoimQueryService {
 
     public SubmittedMoimResponse getSubmittedMoimDetail(final Long moimId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
-        return SubmittedMoimResponse.of(
-                moim.getTitle(),
-                moim.getHost().getNickname(),
-                moim.isOffline(),
-                moim.getSpot(),
-                moim.getDateList(),
-                moim.getFee(),
-                moim.getHost().getImageUrl(),
-                moim.getImageList().getImageUrl1()
-        );
+        return SubmittedMoimResponse.builder()
+                .title(moim.getTitle())
+                .hostNickname(moim.getHost().getNickname())
+                .isOffline(moim.isOffline())
+                .spot(moim.getSpot())
+                .dateList(moim.getDateList())
+                .fee(moim.getFee())
+                .hostImageUrl(moim.getHost().getImageUrl())
+                .moimImageUrl(moim.getImageList().getImageUrl1())
+                .build();
     }
 }
