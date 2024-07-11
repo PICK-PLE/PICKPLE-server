@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class ImageInfo {
+
     private String imageUrl1;
 
     private String imageUrl2;

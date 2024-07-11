@@ -2,6 +2,7 @@ package com.pickple.server.api.moim.domain;
 
 import com.pickple.server.api.host.domain.Host;
 import com.pickple.server.api.moim.domain.enums.MoimState;
+import com.pickple.server.api.moimsubmission.domain.AccountInfo;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.api.notice.domain.Notice;
 import com.pickple.server.global.common.domain.BaseTimeEntity;
@@ -57,6 +58,9 @@ public class Moim extends BaseTimeEntity {
     private int fee;
 
     @JdbcTypeCode(SqlTypes.JSON)
+    private AccountInfo accountList;
+
+    @JdbcTypeCode(SqlTypes.JSON)
     private QuestionInfo questionList;
 
     private String title;
@@ -84,6 +88,7 @@ public class Moim extends BaseTimeEntity {
             final DateInfo dateList,
             final int maxGuest,
             final int fee,
+            final AccountInfo accountList,
             final QuestionInfo questionList,
             final String title,
             final String description,
@@ -97,6 +102,7 @@ public class Moim extends BaseTimeEntity {
         this.dateList = dateList;
         this.maxGuest = maxGuest;
         this.fee = fee;
+        this.accountList = accountList;
         this.questionList = questionList;
         this.title = title;
         this.description = description;
