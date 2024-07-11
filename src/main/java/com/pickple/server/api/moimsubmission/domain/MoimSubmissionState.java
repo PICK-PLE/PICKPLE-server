@@ -2,7 +2,7 @@ package com.pickple.server.api.moimsubmission.domain;
 
 public enum MoimSubmissionState {
     ALL("all"),
-    PENDING_PAYMENT("pendinigPayment"),
+    PENDING_PAYMENT("pendingPayment"),
     PENDING_APPROVAL("pendingApproval"),
     APPROVED("approved"),
     REJECTED("rejected"),

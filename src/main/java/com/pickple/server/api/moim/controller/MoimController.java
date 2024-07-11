@@ -2,7 +2,7 @@ package com.pickple.server.api.moim.controller;
 
 import com.pickple.server.api.moim.domain.enums.Category;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
-import com.pickple.server.api.moim.service.MoimCommandService;
+import com.pickple.server.api.moim.service.MoimQueryService;
 import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.SuccessCode;
 import java.util.List;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class MoimController {
 
-    private final MoimCommandService moimCommandService;
+    private final MoimQueryService moimQueryService;
 
     @GetMapping("/v1/moim/categories")
     public ApiResponseDto<List<String>> getAllCategories() {
@@ -26,6 +26,6 @@ public class MoimController {
 
     @GetMapping("/v1/moim/{moimId}")
     public ApiResponseDto<MoimDetailResponse> getMoimDetail(@PathVariable Long moimId) {
-        return ApiResponseDto.success(SuccessCode.MOIM_DETAIL_GET_SUCCESS, moimCommandService.getMoimDetail(moimId));
+        return ApiResponseDto.success(SuccessCode.MOIM_DETAIL_GET_SUCCESS, moimQueryService.getMoimDetail(moimId));
     }
 }
