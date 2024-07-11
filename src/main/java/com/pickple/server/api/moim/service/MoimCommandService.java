@@ -31,6 +31,4 @@ public class MoimCommandService {
                 moim.getImageList(),
                 moim.getHost().getId());
     }
-
-
 }

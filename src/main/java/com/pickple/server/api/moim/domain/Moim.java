@@ -30,7 +30,6 @@ import org.hibernate.type.SqlTypes;
 @Entity
 @Getter
 @Table(name = "moims")
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Moim extends BaseTimeEntity {
@@ -75,16 +74,6 @@ public class Moim extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "moim", cascade = CascadeType.REMOVE)
     private List<MoimSubmission> moimSubmissions = new ArrayList<>();
-
-//    public LocalDate extractDate() {
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        try {
-//            DateInfo dateInfo = objectMapper.readValue(dateList, DateInfo.class);
-//            return dateInfo.getDate();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 
     @Builder
     public Moim(
