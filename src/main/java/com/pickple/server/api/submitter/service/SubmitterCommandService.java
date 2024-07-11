@@ -21,8 +21,8 @@ public class SubmitterCommandService {
     private final GuestRepository guestRepository;
     private final SubmitterRepository submitterRepository;
 
-    public void createSubmitter(Long userId, SubmitterCreateRequest request) {
-        Guest guest = guestRepository.findGuestByIdOrThrow(userId);
+    public void createSubmitter(Long gestId, SubmitterCreateRequest request) {
+        Guest guest = guestRepository.findGuestByIdOrThrow(gestId);
         Submitter submitter = Submitter.builder()
                 .guest(guest)
                 .intro(request.intro())

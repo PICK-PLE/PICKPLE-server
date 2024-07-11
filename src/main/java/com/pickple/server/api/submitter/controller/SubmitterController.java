@@ -2,7 +2,7 @@ package com.pickple.server.api.submitter.controller;
 
 import com.pickple.server.api.submitter.dto.request.SubmitterCreateRequest;
 import com.pickple.server.api.submitter.service.SubmitterCommandService;
-import com.pickple.server.global.common.annotation.UserId;
+import com.pickple.server.global.common.annotation.GuestId;
 import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.SuccessCode;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +19,9 @@ public class SubmitterController {
     private final SubmitterCommandService submitterCommandService;
 
     @PostMapping("/v1/submitter")
-    public ApiResponseDto postSubmitter(@UserId final Long userId,
+    public ApiResponseDto postSubmitter(@GuestId final Long guestId,
                                         @RequestBody SubmitterCreateRequest submitterCreateRequest) {
-        submitterCommandService.createSubmitter(userId, submitterCreateRequest);
+        submitterCommandService.createSubmitter(guestId, submitterCreateRequest);
         return ApiResponseDto.success(SuccessCode.SUBMITTER_POST_SUCCESS);
     }
 }
