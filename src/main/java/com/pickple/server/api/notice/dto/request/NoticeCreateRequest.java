@@ -3,7 +3,7 @@ package com.pickple.server.api.notice.dto.request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public record NoticePostRequest(
+public record NoticeCreateRequest(
         @Size(max = 25, message = "제목은 최대 25자 이내로 작성해주세요.")
         @NotBlank(message = "제목 비어 있습니다.")
         String noticeTitle,//공지사항 제목

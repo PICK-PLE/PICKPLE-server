@@ -1,6 +1,6 @@
 package com.pickple.server.api.notice.controller;
 
-import com.pickple.server.api.notice.dto.request.NoticePostRequest;
+import com.pickple.server.api.notice.dto.request.NoticeCreateRequest;
 import com.pickple.server.api.notice.service.NoticeCommandService;
 import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.SuccessCode;
@@ -19,9 +19,9 @@ public class NoticeController {
     private final NoticeCommandService noticeCommandService;
 
     @PostMapping("/v1/moim/{moimId}/notice")
-    public ApiResponseDto getHost(@PathVariable Long moimId,
-                                  @RequestBody NoticePostRequest noticePostRequest) {
-        noticeCommandService.postNotice(moimId, noticePostRequest);
+    public ApiResponseDto createNotice(@PathVariable Long moimId,
+                                       @RequestBody NoticeCreateRequest noticeCreateRequest) {
+        noticeCommandService.createNotice(moimId, noticeCreateRequest);
         return ApiResponseDto.success(SuccessCode.HOST_POST_SUCCESS);
     }
 }
