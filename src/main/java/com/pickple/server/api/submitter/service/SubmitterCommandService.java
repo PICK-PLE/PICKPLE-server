@@ -32,7 +32,7 @@ public class SubmitterCommandService {
                 .categoryList(request.categoryList())
                 .email(request.email())
                 .plan(request.plan())
-                .submitterState(SubmitterState.PENDING)
+                .submitterState(SubmitterState.PENDING.getSubmitterState())
                 .build();
         isDulicatedSubmition(submitter);
         submitterRepository.save(submitter);
