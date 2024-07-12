@@ -1,10 +1,10 @@
 package com.pickple.server.api.moim.service;
 
 import com.pickple.server.api.moim.domain.Moim;
+import com.pickple.server.api.moim.domain.QuestionInfo;
 import com.pickple.server.api.moim.dto.response.MoimByCategoryResponse;
 import com.pickple.server.api.moim.dto.response.MoimDescriptionResponse;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
-import com.pickple.server.api.moim.dto.response.MoimQuestionListResponse;
 import com.pickple.server.api.moim.dto.response.SubmittedMoimResponse;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.global.util.DateUtil;
@@ -72,10 +72,8 @@ public class MoimQueryService {
                 .build();
     }
 
-    public MoimQuestionListResponse getMoimQuestionList(final Long moimId) {
+    public QuestionInfo getMoimQuestionList(final Long moimId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
-        return MoimQuestionListResponse.builder()
-                .questionList(moim.getQuestionList())
-                .build();
+        return moim.getQuestionList();
     }
 }
