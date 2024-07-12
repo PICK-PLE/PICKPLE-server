@@ -33,7 +33,7 @@ public class MoimCommandService {
                 .title(request.title())
                 .description(request.description())
                 .imageList(request.imageList())
-                .moimState(MoimState.ONGOING)
+                .moimState(MoimState.ONGOING.getMoimState())
                 .build();
         moimRepository.save(moim);
     }

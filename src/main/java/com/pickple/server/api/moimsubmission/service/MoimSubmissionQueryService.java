@@ -62,6 +62,7 @@ public class MoimSubmissionQueryService {
                 .answerList(submission.getAnswerList())
                 .questionList(submission.getMoim().getQuestionList())
                 .build();
+    }
 
     public List<SubmittedMoimByGuestResponse> getCompletedMoimListByGuest(final Long guestId) {
         Guest guest = guestRepository.findGuestByIdOrThrow(guestId);
