@@ -4,6 +4,7 @@ import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.dto.response.MoimByCategoryResponse;
 import com.pickple.server.api.moim.dto.response.MoimDescriptionResponse;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
+import com.pickple.server.api.moim.dto.response.MoimQuestionListResponse;
 import com.pickple.server.api.moim.dto.response.SubmittedMoimResponse;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.global.util.DateUtil;
@@ -68,6 +69,13 @@ public class MoimQueryService {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
         return MoimDescriptionResponse.builder()
                 .description(moim.getDescription())
+                .build();
+    }
+
+    public MoimQuestionListResponse getMoimQuestionList(final Long moimId) {
+        Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
+        return MoimQuestionListResponse.builder()
+                .questionList(moim.getQuestionList())
                 .build();
     }
 }
