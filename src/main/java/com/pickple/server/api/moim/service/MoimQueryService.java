@@ -2,6 +2,7 @@ package com.pickple.server.api.moim.service;
 
 import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.dto.response.MoimByCategoryResponse;
+import com.pickple.server.api.moim.dto.response.MoimDescriptionResponse;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
 import com.pickple.server.api.moim.dto.response.SubmittedMoimResponse;
 import com.pickple.server.api.moim.repository.MoimRepository;
@@ -61,5 +62,12 @@ public class MoimQueryService {
                         .hostImageUrl(oneMoim.getHost().getImageUrl())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    public MoimDescriptionResponse getMoimDescription(final Long moimId) {
+        Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
+        return MoimDescriptionResponse.builder()
+                .description(moim.getDescription())
+                .build();
     }
 }
