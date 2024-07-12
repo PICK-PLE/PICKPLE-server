@@ -6,6 +6,7 @@ import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.SuccessCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,5 +20,10 @@ public class HostController {
     @GetMapping("/v1/host")
     public ApiResponseDto getHost(@HostId Long hostId) {
         return ApiResponseDto.success(SuccessCode.HOST_DETAIL_GET_SUCCESS, hostQueryService.getHost(hostId));
+    }
+
+    @GetMapping("/v1/host/{hostId}")
+    public ApiResponseDto getMoimHost(@PathVariable Long hostId) {
+        return ApiResponseDto.success(SuccessCode.HOST_BY_MOIM_GET_SUCCESS, hostQueryService.getHostByMoim(hostId));
     }
 }
