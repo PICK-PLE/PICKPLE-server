@@ -20,9 +20,11 @@ public enum SuccessCode {
     MOIM_SUBMISSION_POST_SUCCESS(20007, HttpStatus.OK, "모임 참여 신청 성공"),
     PRESIGNED_URL_GET_SUCCESS(20008, HttpStatus.OK, "presigned url 발급 성공"),
     SUBMITTED_MOIM_DETAIL_GET_SUCCESS(20008, HttpStatus.OK, "신청한 모임 상세 정보 조회 성공"),
-    HOST_POST_SUCCESS(20009, HttpStatus.OK, "공지사항 작성 성공"),
+    NOTICE_POST_SUCCESS(20009, HttpStatus.OK, "공지사항 작성 성공"),
     MOIM_LIST_BY_CATEGORY_GET_SUCCESS(20010, HttpStatus.OK, "카테고리에 해당하는 모임 조회 성공"),
+    NOTICE_LIST_GET_SUCCESS(20011, HttpStatus.OK, "공지사항 리스트 조회 성공"),
     MOIM_DESCRIPTION_GET_SUCCESS(20012, HttpStatus.OK, "모임에 해당하는 소개 조회 성공"),
+
     //201 Created
     MOIM_CREATE_SUCCESS(20100, HttpStatus.CREATED, "모임 개설 성공");
 
