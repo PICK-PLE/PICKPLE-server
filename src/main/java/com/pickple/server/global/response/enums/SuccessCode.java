@@ -28,6 +28,7 @@ public enum SuccessCode {
     MOIM_BANNER_GET_SUCCESS(20016, HttpStatus.OK, "홈 배너 조회 성공"),
     HOST_BY_MOIM_GET_SUCCESS(20017, HttpStatus.OK, "모임에 해당하는 호스트 정보 조회 성공"),
     SUBMITTED_MOIM_LIST_BY_GUEST_GET_SUCCESS(20018, HttpStatus.OK, "게스트에 해당하는 신청한 모임 리스트 조회 성공"),
+    SUBMISSION_DETAIL_GET_SUCCESS(20019, HttpStatus.OK, "신청자 해당하는 신청 내역 조회 성공"),
     COMPLETED_MOIM_LIST_BY_GUEST_GET_SUCCESS(20019, HttpStatus.OK, "게스트에 해당하는 참가한 모임 리스트 조회 성공"),
 
     //201 Created
