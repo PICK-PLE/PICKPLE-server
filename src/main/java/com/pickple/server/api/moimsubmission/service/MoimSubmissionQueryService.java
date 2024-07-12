@@ -24,11 +24,11 @@ public class MoimSubmissionQueryService {
     private final MoimSubmissionRepository moimSubmissionRepository;
 
     public List<SubmittedMoimByGuestResponse> getSubmittedMoimListByGuest(final Long guestId,
-                                                                          final MoimSubmissionState moimSubmissionState) {
+                                                                          final String moimSubmissionState) {
         Guest guest = guestRepository.findGuestByIdOrThrow(guestId);
         List<MoimSubmission> moimSubmissionList;
 
-        if (moimSubmissionState.equals(MoimSubmissionState.ALL)) {
+        if (moimSubmissionState.equals(MoimSubmissionState.ALL.getMoimSubmissionState())) {
             moimSubmissionList = moimSubmissionRepository.findAllByGuestId(guest.getId());
         } else {
             moimSubmissionList = moimSubmissionRepository.findAllByMoimSubmissionState(moimSubmissionState);

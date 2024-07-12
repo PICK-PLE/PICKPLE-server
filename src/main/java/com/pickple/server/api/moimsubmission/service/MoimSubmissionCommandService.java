@@ -27,7 +27,7 @@ public class MoimSubmissionCommandService {
                 .moim(moim)
                 .answerList(request.answerList())
                 .accountList(request.accountList())
-                .moimSubmissionState(MoimSubmissionState.PENDING_PAYMENT)
+                .moimSubmissionState(MoimSubmissionState.PENDING_PAYMENT.getMoimSubmissionState())
                 .build();
         isDuplicatedMoimSubmission(moimSubmission);
         moimSubmissionRepository.save(moimSubmission);

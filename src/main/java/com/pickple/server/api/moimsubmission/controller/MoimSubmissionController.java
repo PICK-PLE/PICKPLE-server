@@ -1,6 +1,5 @@
 package com.pickple.server.api.moimsubmission.controller;
 
-import com.pickple.server.api.moimsubmission.domain.MoimSubmissionState;
 import com.pickple.server.api.moimsubmission.dto.request.MoimSubmitRequest;
 import com.pickple.server.api.moimsubmission.service.MoimSubmissionCommandService;
 import com.pickple.server.api.moimsubmission.service.MoimSubmissionQueryService;
@@ -37,7 +36,7 @@ public class MoimSubmissionController {
     @GetMapping("/v1/guest/{guestId}/submitted-moim-list")
     public ApiResponseDto getSubmittedMoimListByGuest(
             @PathVariable Long guestId,
-            @RequestParam MoimSubmissionState moimSubmissionState
+            @RequestParam String moimSubmissionState
     ) {
         return ApiResponseDto.success(SuccessCode.SUBMITTED_MOIM_LIST_BY_GUEST_GET_SUCCESS,
                 moimSubmissionQueryService.getSubmittedMoimListByGuest(guestId, moimSubmissionState));
