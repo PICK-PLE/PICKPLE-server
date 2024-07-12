@@ -33,7 +33,7 @@ public class HostQueryService {
     public HostByMoimResponse getHostByMoim(Long hostId) {
         Host host = hostRepository.findHostByIdOrThrow(hostId);
         List<Moim> moimList = moimRepository.findMoimByHostId(hostId);
-        int count = moimList.size();
+        String count = String.format("%02d", moimList.size());
 
         return HostByMoimResponse.builder()
                 .hostNickName(host.getNickname())
