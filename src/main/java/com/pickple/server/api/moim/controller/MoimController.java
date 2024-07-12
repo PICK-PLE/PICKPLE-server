@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -46,5 +47,17 @@ public class MoimController {
     public ApiResponseDto<SubmittedMoimResponse> getSubmittedMoimDetail(@PathVariable Long moimId) {
         return ApiResponseDto.success(SuccessCode.SUBMITTED_MOIM_DETAIL_GET_SUCCESS,
                 moimQueryService.getSubmittedMoimDetail(moimId));
+    }
+
+    @GetMapping("/v1/moim-list")
+    public ApiResponseDto getMoimListByCategory(@RequestParam String category) {
+        return ApiResponseDto.success(SuccessCode.MOIM_LIST_BY_CATEGORY_GET_SUCCESS,
+                moimQueryService.getMoimListByCategory(category));
+    }
+
+    @GetMapping("/v1/moim/{moimId}/description")
+    public ApiResponseDto getMoimDescription(@PathVariable Long moimId) {
+        return ApiResponseDto.success(SuccessCode.MOIM_DESCRIPTION_GET_SUCCESS,
+                moimQueryService.getMoimDescription(moimId));
     }
 }

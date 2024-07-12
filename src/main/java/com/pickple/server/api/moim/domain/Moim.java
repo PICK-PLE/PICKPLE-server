@@ -44,7 +44,7 @@ public class Moim extends BaseTimeEntity {
     private Host host;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    private CategoryInfo category;
+    private CategoryInfo categoryList;
 
     private boolean isOffline;
 
@@ -82,7 +82,7 @@ public class Moim extends BaseTimeEntity {
     @Builder
     public Moim(
             final Host host,
-            final CategoryInfo category,
+            final CategoryInfo categoryList,
             final boolean isOffline,
             final String spot,
             final DateInfo dateList,
@@ -96,7 +96,7 @@ public class Moim extends BaseTimeEntity {
             final MoimState moimState
     ) {
         this.host = host;
-        this.category = category;
+        this.categoryList = categoryList;
         this.isOffline = isOffline;
         this.spot = spot;
         this.dateList = dateList;

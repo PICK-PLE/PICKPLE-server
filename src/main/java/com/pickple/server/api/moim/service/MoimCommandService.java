@@ -22,7 +22,7 @@ public class MoimCommandService {
         Host host = hostRepository.findHostByIdOrThrow(hostId);
         Moim moim = Moim.builder()
                 .host(host)
-                .category(request.categoryList())
+                .categoryList(request.categoryList())
                 .isOffline(request.isOffline())
                 .spot(request.spot())
                 .dateList(request.dateList())
