@@ -62,5 +62,26 @@ public class MoimSubmissionQueryService {
                 .answerList(submission.getAnswerList())
                 .questionList(submission.getMoim().getQuestionList())
                 .build();
+
+    public List<SubmittedMoimByGuestResponse> getCompletedMoimListByGuest(final Long guestId) {
+        Guest guest = guestRepository.findGuestByIdOrThrow(guestId);
+        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findCompletedMoimSubmissionsByGuest(
+                guest.getId());
+
+        if (moimSubmissionList.isEmpty()) {
+            throw new CustomException(ErrorCode.MOIM_BY_STATE_NOT_FOUND);
+        }
+
+        return moimSubmissionList.stream()
+                .map(oneMoimSubmission -> SubmittedMoimByGuestResponse.builder()
+                        .moimId(oneMoimSubmission.getMoim().getId())
+                        .moimSubmissionState(oneMoimSubmission.getMoimSubmissionState())
+                        .title(oneMoimSubmission.getMoim().getTitle())
+                        .hostNickname(oneMoimSubmission.getMoim().getHost().getNickname())
+                        .dateList(oneMoimSubmission.getMoim().getDateList())
+                        .fee(oneMoimSubmission.getMoim().getFee())
+                        .imageUrl(oneMoimSubmission.getMoim().getImageList().getImageUrl1())
+                        .build())
+                .collect(Collectors.toList());
     }
 }
