@@ -4,7 +4,7 @@ import com.pickple.server.api.moim.domain.DateInfo;
 import lombok.Builder;
 
 @Builder
-public record SubmittedMoimByGuestResponse(
+public record MoimByGuestResponse(
         String title,
         String hostNickname,
         boolean isOffline,
