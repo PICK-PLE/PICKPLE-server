@@ -31,7 +31,7 @@ public class NoticeQueryService {
                         .hostImageUrl(moim.getHost().getImageUrl())
                         .title(oneNotice.getTitle())
                         .content(oneNotice.getContent())
-                        .date(DateTimeUtil.refineTime(oneNotice.getCreatedAt()))
+                        .date(DateTimeUtil.refineDateAndTime(oneNotice.getCreatedAt()))
                         .noticeImageUrl(oneNotice.getImageUrl())
                         .hostId(moim.getHost().getId())
                         .build())
