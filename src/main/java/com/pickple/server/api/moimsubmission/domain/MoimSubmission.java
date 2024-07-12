@@ -3,8 +3,6 @@ package com.pickple.server.api.moimsubmission.domain;
 import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.global.common.domain.BaseTimeEntity;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -44,6 +42,5 @@ public class MoimSubmission extends BaseTimeEntity {
     @JdbcTypeCode(SqlTypes.JSON)
     private AccountInfo accountList;
 
-    @Enumerated(EnumType.STRING)
-    private MoimSubmissionState moimSubmissionState;
+    private String moimSubmissionState;
 }

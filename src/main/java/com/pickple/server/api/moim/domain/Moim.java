@@ -1,15 +1,12 @@
 package com.pickple.server.api.moim.domain;
 
 import com.pickple.server.api.host.domain.Host;
-import com.pickple.server.api.moim.domain.enums.MoimState;
 import com.pickple.server.api.moimsubmission.domain.AccountInfo;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.api.notice.domain.Notice;
 import com.pickple.server.global.common.domain.BaseTimeEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,6 +28,7 @@ import org.hibernate.type.SqlTypes;
 @Entity
 @Getter
 @Table(name = "moims")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Moim extends BaseTimeEntity {
@@ -70,44 +68,11 @@ public class Moim extends BaseTimeEntity {
     @JdbcTypeCode(SqlTypes.JSON)
     private ImageInfo imageList;
 
-    @Enumerated(EnumType.STRING)
-    private MoimState moimState;
+    private String moimState;
 
     @OneToMany(mappedBy = "moim", cascade = CascadeType.REMOVE)
     private List<Notice> notices = new ArrayList<>();
 
     @OneToMany(mappedBy = "moim", cascade = CascadeType.REMOVE)
     private List<MoimSubmission> moimSubmissions = new ArrayList<>();
-
-    @Builder
-    public Moim(
-            final Host host,
-            final CategoryInfo categoryList,
-            final boolean isOffline,
-            final String spot,
-            final DateInfo dateList,
-            final int maxGuest,
-            final int fee,
-            final AccountInfo accountList,
-            final QuestionInfo questionList,
-            final String title,
-            final String description,
-            final ImageInfo imageList,
-            final MoimState moimState
-    ) {
-        this.host = host;
-        this.categoryList = categoryList;
-        this.isOffline = isOffline;
-        this.spot = spot;
-        this.dateList = dateList;
-        this.maxGuest = maxGuest;
-        this.fee = fee;
-        this.accountList = accountList;
-        this.questionList = questionList;
-        this.title = title;
-        this.description = description;
-        this.imageList = imageList;
-        this.moimState = moimState;
-    }
-
 }

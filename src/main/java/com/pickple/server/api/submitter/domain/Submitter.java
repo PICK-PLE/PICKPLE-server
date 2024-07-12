@@ -3,8 +3,6 @@ package com.pickple.server.api.submitter.domain;
 import com.pickple.server.api.guest.domain.Guest;
 import com.pickple.server.global.common.domain.BaseTimeEntity;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +20,7 @@ import org.hibernate.type.SqlTypes;
 
 @Entity
 @Getter
+@Builder
 @Table(name = "submitters")
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -50,28 +49,5 @@ public class Submitter extends BaseTimeEntity {
 
     private String email;
 
-    @Enumerated(EnumType.STRING)
-    private SubmitterState submitterState;
-
-    @Builder
-    public Submitter(final Guest guest,
-                     final String intro,
-                     final String goal,
-                     final String link,
-                     final String nickname,
-                     final SubmitterCategoryInfo categoryList,
-                     final String plan,
-                     final String email,
-                     final SubmitterState submitterState
-    ) {
-        this.guest = guest;
-        this.intro = intro;
-        this.goal = goal;
-        this.link = link;
-        this.nickname = nickname;
-        this.categoryList = categoryList;
-        this.plan = plan;
-        this.email = email;
-        this.submitterState = submitterState;
-    }
+    private String submitterState;
 }

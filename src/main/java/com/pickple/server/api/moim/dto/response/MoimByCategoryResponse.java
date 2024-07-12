@@ -5,12 +5,19 @@ import lombok.Builder;
 
 @Builder
 public record MoimByCategoryResponse(
+
         Long moimId,
+
         int dayOfDay,
+
         String title,
+
         String hostNickName,
+
         DateInfo dateList,
+
         String moimImageUrl,
+
         String hostImageUrl
 ) {
 }
