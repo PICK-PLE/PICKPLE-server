@@ -8,6 +8,7 @@ import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.SuccessCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,5 +57,11 @@ public class MoimSubmissionController {
     ) {
         return ApiResponseDto.success(SuccessCode.COMPLETED_MOIM_LIST_BY_GUEST_GET_SUCCESS,
                 moimSubmissionQueryService.getCompletedMoimListByGuest(guestId));
+    }
+
+    @PatchMapping("/v1/moim/{moimId}/submitter/{submitterId}")
+    public ApiResponseDto updateSubmitterState(@PathVariable Long moimId, @PathVariable Long submitterId) {
+        moimSubmissionCommandService.updateSubmissionState(moimId, submitterId);
+        return ApiResponseDto.success(SuccessCode.SUBMITTER_APPROVE_SUCCESS);
     }
 }
