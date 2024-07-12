@@ -9,6 +9,7 @@ import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.dto.response.SubmittedMoimByGuestResponse;
 import com.pickple.server.global.util.DateUtil;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MoimQueryService {
 
     private final MoimRepository moimRepository;
+    private final Random random = new Random();
 
     public MoimDetailResponse getMoimDetail(final Long moimId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
@@ -75,5 +77,15 @@ public class MoimQueryService {
     public QuestionInfo getMoimQuestionList(final Long moimId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
         return moim.getQuestionList();
+    }
+
+    public Long getMoimBanner() {
+        List<Long> moimIdList = moimRepository.findAll()
+                .stream()
+                .map(Moim::getId)
+                .toList();
+
+        int randomIndex = random.nextInt(moimIdList.size());
+        return moimIdList.get(randomIndex);
     }
 }

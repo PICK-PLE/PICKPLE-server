@@ -1,9 +1,14 @@
 package com.pickple.server.api.user.service;
 
+import com.pickple.server.api.guest.domain.Guest;
+import com.pickple.server.api.guest.repository.GuestRepository;
+import com.pickple.server.api.host.domain.Host;
+import com.pickple.server.api.host.repository.HostRepository;
 import com.pickple.server.api.user.domain.SocialType;
 import com.pickple.server.api.user.domain.User;
 import com.pickple.server.api.user.dto.AccessTokenGetSuccess;
 import com.pickple.server.api.user.dto.LoginSuccessResponse;
+import com.pickple.server.api.user.dto.TokenDto;
 import com.pickple.server.api.user.repository.UserRepository;
 import com.pickple.server.global.auth.client.dto.UserInfoResponse;
 import com.pickple.server.global.auth.client.dto.UserLoginRequest;
@@ -24,12 +29,24 @@ public class UserService {
     private final JwtTokenProvider jwtTokenProvider;
     private final TokenService tokenService;
     private final KakaoSocialService kakaoSocialService;
+    private final GuestRepository guestRepository;  // 의존성 분리하기
+    private final HostRepository hostRepository;    // 의존성 분리하기
 
     public LoginSuccessResponse create(
             final String authorizationCode,
             final UserLoginRequest loginRequest
     ) {
-        return getTokenDto(getUserInfoResponse(authorizationCode, loginRequest));
+        User user = getUser(getUserInfoResponse(authorizationCode, loginRequest));
+        Guest guest = getOrCreateGuest(user);
+        TokenDto tokenDto = getTokenDto(user);
+
+        if (isExistingHost(user.getId())) {
+            Host host = hostRepository.findHostByUserId(user.getId());
+            return LoginSuccessResponse.of(guest.getNickname(), guest.getId(),
+                    host.getNickname(), host.getId(), tokenDto);
+        } else {
+            return LoginSuccessResponse.of(guest.getNickname(), guest.getId(), null, null, tokenDto);
+        }
     }
 
     public UserInfoResponse getUserInfoResponse(
@@ -44,14 +61,23 @@ public class UserService {
         }
     }
 
-    public Long createUser(final UserInfoResponse userResponse) {
+    public User createUser(final UserInfoResponse userResponse) {
         User user = User.of(
                 userResponse.socialId(),
                 userResponse.email(),
                 userResponse.socialType(),
                 userResponse.socialNickname()
         );
-        return userRepository.save(user).getId();
+        return userRepository.save(user);
+    }
+
+    public Guest createGuest(final User user) {
+        Guest guest = Guest.builder()
+                .user(user)
+                .nickname(user.getSocialNickname() + "#" + user.getId())
+                .imageUrl("testImage")
+                .build();
+        return guestRepository.save(guest);
     }
 
     public User getBySocialId(
@@ -77,20 +103,13 @@ public class UserService {
         );
     }
 
-    public boolean isExistingUser(
-            final Long socialId,
-            final SocialType socialType
-    ) {
-        return userRepository.findBySocialTypeAndSocialId(socialId, socialType).isPresent();
-    }
-
-    public LoginSuccessResponse getTokenByUserId(
+    public TokenDto getTokenByUserId(
             final Long id
     ) {
         UserAuthentication userAuthentication = new UserAuthentication(id, null, null);
         String refreshToken = jwtTokenProvider.issueRefreshToken(userAuthentication);
         tokenService.saveRefreshToken(id, refreshToken);
-        return LoginSuccessResponse.of(
+        return TokenDto.of(
                 jwtTokenProvider.issueAccessToken(userAuthentication),
                 refreshToken
         );
@@ -107,14 +126,33 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    private LoginSuccessResponse getTokenDto(
-            final UserInfoResponse userResponse
+    private TokenDto getTokenDto(
+            final User user
     ) {
+        return getTokenByUserId(user.getId());
+    }
+
+    private User getUser(final UserInfoResponse userResponse) {
         if (isExistingUser(userResponse.socialId(), userResponse.socialType())) {
-            return getTokenByUserId(getBySocialId(userResponse.socialId(), userResponse.socialType()).getId());
+            return getBySocialId(userResponse.socialId(), userResponse.socialType());
         } else {
-            Long id = createUser(userResponse);
-            return getTokenByUserId(id);
+            return createUser(userResponse);
         }
+    }
+
+    private boolean isExistingUser(
+            final Long socialId,
+            final SocialType socialType
+    ) {
+        return userRepository.findBySocialTypeAndSocialId(socialId, socialType).isPresent();
+    }
+
+    private boolean isExistingHost(final Long userId) {
+        return hostRepository.existsById(userId);
+    }
+
+    private Guest getOrCreateGuest(final User user) {
+        return guestRepository.findByUserId(user.getId())
+                .orElseGet(() -> createGuest(user));
     }
 }
