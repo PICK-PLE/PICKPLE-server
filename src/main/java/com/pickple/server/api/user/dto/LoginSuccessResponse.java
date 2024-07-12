@@ -1,13 +1,19 @@
 package com.pickple.server.api.user.dto;
 
 public record LoginSuccessResponse(
-        String accessToken,
-        String refreshToken
+        String guestNickname,
+        Long guestId,
+        String hostNickname,
+        Long hostId,
+        TokenDto token
 ) {
     public static LoginSuccessResponse of(
-            final String accessToken,
-            final String refreshToken
+            final String guestNickname,
+            final Long guestId,
+            final String hostNickname,
+            final Long hostId,
+            final TokenDto token
     ) {
-        return new LoginSuccessResponse(accessToken, refreshToken);
+        return new LoginSuccessResponse(guestNickname, guestId, hostNickname, hostId, token);
     }
 }
