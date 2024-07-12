@@ -1,5 +1,7 @@
 package com.pickple.server.api.user.service;
 
+import com.pickple.server.api.guest.domain.Guest;
+import com.pickple.server.api.guest.repository.GuestRepository;
 import com.pickple.server.api.user.domain.SocialType;
 import com.pickple.server.api.user.domain.User;
 import com.pickple.server.api.user.dto.AccessTokenGetSuccess;
@@ -24,6 +26,7 @@ public class UserService {
     private final JwtTokenProvider jwtTokenProvider;
     private final TokenService tokenService;
     private final KakaoSocialService kakaoSocialService;
+    private final GuestRepository guestRepository;  // 의존성 분리하기
 
     public LoginSuccessResponse create(
             final String authorizationCode,
@@ -52,6 +55,16 @@ public class UserService {
                 userResponse.socialNickname()
         );
         return userRepository.save(user).getId();
+    }
+
+    public Guest createGuest(final User user) {
+        Guest guest = Guest.builder()
+                .user(user)
+                .nickname(user.getSocialNickname() + "#" + user.getId())
+                .imageUrl("test")
+                .build();
+
+        return guestRepository.save(guest);
     }
 
     public User getBySocialId(
