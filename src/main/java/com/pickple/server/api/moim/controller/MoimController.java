@@ -66,10 +66,4 @@ public class MoimController {
         return ApiResponseDto.success(SuccessCode.MOIM_QUESTION_LIST_GET_SUCCESS,
                 moimQueryService.getMoimQuestionList(moimId));
     }
-
-    @GetMapping("/v1/moim/banner")
-    private ApiResponseDto getMoimBanner() {
-        return ApiResponseDto.success(SuccessCode.MOIM_BANNER_GET_SUCCESS,
-                moimQueryService.getMoimBanner());
-    }
 }

@@ -78,14 +78,4 @@ public class MoimQueryService {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
         return moim.getQuestionList();
     }
-
-    public Long getMoimBanner() {
-        List<Long> moimIdList = moimRepository.findAll()
-                .stream()
-                .map(Moim::getId)
-                .toList();
-
-        int randomIndex = random.nextInt(moimIdList.size());
-        return moimIdList.get(randomIndex);
-    }
 }
