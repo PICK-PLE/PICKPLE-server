@@ -6,7 +6,7 @@ import com.pickple.server.api.moim.dto.response.MoimByCategoryResponse;
 import com.pickple.server.api.moim.dto.response.MoimDescriptionResponse;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
 import com.pickple.server.api.moim.repository.MoimRepository;
-import com.pickple.server.api.moimsubmission.dto.response.SubmittedMoimByGuestResponse;
+import com.pickple.server.api.moimsubmission.dto.response.MoimByGuestResponse;
 import com.pickple.server.global.util.DateUtil;
 import java.util.List;
 import java.util.Random;
@@ -38,9 +38,9 @@ public class MoimQueryService {
                 .build();
     }
 
-    public SubmittedMoimByGuestResponse getSubmittedMoimDetail(final Long moimId) {
+    public MoimByGuestResponse getSubmittedMoimDetail(final Long moimId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
-        return SubmittedMoimByGuestResponse.builder()
+        return MoimByGuestResponse.builder()
                 .title(moim.getTitle())
                 .hostNickname(moim.getHost().getNickname())
                 .isOffline(moim.isOffline())
