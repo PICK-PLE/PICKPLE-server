@@ -22,7 +22,7 @@ import org.hibernate.type.SqlTypes;
 
 @Entity
 @Getter
-@Table(name = "moimSubmission")
+@Table(name = "moimSubmissions")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -46,19 +46,4 @@ public class MoimSubmission extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     private MoimSubmissionState moimSubmissionState;
-
-    @Builder
-    public MoimSubmission(
-            final Long guestId,
-            final Moim moim,
-            final AnswerInfo answerList,
-            final AccountInfo accountList,
-            final MoimSubmissionState moimSubmissionState
-    ) {
-        this.guestId = guestId;
-        this.moim = moim;
-        this.answerList = answerList;
-        this.accountList = accountList;
-        this.moimSubmissionState = moimSubmissionState;
-    }
 }
