@@ -3,9 +3,9 @@ package com.pickple.server.api.moim.controller;
 import com.pickple.server.api.moim.domain.enums.Category;
 import com.pickple.server.api.moim.dto.request.MoimCreateRequest;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
-import com.pickple.server.api.moim.dto.response.SubmittedMoimResponse;
 import com.pickple.server.api.moim.service.MoimCommandService;
 import com.pickple.server.api.moim.service.MoimQueryService;
+import com.pickple.server.api.moimsubmission.dto.response.SubmittedMoimByGuestResponse;
 import com.pickple.server.global.common.annotation.HostId;
 import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.SuccessCode;
@@ -44,7 +44,7 @@ public class MoimController {
     }
 
     @GetMapping("/v1/submitted-moim/{moimId}")
-    public ApiResponseDto<SubmittedMoimResponse> getSubmittedMoimDetail(@PathVariable Long moimId) {
+    public ApiResponseDto<SubmittedMoimByGuestResponse> getSubmittedMoimDetail(@PathVariable Long moimId) {
         return ApiResponseDto.success(SuccessCode.SUBMITTED_MOIM_DETAIL_GET_SUCCESS,
                 moimQueryService.getSubmittedMoimDetail(moimId));
     }
@@ -65,5 +65,11 @@ public class MoimController {
     public ApiResponseDto getMoimQuestionList(@PathVariable Long moimId) {
         return ApiResponseDto.success(SuccessCode.MOIM_QUESTION_LIST_GET_SUCCESS,
                 moimQueryService.getMoimQuestionList(moimId));
+    }
+
+    @GetMapping("/v1/moim/banner")
+    private ApiResponseDto getMoimBanner() {
+        return ApiResponseDto.success(SuccessCode.MOIM_BANNER_GET_SUCCESS,
+                moimQueryService.getMoimBanner());
     }
 }

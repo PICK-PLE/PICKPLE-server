@@ -5,8 +5,8 @@ import com.pickple.server.api.moim.domain.QuestionInfo;
 import com.pickple.server.api.moim.dto.response.MoimByCategoryResponse;
 import com.pickple.server.api.moim.dto.response.MoimDescriptionResponse;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
-import com.pickple.server.api.moim.dto.response.SubmittedMoimResponse;
 import com.pickple.server.api.moim.repository.MoimRepository;
+import com.pickple.server.api.moimsubmission.dto.response.SubmittedMoimByGuestResponse;
 import com.pickple.server.global.util.DateUtil;
 import java.util.List;
 import java.util.Random;
@@ -38,9 +38,9 @@ public class MoimQueryService {
                 .build();
     }
 
-    public SubmittedMoimResponse getSubmittedMoimDetail(final Long moimId) {
+    public SubmittedMoimByGuestResponse getSubmittedMoimDetail(final Long moimId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
-        return SubmittedMoimResponse.builder()
+        return SubmittedMoimByGuestResponse.builder()
                 .title(moim.getTitle())
                 .hostNickname(moim.getHost().getNickname())
                 .isOffline(moim.isOffline())
@@ -77,5 +77,15 @@ public class MoimQueryService {
     public QuestionInfo getMoimQuestionList(final Long moimId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
         return moim.getQuestionList();
+    }
+
+    public Long getMoimBanner() {
+        List<Long> moimIdList = moimRepository.findAll()
+                .stream()
+                .map(Moim::getId)
+                .toList();
+
+        int randomIndex = random.nextInt(moimIdList.size());
+        return moimIdList.get(randomIndex);
     }
 }
