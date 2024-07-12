@@ -6,6 +6,8 @@ import com.pickple.server.api.moim.dto.response.SubmittedMoimByGuestResponse;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmissionState;
 import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository;
+import com.pickple.server.global.exception.CustomException;
+import com.pickple.server.global.response.enums.ErrorCode;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -23,33 +25,28 @@ public class MoimSubmissionQueryService {
     public List<SubmittedMoimByGuestResponse> getSubmittedMoimListByGuest(final Long guestId,
                                                                           final MoimSubmissionState moimSubmissionState) {
         Guest guest = guestRepository.findGuestByIdOrThrow(guestId);
+        List<MoimSubmission> moimSubmissionList;
+
         if (moimSubmissionState.equals(MoimSubmissionState.ALL)) {
-            List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findAllByGuestId(guest.getId());
-            return moimSubmissionList.stream()
-                    .map(oneMoimSubmission -> SubmittedMoimByGuestResponse.builder()
-                            .moimId(oneMoimSubmission.getMoim().getId())
-                            .moimSubmissionState(oneMoimSubmission.getMoimSubmissionState())
-                            .title(oneMoimSubmission.getMoim().getTitle())
-                            .hostNickname(oneMoimSubmission.getMoim().getHost().getNickname())
-                            .dateList(oneMoimSubmission.getMoim().getDateList())
-                            .fee(oneMoimSubmission.getMoim().getFee())
-                            .imageUrl(oneMoimSubmission.getMoim().getImageList().getImageUrl1())
-                            .build()
-                    ).collect(Collectors.toList());
+            moimSubmissionList = moimSubmissionRepository.findAllByGuestId(guest.getId());
         } else {
-            List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findAllByMoimSubmissionState(
-                    moimSubmissionState);
-            return moimSubmissionList.stream()
-                    .map(oneMoimSubmission -> SubmittedMoimByGuestResponse.builder()
-                            .moimId(oneMoimSubmission.getMoim().getId())
-                            .moimSubmissionState(oneMoimSubmission.getMoimSubmissionState())
-                            .title(oneMoimSubmission.getMoim().getTitle())
-                            .hostNickname(oneMoimSubmission.getMoim().getHost().getNickname())
-                            .dateList(oneMoimSubmission.getMoim().getDateList())
-                            .fee(oneMoimSubmission.getMoim().getFee())
-                            .imageUrl(oneMoimSubmission.getMoim().getImageList().getImageUrl1())
-                            .build()
-                    ).collect(Collectors.toList());
+            moimSubmissionList = moimSubmissionRepository.findAllByMoimSubmissionState(moimSubmissionState);
         }
+
+        if (moimSubmissionList.isEmpty()) {
+            throw new CustomException(ErrorCode.MOIM_BY_STATE_NOT_FOUND);
+        }
+
+        return moimSubmissionList.stream()
+                .map(oneMoimSubmission -> SubmittedMoimByGuestResponse.builder()
+                        .moimId(oneMoimSubmission.getMoim().getId())
+                        .moimSubmissionState(oneMoimSubmission.getMoimSubmissionState())
+                        .title(oneMoimSubmission.getMoim().getTitle())
+                        .hostNickname(oneMoimSubmission.getMoim().getHost().getNickname())
+                        .dateList(oneMoimSubmission.getMoim().getDateList())
+                        .fee(oneMoimSubmission.getMoim().getFee())
+                        .imageUrl(oneMoimSubmission.getMoim().getImageList().getImageUrl1())
+                        .build())
+                .collect(Collectors.toList());
     }
 }
