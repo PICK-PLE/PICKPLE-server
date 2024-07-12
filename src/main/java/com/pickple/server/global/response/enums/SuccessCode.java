@@ -25,7 +25,8 @@ public enum SuccessCode {
     NOTICE_LIST_GET_SUCCESS(20011, HttpStatus.OK, "공지사항 리스트 조회 성공"),
     MOIM_DESCRIPTION_GET_SUCCESS(20012, HttpStatus.OK, "모임에 해당하는 소개 조회 성공"),
     MOIM_QUESTION_LIST_GET_SUCCESS(20013, HttpStatus.OK, "모임 질문 목록 조회 성공"),
-    MOIM_BANNER_GET_SUCCESS(30014, HttpStatus.OK, "홈 배너 조회 성공"),
+    MOIM_BANNER_GET_SUCCESS(20014, HttpStatus.OK, "홈 배너 조회 성공"),
+    HOST_BY_MOIM_GET_SUCCESS(20015, HttpStatus.OK, "모임에 해당하는 호스 정보 조회 성공"),
 
     //201 Created
     MOIM_CREATE_SUCCESS(20100, HttpStatus.CREATED, "모임 개설 성공");

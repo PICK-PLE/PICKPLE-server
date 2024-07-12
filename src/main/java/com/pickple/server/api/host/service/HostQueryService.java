@@ -1,8 +1,12 @@
 package com.pickple.server.api.host.service;
 
 import com.pickple.server.api.host.domain.Host;
+import com.pickple.server.api.host.dto.response.HostByMoimResponse;
 import com.pickple.server.api.host.dto.response.HostGetResponse;
 import com.pickple.server.api.host.repository.HostRepository;
+import com.pickple.server.api.moim.domain.Moim;
+import com.pickple.server.api.moim.repository.MoimRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class HostQueryService {
 
     private final HostRepository hostRepository;
+    private final MoimRepository moimRepository;
 
     public HostGetResponse getHost(Long hostId) {
         Host host = hostRepository.findHostByIdOrThrow(hostId);
@@ -22,6 +27,19 @@ public class HostQueryService {
                 .hostImageUrl(host.getImageUrl())
                 .hostNickName(host.getNickname())
                 .hostLink(host.getLink())
+                .build();
+    }
+
+    public HostByMoimResponse getHostByMoim(Long hostId) {
+        Host host = hostRepository.findHostByIdOrThrow(hostId);
+        List<Moim> moimList = moimRepository.findMoimByHostId(hostId);
+        int count = moimList.size();
+
+        return HostByMoimResponse.builder()
+                .hostNickName(host.getNickname())
+                .hostImageUrl(host.getImageUrl())
+                .hostCategoryList(host.getCategoryList())
+                .count(count)
                 .build();
     }
 }

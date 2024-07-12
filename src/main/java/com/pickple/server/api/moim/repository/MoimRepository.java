@@ -12,6 +12,8 @@ import org.springframework.data.repository.query.Param;
 public interface MoimRepository extends JpaRepository<Moim, Long> {
     Optional<Moim> findMoimById(Long id);
 
+    List<Moim> findMoimByHostId(Long hostId);
+
     default Moim findMoimByIdOrThrow(Long id) {
         return findMoimById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.MOIM_NOT_FOUND));
