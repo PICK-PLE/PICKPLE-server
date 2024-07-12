@@ -2,6 +2,7 @@ package com.pickple.server.api.moimsubmission.service;
 
 import com.pickple.server.api.guest.domain.Guest;
 import com.pickple.server.api.guest.repository.GuestRepository;
+import com.pickple.server.api.host.dto.response.SubmittionDetailResponse;
 import com.pickple.server.api.moim.dto.response.SubmittedMoimByGuestResponse;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmissionState;
@@ -48,5 +49,14 @@ public class MoimSubmissionQueryService {
                         .imageUrl(oneMoimSubmission.getMoim().getImageList().getImageUrl1())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    public SubmittionDetailResponse getSubmittionDetail(Long moimId, Long guestId) {
+        MoimSubmission submission = moimSubmissionRepository.findBymoimIdAndGuestId(moimId, guestId);
+
+        return SubmittionDetailResponse.builder()
+                .answerList(submission.getAnswerList())
+                .questionList(submission.getMoim().getQuestionList())
+                .build();
     }
 }

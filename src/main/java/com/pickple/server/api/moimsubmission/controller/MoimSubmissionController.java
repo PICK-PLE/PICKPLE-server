@@ -42,4 +42,12 @@ public class MoimSubmissionController {
         return ApiResponseDto.success(SuccessCode.SUBMITTED_MOIM_LIST_BY_GUEST_GET_SUCCESS,
                 moimSubmissionQueryService.getSubmittedMoimListByGuest(guestId, moimSubmissionState));
     }
+
+    @GetMapping("/v1/moim/{moimId}/submitter/{submitterId}")
+    public ApiResponseDto getSubmissionDetail(
+            @PathVariable Long moimId, @PathVariable Long submitterId
+    ) {
+        return ApiResponseDto.success(SuccessCode.SUBMISSION_DETAIL_GET_SUCCESS,
+                moimSubmissionQueryService.getSubmittionDetail(moimId, submitterId));
+    }
 }
