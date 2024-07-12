@@ -60,4 +60,10 @@ public class MoimController {
         return ApiResponseDto.success(SuccessCode.MOIM_DESCRIPTION_GET_SUCCESS,
                 moimQueryService.getMoimDescription(moimId));
     }
+
+    @GetMapping("/v1/moim/{moimId}/question-list")
+    public ApiResponseDto getMoimQuestionList(@PathVariable Long moimId) {
+        return ApiResponseDto.success(SuccessCode.MOIM_QUESTION_LIST_GET_SUCCESS,
+                moimQueryService.getMoimQuestionList(moimId));
+    }
 }

@@ -1,6 +1,7 @@
 package com.pickple.server.api.moim.service;
 
 import com.pickple.server.api.moim.domain.Moim;
+import com.pickple.server.api.moim.domain.QuestionInfo;
 import com.pickple.server.api.moim.dto.response.MoimByCategoryResponse;
 import com.pickple.server.api.moim.dto.response.MoimDescriptionResponse;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
@@ -69,5 +70,10 @@ public class MoimQueryService {
         return MoimDescriptionResponse.builder()
                 .description(moim.getDescription())
                 .build();
+    }
+
+    public QuestionInfo getMoimQuestionList(final Long moimId) {
+        Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
+        return moim.getQuestionList();
     }
 }
