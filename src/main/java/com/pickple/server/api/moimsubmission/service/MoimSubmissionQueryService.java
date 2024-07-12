@@ -54,6 +54,10 @@ public class MoimSubmissionQueryService {
     public SubmittionDetailResponse getSubmittionDetail(Long moimId, Long guestId) {
         MoimSubmission submission = moimSubmissionRepository.findBymoimIdAndGuestId(moimId, guestId);
 
+        if (submission == null) {
+            throw new CustomException(ErrorCode.MOIM_SUBMISSION_NOT_FOUND);
+        }
+
         return SubmittionDetailResponse.builder()
                 .answerList(submission.getAnswerList())
                 .questionList(submission.getMoim().getQuestionList())
