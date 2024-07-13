@@ -97,7 +97,7 @@ public class MoimSubmissionQueryService {
         List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimListByMoimId(moimId);
 
         if (moimSubmissionList.isEmpty()) {
-            throw new CustomException(ErrorCode.SUBMITTE_BY_MOIM_NOT_FOUND);
+            throw new CustomException(ErrorCode.SUBMITTER_BY_MOIM_NOT_FOUND);
         }
 
         return moimSubmissionList.stream()
