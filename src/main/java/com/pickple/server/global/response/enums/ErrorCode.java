@@ -17,7 +17,6 @@ public enum ErrorCode {
     MISSING_REQUIRED_HEADER(40005, HttpStatus.BAD_REQUEST, "필수 헤더가 누락되었습니다."),
     MISSING_REQUIRED_PARAMETER(40006, HttpStatus.BAD_REQUEST, "필수 파라미터가 누락되었습니다."),
     DUPLICATION_MOIM_SUBMISSION(40007, HttpStatus.BAD_REQUEST, "이미 대기중인 모임입니다."),
-    MOIM_SUBMISSION_NOT_FOUND(40008, HttpStatus.BAD_REQUEST, "해당 모임에 신청한 내역이 없습니다."),
 
     // 401 Unauthorized
     ACCESS_TOKEN_EXPIRED(40100, HttpStatus.UNAUTHORIZED, "액세스 토큰이 만료되었습니다."),
@@ -32,6 +31,8 @@ public enum ErrorCode {
     MOIM_NOT_FOUND(40404, HttpStatus.NOT_FOUND, "존재하지 않는 모임입니다."),
     HOST_NOT_FOUND(40405, HttpStatus.NOT_FOUND, "존재하지 않는 호스트입니다"),
     MOIM_BY_STATE_NOT_FOUND(40406, HttpStatus.NOT_FOUND, "상태에 맞는 모임이 없습니다"),
+    MOIM_SUBMISSION_NOT_FOUND(40407, HttpStatus.NOT_FOUND, "해당 모임에 신청한 내역이 없습니다."),
+
     // Method Not Allowed Error 405
     METHOD_NOT_ALLOWED(40500, HttpStatus.METHOD_NOT_ALLOWED, "지원하지 않는 메소드입니다."),
 
