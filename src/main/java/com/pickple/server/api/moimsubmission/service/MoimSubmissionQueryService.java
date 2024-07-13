@@ -3,6 +3,7 @@ package com.pickple.server.api.moimsubmission.service;
 import com.pickple.server.api.guest.domain.Guest;
 import com.pickple.server.api.guest.repository.GuestRepository;
 import com.pickple.server.api.host.dto.response.SubmittionDetailResponse;
+import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.dto.response.SubmittedMoimByGuestResponse;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmissionState;
@@ -12,6 +13,7 @@ import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository
 import com.pickple.server.global.exception.CustomException;
 import com.pickple.server.global.response.enums.ErrorCode;
 import com.pickple.server.global.util.DateTimeUtil;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -101,18 +103,19 @@ public class MoimSubmissionQueryService {
         return moimSubmissionList.stream()
                 .map(oneMoimSubmission -> MoimSubmissionByMoimResponse.builder()
                         .maxGuest(oneMoimSubmission.getMoim().getMaxGuest())
-                        .isApprovable(isApprovable(oneMoimSubmission))
+                        .isApprovable(isApprovable(oneMoimSubmission.getMoim()))
                         .submitterList(getSubmitterInfo(oneMoimSubmission.getGuestId()))
                         .build())
                 .collect(Collectors.toList());
     }
 
-    private boolean isApprovable(MoimSubmission oneMoimSubmission) {
-        // 신청일
-        LocalDateTime createdAt = oneMoimSubmission.getCreatedAt();
+    private boolean isApprovable(Moim moim) {
+        // 모임일
+        System.out.println(moim.getId());
+        LocalDate date = moim.getDateList().getDate();
 
         // 마감일: 신청일 + 3일의 자정
-        LocalDateTime deadline = createdAt.plusDays(3).with(LocalTime.MIDNIGHT);
+        LocalDateTime deadline = date.minusDays(3).atTime(LocalTime.MIDNIGHT);
 
         // 현재 시간
         LocalDateTime now = LocalDateTime.now();
