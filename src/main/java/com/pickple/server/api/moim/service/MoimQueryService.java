@@ -5,8 +5,12 @@ import com.pickple.server.api.moim.domain.QuestionInfo;
 import com.pickple.server.api.moim.dto.response.MoimByCategoryResponse;
 import com.pickple.server.api.moim.dto.response.MoimDescriptionResponse;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
+import com.pickple.server.api.moim.dto.response.MoimListByHostGetResponse;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.dto.response.MoimByGuestResponse;
+import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository;
+import com.pickple.server.global.exception.CustomException;
+import com.pickple.server.global.response.enums.ErrorCode;
 import com.pickple.server.global.util.DateUtil;
 import java.util.List;
 import java.util.Random;
@@ -22,6 +26,7 @@ public class MoimQueryService {
 
     private final MoimRepository moimRepository;
     private final Random random = new Random();
+    private final MoimSubmissionRepository moimSubmissionRepository;
 
     public MoimDetailResponse getMoimDetail(final Long moimId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
@@ -87,5 +92,25 @@ public class MoimQueryService {
 
         int randomIndex = random.nextInt(moimIdList.size());
         return moimIdList.get(randomIndex);
+    }
+
+    public List<MoimListByHostGetResponse> getMoimListByHost(Long hostId, String moimState) {
+        List<Moim> moimList = moimRepository.findMoimByhostIdAndMoimState(hostId, moimState);
+        if (moimList.isEmpty()) {
+            throw new CustomException(ErrorCode.MOIM_BY_HOST_AND_STATE_NOT_FOUND);
+        }
+        return moimList.stream()
+                .map(oneMoim -> MoimListByHostGetResponse.builder()
+                        .moimId(oneMoim.getId())
+                        .moimImage(oneMoim.getImageList().getImageUrl1())
+                        .approvedGuest(calculateApprovedGuest(oneMoim.getId()))
+                        .title(oneMoim.getTitle())
+                        .maxGuest(oneMoim.getMaxGuest())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    private Long calculateApprovedGuest(Long moimId) {
+        return moimSubmissionRepository.countApprovedMoimSubmissions(moimId);
     }
 }

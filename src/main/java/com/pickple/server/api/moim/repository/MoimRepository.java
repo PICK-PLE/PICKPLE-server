@@ -14,7 +14,7 @@ public interface MoimRepository extends JpaRepository<Moim, Long> {
 
     List<Moim> findMoimByHostId(Long hostId);
 
-    List<Moim> findMoimListById(Long Id);
+    List<Moim> findMoimByhostIdAndMoimState(Long hostId, String moimState);
 
     default Moim findMoimByIdOrThrow(Long id) {
         return findMoimById(id)

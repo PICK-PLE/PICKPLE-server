@@ -7,9 +7,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum MoimState {
 
-    ONGOING("ongoing"),
+    ONGOING("ongoing"), //진행중
 
-    COMPLETED("completed");
+    COMPLETED("completed"); //완료
 
     public final String moimState;
 }
