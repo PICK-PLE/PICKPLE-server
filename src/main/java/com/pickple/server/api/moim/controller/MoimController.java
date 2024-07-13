@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class MoimController {
+public class MoimController implements MoimControllerDocs {
 
     private final MoimQueryService moimQueryService;
     private final MoimCommandService moimCommandService;
@@ -68,7 +68,7 @@ public class MoimController {
     }
 
     @GetMapping("/v1/moim/banner")
-    private ApiResponseDto getMoimBanner() {
+    public ApiResponseDto getMoimBanner() {
         return ApiResponseDto.success(SuccessCode.MOIM_BANNER_GET_SUCCESS,
                 moimQueryService.getMoimBanner());
     }
