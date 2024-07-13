@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.InvalidDataAccessResourceUsageException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -111,6 +112,11 @@ public class MoimQueryService {
     }
 
     private Long calculateApprovedGuest(Long moimId) {
-        return moimSubmissionRepository.countApprovedMoimSubmissions(moimId);
+        try {
+            return moimSubmissionRepository.countApprovedMoimSubmissions(moimId);
+        } catch (InvalidDataAccessResourceUsageException e) {
+            // 테이블이 존재하지 않아서 발생한 예외일 경우 0 반환
+            return 0L;
+        }
     }
 }
