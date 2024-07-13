@@ -59,6 +59,11 @@ public class MoimSubmissionController {
                 moimSubmissionQueryService.getCompletedMoimListByGuest(guestId));
     }
 
+    @GetMapping("/v1/moim/{moimId}/submitter-list")
+    public ApiResponseDto getSubmitterListByMoim(@PathVariable Long moimId) {
+        return ApiResponseDto.success(SuccessCode.SUBMITTER_LIST_BY_MOIM_GET_SUCCESS,
+                moimSubmissionQueryService.getSubmitterListByMoim(moimId));
+      
     @PatchMapping("/v1/moim/{moimId}/submitter/{submitterId}")
     public ApiResponseDto updateSubmitterState(@PathVariable Long moimId, @PathVariable Long submitterId) {
         moimSubmissionCommandService.updateSubmissionState(moimId, submitterId);
