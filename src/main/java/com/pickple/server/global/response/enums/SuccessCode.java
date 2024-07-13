@@ -19,7 +19,7 @@ public enum SuccessCode {
     HOST_DETAIL_GET_SUCCESS(20007, HttpStatus.OK, "호스트 정보 조회 성공"),
     MOIM_SUBMISSION_POST_SUCCESS(20008, HttpStatus.OK, "모임 참여 신청 성공"),
     PRESIGNED_URL_GET_SUCCESS(20009, HttpStatus.OK, "presigned url 발급 성공"),
-    SUBMITTED_MOIM_DETAIL_GET_SUCCESS(200010, HttpStatus.OK, "신청한 모임 상세 정보 조회 성공"),
+    SUBMITTED_MOIM_DETAIL_GET_SUCCESS(20010, HttpStatus.OK, "신청한 모임 상세 정보 조회 성공"),
     NOTICE_POST_SUCCESS(20011, HttpStatus.OK, "공지사항 작성 성공"),
     MOIM_LIST_BY_CATEGORY_GET_SUCCESS(20012, HttpStatus.OK, "카테고리에 해당하는 모임 조회 성공"),
     NOTICE_LIST_GET_SUCCESS(20013, HttpStatus.OK, "공지사항 리스트 조회 성공"),
@@ -28,11 +28,11 @@ public enum SuccessCode {
     MOIM_BANNER_GET_SUCCESS(20016, HttpStatus.OK, "홈 배너 조회 성공"),
     HOST_BY_MOIM_GET_SUCCESS(20017, HttpStatus.OK, "모임에 해당하는 호스트 정보 조회 성공"),
     SUBMITTED_MOIM_LIST_BY_GUEST_GET_SUCCESS(20018, HttpStatus.OK, "게스트에 해당하는 신청한 모임 리스트 조회 성공"),
-    SUBMISSION_DETAIL_GET_SUCCESS(20019, HttpStatus.OK, "신청자 해당하는 신청 내역 조회 성공"),
-    COMPLETED_MOIM_LIST_BY_GUEST_GET_SUCCESS(20019, HttpStatus.OK, "게스트에 해당하는 참가한 모임 리스트 조회 성공"),
-    SUBMITTER_LIST_BY_MOIM_GET_SUCCESS(20020, HttpStatus.OK, "모임에 해당하는 신청자 전체 조회 성공"),
-    SUBMITTER_APPROVE_SUCCESS(20020, HttpStatus.OK, "신청자 승인 성공"),
-    MOIM_LIST_BY_HOST(20021, HttpStatus.OK, "호스트에 해당하는 모임 조회 성공"),
+    SUBMISSION_DETAIL_GET_SUCCESS(20019, HttpStatus.OK, "신청자에 해당하는 신청 내역 조회 성공"),
+    COMPLETED_MOIM_LIST_BY_GUEST_GET_SUCCESS(20020, HttpStatus.OK, "게스트에 해당하는 참가한 모임 리스트 조회 성공"),
+    SUBMITTER_LIST_BY_MOIM_GET_SUCCESS(20021, HttpStatus.OK, "모임에 해당하는 신청자 전체 조회 성공"),
+    SUBMITTER_APPROVE_SUCCESS(20022, HttpStatus.OK, "신청자 승인 성공"),
+    MOIM_LIST_BY_HOST(20023, HttpStatus.OK, "호스트에 해당하는 모임 조회 성공"),
 
     //201 Created
     MOIM_CREATE_SUCCESS(20100, HttpStatus.CREATED, "모임 개설 성공");

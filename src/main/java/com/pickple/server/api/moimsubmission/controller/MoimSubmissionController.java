@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class MoimSubmissionController {
+public class MoimSubmissionController implements MoimSubmissionControllerDocs {
 
     private final MoimSubmissionCommandService moimSubmissionCommandService;
     private final MoimSubmissionQueryService moimSubmissionQueryService;
