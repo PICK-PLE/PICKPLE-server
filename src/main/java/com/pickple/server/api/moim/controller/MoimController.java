@@ -72,4 +72,10 @@ public class MoimController {
         return ApiResponseDto.success(SuccessCode.MOIM_BANNER_GET_SUCCESS,
                 moimQueryService.getMoimBanner());
     }
+
+    @GetMapping("/v1/host/{hostId}/moim-list")
+    public ApiResponseDto getMoimListByHostId(@PathVariable Long hostId, @RequestParam String moimState) {
+        return ApiResponseDto.success(SuccessCode.MOIM_LIST_BY_HOST,
+                moimQueryService.getMoimListByHost(hostId, moimState));
+    }
 }

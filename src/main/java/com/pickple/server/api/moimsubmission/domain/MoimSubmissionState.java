@@ -7,19 +7,19 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum MoimSubmissionState {
 
-    ALL("all"),
+    ALL("all"), //전체
 
-    PENDING_PAYMENT("pendingPayment"),
+    PENDING_PAYMENT("pendingPayment"),  //입금 대기
 
-    PENDING_APPROVAL("pendingApproval"),
+    PENDING_APPROVAL("pendingApproval"),    //승인 대기
 
-    APPROVED("approved"),
+    APPROVED("approved"),   //승인
 
-    REJECTED("rejected"),
+    REJECTED("rejected"),   //거절
 
-    REFUNDED("refunded"),
+    REFUNDED("refunded"),   //환불
 
-    COMPLETED("completed");
+    COMPLETED("completed"); //완료
 
     public final String moimSubmissionState;
 }
