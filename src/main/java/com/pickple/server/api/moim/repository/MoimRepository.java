@@ -14,6 +14,8 @@ public interface MoimRepository extends JpaRepository<Moim, Long> {
 
     List<Moim> findMoimByHostId(Long hostId);
 
+    List<Moim> findMoimListById(Long Id);
+
     default Moim findMoimByIdOrThrow(Long id) {
         return findMoimById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.MOIM_NOT_FOUND));

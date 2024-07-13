@@ -4,11 +4,17 @@ import com.pickple.server.api.guest.domain.Guest;
 import com.pickple.server.api.guest.repository.GuestRepository;
 import com.pickple.server.api.host.dto.response.SubmittionDetailResponse;
 import com.pickple.server.api.moim.dto.response.SubmittedMoimByGuestResponse;
+import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmissionState;
+import com.pickple.server.api.moimsubmission.domain.SubmitterInfo;
+import com.pickple.server.api.moimsubmission.dto.response.MoimSubmissionByMoimResponse;
 import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository;
 import com.pickple.server.global.exception.CustomException;
 import com.pickple.server.global.response.enums.ErrorCode;
+import com.pickple.server.global.util.DateTimeUtil;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +28,7 @@ public class MoimSubmissionQueryService {
 
     private final GuestRepository guestRepository;
     private final MoimSubmissionRepository moimSubmissionRepository;
+    private final MoimRepository moimRepository;
 
     public List<SubmittedMoimByGuestResponse> getSubmittedMoimListByGuest(final Long guestId,
                                                                           final String moimSubmissionState) {
@@ -84,5 +91,45 @@ public class MoimSubmissionQueryService {
                         .imageUrl(oneMoimSubmission.getMoim().getImageList().getImageUrl1())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    public List<MoimSubmissionByMoimResponse> getSubmitterListByMoim(Long moimId) {
+        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimListByMoimId(moimId);
+        
+        return moimSubmissionList.stream()
+                .map(oneMoimSubmission -> MoimSubmissionByMoimResponse.builder()
+                        .maxGuest(oneMoimSubmission.getMoim().getMaxGuest())
+                        .isApprovable(isApprovable(oneMoimSubmission))
+                        .submitterList(getSubmitterInfo(oneMoimSubmission.getGuestId()))
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    private boolean isApprovable(MoimSubmission oneMoimSubmission) {
+        // 신청일
+        LocalDateTime createdAt = oneMoimSubmission.getCreatedAt();
+
+        // 마감일: 신청일 + 3일의 자정
+        LocalDateTime deadline = createdAt.plusDays(3).with(LocalTime.MIDNIGHT);
+
+        // 현재 시간
+        LocalDateTime now = LocalDateTime.now();
+
+        // 승인 가능 여부: 현재 시간이 마감일 이후인지 확인
+        return now.isAfter(deadline);
+    }
+
+    public SubmitterInfo getSubmitterInfo(Long guestId) {
+        // Guest 객체를 가져옴
+        Guest guest = guestRepository.findById(guestId)
+                .orElseThrow(() -> new CustomException(ErrorCode.GUEST_NOT_FOUND));
+
+        // SubmitterInfo 객체 생성
+        return new SubmitterInfo(
+                guest.getId(),
+                guest.getNickname(),
+                guest.getImageUrl(),
+                DateTimeUtil.refineDateAndTime(guest.getCreatedAt())
+        );
     }
 }
