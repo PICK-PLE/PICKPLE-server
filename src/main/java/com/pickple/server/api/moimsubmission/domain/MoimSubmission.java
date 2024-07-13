@@ -43,4 +43,8 @@ public class MoimSubmission extends BaseTimeEntity {
     private AccountInfo accountList;
 
     private String moimSubmissionState;
+
+    public void updateMoimSubmissionState(String moimSubmissionState) {
+        this.moimSubmissionState = moimSubmissionState;
+    }
 }
