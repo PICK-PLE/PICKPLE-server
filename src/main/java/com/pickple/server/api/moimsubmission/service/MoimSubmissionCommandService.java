@@ -39,4 +39,10 @@ public class MoimSubmissionCommandService {
             throw new BadRequestException(ErrorCode.DUPLICATION_MOIM_SUBMISSION);
         }
     }
+
+    public void updateSubmissionState(Long moimId, Long submitterId) {
+        MoimSubmission moimSubmission = moimSubmissionRepository.findBymoimIdAndGuestId(moimId, submitterId);
+        moimSubmission.updateMoimSubmissionState(MoimSubmissionState.APPROVED.getMoimSubmissionState());
+        moimSubmissionRepository.save(moimSubmission);
+    }
 }
