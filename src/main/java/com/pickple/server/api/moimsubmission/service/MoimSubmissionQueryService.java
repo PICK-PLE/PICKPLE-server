@@ -4,7 +4,6 @@ import com.pickple.server.api.guest.domain.Guest;
 import com.pickple.server.api.guest.repository.GuestRepository;
 import com.pickple.server.api.host.dto.response.SubmittionDetailResponse;
 import com.pickple.server.api.moim.dto.response.SubmittedMoimByGuestResponse;
-import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmissionState;
 import com.pickple.server.api.moimsubmission.domain.SubmitterInfo;
@@ -28,7 +27,6 @@ public class MoimSubmissionQueryService {
 
     private final GuestRepository guestRepository;
     private final MoimSubmissionRepository moimSubmissionRepository;
-    private final MoimRepository moimRepository;
 
     public List<SubmittedMoimByGuestResponse> getSubmittedMoimListByGuest(final Long guestId,
                                                                           final String moimSubmissionState) {
@@ -95,7 +93,11 @@ public class MoimSubmissionQueryService {
 
     public List<MoimSubmissionByMoimResponse> getSubmitterListByMoim(Long moimId) {
         List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimListByMoimId(moimId);
-        
+
+        if (moimSubmissionList.isEmpty()) {
+            throw new CustomException(ErrorCode.SUBMITTE_BY_MOIM_NOT_FOUND);
+        }
+
         return moimSubmissionList.stream()
                 .map(oneMoimSubmission -> MoimSubmissionByMoimResponse.builder()
                         .maxGuest(oneMoimSubmission.getMoim().getMaxGuest())
