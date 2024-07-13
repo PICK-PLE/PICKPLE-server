@@ -44,7 +44,7 @@ public class MoimSubmission extends BaseTimeEntity {
 
     private String moimSubmissionState;
 
-    public void setMoimSubmissionState(String moimSubmissionState) {
+    public void updateMoimSubmissionState(String moimSubmissionState) {
         this.moimSubmissionState = moimSubmissionState;
     }
 }

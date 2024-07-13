@@ -42,7 +42,7 @@ public class MoimSubmissionCommandService {
 
     public void updateSubmissionState(Long moimId, Long submitterId) {
         MoimSubmission moimSubmission = moimSubmissionRepository.findBymoimIdAndGuestId(moimId, submitterId);
-        moimSubmission.setMoimSubmissionState(MoimSubmissionState.APPROVED.getMoimSubmissionState());
+        moimSubmission.updateMoimSubmissionState(MoimSubmissionState.APPROVED.getMoimSubmissionState());
         moimSubmissionRepository.save(moimSubmission);
     }
 }
