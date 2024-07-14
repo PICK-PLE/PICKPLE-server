@@ -17,7 +17,6 @@ public enum ErrorCode {
     MISSING_REQUIRED_HEADER(40005, HttpStatus.BAD_REQUEST, "필수 헤더가 누락되었습니다."),
     MISSING_REQUIRED_PARAMETER(40006, HttpStatus.BAD_REQUEST, "필수 파라미터가 누락되었습니다."),
     DUPLICATION_MOIM_SUBMISSION(40007, HttpStatus.BAD_REQUEST, "이미 대기중인 모임입니다."),
-    SUBMITTER_BY_MOIM_NOT_FOUND(40008, HttpStatus.BAD_REQUEST, "해당 모임에 신청자가 없습니다."),
 
     // 401 Unauthorized
     ACCESS_TOKEN_EXPIRED(40100, HttpStatus.UNAUTHORIZED, "액세스 토큰이 만료되었습니다."),
@@ -34,15 +33,15 @@ public enum ErrorCode {
     MOIM_BY_STATE_NOT_FOUND(40406, HttpStatus.NOT_FOUND, "상태에 맞는 모임이 없습니다"),
     MOIM_SUBMISSION_NOT_FOUND(40407, HttpStatus.NOT_FOUND, "해당 모임에 신청한 내역이 없습니다."),
     MOIM_BY_HOST_AND_STATE_NOT_FOUND(40408, HttpStatus.NOT_FOUND, "호스트와 상태에 해당하는 모임이 없습니다."),
+    SUBMITTER_BY_MOIM_NOT_FOUND(40409, HttpStatus.NOT_FOUND, "해당 모임에 신청자가 없습니다."),
 
-    //405 Method Not Allowed Error
+    // 405 Method Not Allowed Error
     METHOD_NOT_ALLOWED(40500, HttpStatus.METHOD_NOT_ALLOWED, "지원하지 않는 메소드입니다."),
 
     // 500 Internal Server Error
     INTERNAL_SERVER_ERROR(50000, HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류입니다."),
     PRESIGNED_URL_GET_ERROR(50001, HttpStatus.INTERNAL_SERVER_ERROR, "S3 presigned url을 받아오기에 실패했습니다."),
     IMAGE_DELETE_ERROR(50002, HttpStatus.INTERNAL_SERVER_ERROR, "S3 이미지 삭제가 실패했습니다.");
-
 
     private final int code;
     private final HttpStatus httpStatus;
