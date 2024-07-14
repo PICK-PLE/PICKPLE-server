@@ -3,6 +3,9 @@ package com.pickple.server.api.host.controller;
 import com.pickple.server.global.common.annotation.HostId;
 import com.pickple.server.global.response.ApiResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,6 +22,7 @@ public interface HostControllerDocs {
             }
     )
     ApiResponseDto getHost(
+            @Parameter(schema = @Schema(implementation = String.class), in = ParameterIn.PATH)
             @HostId Long hostId
     );
 

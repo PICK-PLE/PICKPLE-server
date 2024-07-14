@@ -6,6 +6,9 @@ import com.pickple.server.api.moimsubmission.dto.response.MoimByGuestResponse;
 import com.pickple.server.global.common.annotation.HostId;
 import com.pickple.server.global.response.ApiResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,7 +28,8 @@ public interface MoimControllerDocs {
             }
     )
     ApiResponseDto createMoim(
-            @HostId Long hostId,
+            @Parameter(schema = @Schema(implementation = String.class), in = ParameterIn.PATH)
+            @HostId final Long hostId,
             @RequestBody MoimCreateRequest moimCreateRequest
     );
 
