@@ -16,6 +16,8 @@ public interface MoimSubmissionRepository extends JpaRepository<MoimSubmission, 
 
     MoimSubmission findBymoimIdAndGuestId(Long moimId, Long guestId);
 
+    List<MoimSubmission> findByMoimIdAndGuestIdIn(Long moimId, List<Long> submitterIdList);
+
     List<MoimSubmission> findMoimListByMoimId(Long moimId);
 
     @Query("SELECT ms FROM MoimSubmission ms WHERE ms.guestId = :guestId AND ms.moimSubmissionState = 'completed'")

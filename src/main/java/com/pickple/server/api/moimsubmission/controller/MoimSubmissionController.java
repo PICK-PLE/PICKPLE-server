@@ -1,6 +1,7 @@
 package com.pickple.server.api.moimsubmission.controller;
 
 import com.pickple.server.api.moimsubmission.dto.request.MoimSubmitRequest;
+import com.pickple.server.api.moimsubmission.dto.request.MoimSubmitterUpdateRequest;
 import com.pickple.server.api.moimsubmission.service.MoimSubmissionCommandService;
 import com.pickple.server.api.moimsubmission.service.MoimSubmissionQueryService;
 import com.pickple.server.global.common.annotation.GuestId;
@@ -65,9 +66,12 @@ public class MoimSubmissionController implements MoimSubmissionControllerDocs {
                 moimSubmissionQueryService.getSubmitterListByMoim(moimId));
     }
 
-    @PatchMapping("/v1/moim/{moimId}/submitter/{submitterId}")
-    public ApiResponseDto updateSubmitterState(@PathVariable Long moimId, @PathVariable Long submitterId) {
-        moimSubmissionCommandService.updateSubmissionState(moimId, submitterId);
+    @PatchMapping("/v1/moim/{moimId}/submitter")
+    public ApiResponseDto updateSubmitterState(
+            @PathVariable Long moimId,
+            @RequestBody MoimSubmitterUpdateRequest moimSubmitterUpdateRequest
+    ) {
+        moimSubmissionCommandService.updateSubmissionState(moimId, moimSubmitterUpdateRequest.submitterIdList());
         return ApiResponseDto.success(SuccessCode.SUBMITTER_APPROVE_SUCCESS);
     }
 }
