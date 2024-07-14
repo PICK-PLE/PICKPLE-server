@@ -34,7 +34,7 @@ public enum SuccessCode {
     SUBMITTER_APPROVE_SUCCESS(20022, HttpStatus.OK, "신청자 승인 성공"),
     MOIM_LIST_BY_HOST(20023, HttpStatus.OK, "호스트에 해당하는 모임 조회 성공"),
 
-    //201 Created
+    // 201 Created
     MOIM_CREATE_SUCCESS(20100, HttpStatus.CREATED, "모임 개설 성공");
 
     private final int code;
