@@ -8,6 +8,7 @@ import com.pickple.server.api.moimsubmission.dto.request.MoimSubmitRequest;
 import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository;
 import com.pickple.server.global.exception.BadRequestException;
 import com.pickple.server.global.response.enums.ErrorCode;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,9 +41,13 @@ public class MoimSubmissionCommandService {
         }
     }
 
-    public void updateSubmissionState(Long moimId, Long submitterId) {
-        MoimSubmission moimSubmission = moimSubmissionRepository.findBymoimIdAndGuestId(moimId, submitterId);
-        moimSubmission.updateMoimSubmissionState(MoimSubmissionState.APPROVED.getMoimSubmissionState());
-        moimSubmissionRepository.save(moimSubmission);
+    public void updateSubmissionState(Long moimId, List<Long> submitterIdList) {
+        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findByMoimIdAndGuestIdIn(moimId,
+                submitterIdList);
+        System.out.println(moimSubmissionList);
+        for (MoimSubmission moimSubmission : moimSubmissionList) {
+            moimSubmission.updateMoimSubmissionState(MoimSubmissionState.APPROVED.getMoimSubmissionState());
+            moimSubmissionRepository.save(moimSubmission);
+        }
     }
 }
