@@ -31,6 +31,7 @@ public class WebConfig implements WebMvcConfigurer {
         config.addAllowedOrigin("http://localhost:8081");
         config.addAllowedOrigin("http://localhost:5173");
         config.addAllowedOrigin("https://pick-ple.com");
+        config.addAllowedOrigin("http://pick-ple.com");
         config.addAllowedHeader("*");
         config.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         source.registerCorsConfiguration("/**", config);
