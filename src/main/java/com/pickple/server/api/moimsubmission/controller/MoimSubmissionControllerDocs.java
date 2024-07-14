@@ -5,6 +5,9 @@ import com.pickple.server.api.moimsubmission.dto.request.MoimSubmitterUpdateRequ
 import com.pickple.server.global.common.annotation.GuestId;
 import com.pickple.server.global.response.ApiResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,7 +28,8 @@ public interface MoimSubmissionControllerDocs {
     )
     ApiResponseDto createMoimSubmission(
             @PathVariable Long moimId,
-            @GuestId Long guestId,
+            @Parameter(schema = @Schema(implementation = String.class), in = ParameterIn.PATH)
+            @GuestId final Long guestId,
             @RequestBody MoimSubmitRequest moimSubmitRequest
     );
 
