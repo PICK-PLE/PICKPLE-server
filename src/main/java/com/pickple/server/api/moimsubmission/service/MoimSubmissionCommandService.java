@@ -44,7 +44,6 @@ public class MoimSubmissionCommandService {
     public void updateSubmissionState(Long moimId, List<Long> submitterIdList) {
         List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findByMoimIdAndGuestIdIn(moimId,
                 submitterIdList);
-        System.out.println(moimSubmissionList);
         for (MoimSubmission moimSubmission : moimSubmissionList) {
             moimSubmission.updateMoimSubmissionState(MoimSubmissionState.APPROVED.getMoimSubmissionState());
             moimSubmissionRepository.save(moimSubmission);
