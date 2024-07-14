@@ -1,6 +1,7 @@
 package com.pickple.server.api.moimsubmission.controller;
 
 import com.pickple.server.api.moimsubmission.dto.request.MoimSubmitRequest;
+import com.pickple.server.api.moimsubmission.dto.request.MoimSubmitterUpdateRequest;
 import com.pickple.server.global.common.annotation.GuestId;
 import com.pickple.server.global.response.ApiResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Tag(name = "MoimSubmissionr", description = "MoimSubmission 관련 API")
+@Tag(name = "MoimSubmission", description = "MoimSubmission 관련 API")
 public interface MoimSubmissionControllerDocs {
     @Operation(summary = "모임 참여")
     @ApiResponses(
@@ -63,5 +64,29 @@ public interface MoimSubmissionControllerDocs {
     )
     ApiResponseDto getCompletedMoimListByGuest(
             @PathVariable Long guestId
+    );
+
+    @Operation(summary = "모임에 해당하는 신청자 전체 조회")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "20021", description = "모임에 해당하는 신청자 전체 조회 성공"),
+                    @ApiResponse(responseCode = "40404", description = "존재하지 않는 모임입니다."),
+                    @ApiResponse(responseCode = "40409", description = "해당 모임에 신청자가 없습니다.")
+            }
+    )
+    ApiResponseDto getSubmitterListByMoim(
+            @PathVariable Long moimId
+    );
+
+    @Operation(summary = "신청자 승인")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "20022", description = "신청자 승인 성공"),
+                    @ApiResponse(responseCode = "40404", description = "존재하지 않는 모임입니다.")
+            }
+    )
+    ApiResponseDto updateSubmitterState(
+            @PathVariable Long moimId,
+            @RequestBody MoimSubmitterUpdateRequest moimSubmitterUpdateRequest
     );
 }
