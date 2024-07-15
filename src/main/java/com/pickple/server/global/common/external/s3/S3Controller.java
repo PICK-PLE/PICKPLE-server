@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class S3Controller implements S3ControllerDocs {
     private final S3Service s3Service;
 
-    @GetMapping("/moim-image-list/upload/{count}")
+    @GetMapping("/v1/moim-image-list/upload/{count}")
     @Override
     public ApiResponseDto<List<PreSignedUrlResponse>> getMoimPreSignedUrl(
             @PathVariable int count
@@ -24,7 +24,7 @@ public class S3Controller implements S3ControllerDocs {
                 s3Service.getUploadPreSignedUrlList(S3BucketDirectory.MOIM_PREFIX, count));
     }
 
-    @GetMapping("/notice-image-list/upload/{count}")
+    @GetMapping("/v1/notice-image-list/upload/{count}")
     @Override
     public ApiResponseDto<List<PreSignedUrlResponse>> getNoticePreSignedUrl(
             @PathVariable int count
