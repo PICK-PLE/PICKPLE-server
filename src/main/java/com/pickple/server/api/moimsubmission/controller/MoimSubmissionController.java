@@ -1,12 +1,16 @@
 package com.pickple.server.api.moimsubmission.controller;
 
+import com.pickple.server.api.host.dto.response.SubmittionDetailResponse;
+import com.pickple.server.api.moim.dto.response.SubmittedMoimByGuestResponse;
 import com.pickple.server.api.moimsubmission.dto.request.MoimSubmitRequest;
 import com.pickple.server.api.moimsubmission.dto.request.MoimSubmitterUpdateRequest;
+import com.pickple.server.api.moimsubmission.dto.response.MoimSubmissionByMoimResponse;
 import com.pickple.server.api.moimsubmission.service.MoimSubmissionCommandService;
 import com.pickple.server.api.moimsubmission.service.MoimSubmissionQueryService;
 import com.pickple.server.global.common.annotation.GuestId;
 import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.SuccessCode;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -36,7 +40,7 @@ public class MoimSubmissionController implements MoimSubmissionControllerDocs {
     }
 
     @GetMapping("/v1/guest/{guestId}/submitted-moim-list")
-    public ApiResponseDto getSubmittedMoimListByGuest(
+    public ApiResponseDto<List<SubmittedMoimByGuestResponse>> getSubmittedMoimListByGuest(
             @PathVariable Long guestId,
             @RequestParam String moimSubmissionState
     ) {
@@ -45,7 +49,7 @@ public class MoimSubmissionController implements MoimSubmissionControllerDocs {
     }
 
     @GetMapping("/v1/moim/{moimId}/submitter/{submitterId}")
-    public ApiResponseDto getSubmissionDetail(
+    public ApiResponseDto<SubmittionDetailResponse> getSubmissionDetail(
             @PathVariable Long moimId, @PathVariable Long submitterId
     ) {
         return ApiResponseDto.success(SuccessCode.SUBMISSION_DETAIL_GET_SUCCESS,
@@ -53,7 +57,7 @@ public class MoimSubmissionController implements MoimSubmissionControllerDocs {
     }
 
     @GetMapping("/v1/guest/{guestId}/completed-moim-list")
-    public ApiResponseDto getCompletedMoimListByGuest(
+    public ApiResponseDto<List<SubmittedMoimByGuestResponse>> getCompletedMoimListByGuest(
             @PathVariable Long guestId
     ) {
         return ApiResponseDto.success(SuccessCode.COMPLETED_MOIM_LIST_BY_GUEST_GET_SUCCESS,
@@ -61,7 +65,7 @@ public class MoimSubmissionController implements MoimSubmissionControllerDocs {
     }
 
     @GetMapping("/v1/moim/{moimId}/submitter-list")
-    public ApiResponseDto getSubmitterListByMoim(@PathVariable Long moimId) {
+    public ApiResponseDto<List<MoimSubmissionByMoimResponse>> getSubmitterListByMoim(@PathVariable Long moimId) {
         return ApiResponseDto.success(SuccessCode.SUBMITTER_LIST_BY_MOIM_GET_SUCCESS,
                 moimSubmissionQueryService.getSubmitterListByMoim(moimId));
     }
