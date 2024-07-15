@@ -16,4 +16,6 @@ public interface HostRepository extends JpaRepository<Host, Long> {
         return findHostById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.HOST_NOT_FOUND));
     }
+
+    boolean existsByNickname(String nickname);
 }

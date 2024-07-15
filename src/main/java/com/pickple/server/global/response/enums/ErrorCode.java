@@ -17,6 +17,7 @@ public enum ErrorCode {
     MISSING_REQUIRED_HEADER(40005, HttpStatus.BAD_REQUEST, "필수 헤더가 누락되었습니다."),
     MISSING_REQUIRED_PARAMETER(40006, HttpStatus.BAD_REQUEST, "필수 파라미터가 누락되었습니다."),
     DUPLICATION_MOIM_SUBMISSION(40007, HttpStatus.BAD_REQUEST, "이미 대기중인 모임입니다."),
+    DUPLICATION_HOST_NICKNAME(40008, HttpStatus.BAD_REQUEST, "이미 존재하는 닉네임입니다."),
 
     // 401 Unauthorized
     ACCESS_TOKEN_EXPIRED(40100, HttpStatus.UNAUTHORIZED, "액세스 토큰이 만료되었습니다."),
