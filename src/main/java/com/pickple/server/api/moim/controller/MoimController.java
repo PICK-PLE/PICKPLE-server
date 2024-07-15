@@ -1,8 +1,12 @@
 package com.pickple.server.api.moim.controller;
 
+import com.pickple.server.api.moim.domain.QuestionInfo;
 import com.pickple.server.api.moim.domain.enums.Category;
 import com.pickple.server.api.moim.dto.request.MoimCreateRequest;
+import com.pickple.server.api.moim.dto.response.MoimByCategoryResponse;
+import com.pickple.server.api.moim.dto.response.MoimDescriptionResponse;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
+import com.pickple.server.api.moim.dto.response.MoimListByHostGetResponse;
 import com.pickple.server.api.moim.service.MoimCommandService;
 import com.pickple.server.api.moim.service.MoimQueryService;
 import com.pickple.server.api.moimsubmission.dto.response.MoimByGuestResponse;
@@ -50,31 +54,32 @@ public class MoimController implements MoimControllerDocs {
     }
 
     @GetMapping("/v1/moim-list")
-    public ApiResponseDto getMoimListByCategory(@RequestParam String category) {
+    public ApiResponseDto<List<MoimByCategoryResponse>> getMoimListByCategory(@RequestParam String category) {
         return ApiResponseDto.success(SuccessCode.MOIM_LIST_BY_CATEGORY_GET_SUCCESS,
                 moimQueryService.getMoimListByCategory(category));
     }
 
     @GetMapping("/v1/moim/{moimId}/description")
-    public ApiResponseDto getMoimDescription(@PathVariable Long moimId) {
+    public ApiResponseDto<MoimDescriptionResponse> getMoimDescription(@PathVariable Long moimId) {
         return ApiResponseDto.success(SuccessCode.MOIM_DESCRIPTION_GET_SUCCESS,
                 moimQueryService.getMoimDescription(moimId));
     }
 
     @GetMapping("/v1/moim/{moimId}/question-list")
-    public ApiResponseDto getMoimQuestionList(@PathVariable Long moimId) {
+    public ApiResponseDto<QuestionInfo> getMoimQuestionList(@PathVariable Long moimId) {
         return ApiResponseDto.success(SuccessCode.MOIM_QUESTION_LIST_GET_SUCCESS,
                 moimQueryService.getMoimQuestionList(moimId));
     }
 
     @GetMapping("/v1/moim/banner")
-    public ApiResponseDto getMoimBanner() {
+    public ApiResponseDto<Long> getMoimBanner() {
         return ApiResponseDto.success(SuccessCode.MOIM_BANNER_GET_SUCCESS,
                 moimQueryService.getMoimBanner());
     }
 
     @GetMapping("/v1/host/{hostId}/moim-list")
-    public ApiResponseDto getMoimListByHostId(@PathVariable Long hostId, @RequestParam String moimState) {
+    public ApiResponseDto<List<MoimListByHostGetResponse>> getMoimListByHostId(@PathVariable Long hostId,
+                                                                               @RequestParam String moimState) {
         return ApiResponseDto.success(SuccessCode.MOIM_LIST_BY_HOST,
                 moimQueryService.getMoimListByHost(hostId, moimState));
     }

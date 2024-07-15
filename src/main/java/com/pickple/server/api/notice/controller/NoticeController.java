@@ -1,10 +1,12 @@
 package com.pickple.server.api.notice.controller;
 
 import com.pickple.server.api.notice.dto.request.NoticeCreateRequest;
+import com.pickple.server.api.notice.dto.response.NoticeListGetByMoimResponse;
 import com.pickple.server.api.notice.service.NoticeCommandService;
 import com.pickple.server.api.notice.service.NoticeQueryService;
 import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.SuccessCode;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +31,7 @@ public class NoticeController implements NoticeControllerDocs {
     }
 
     @GetMapping("/v1/moim/{moimId}/noitce-list")
-    public ApiResponseDto getNoticeListByMoimId(@PathVariable Long moimId) {
+    public ApiResponseDto<List<NoticeListGetByMoimResponse>> getNoticeListByMoimId(@PathVariable Long moimId) {
         return ApiResponseDto.success(SuccessCode.NOTICE_LIST_GET_SUCCESS,
                 noticeQueryService.getNoticeListByMoimId(moimId));
     }
