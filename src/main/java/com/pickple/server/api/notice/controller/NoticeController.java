@@ -30,7 +30,7 @@ public class NoticeController implements NoticeControllerDocs {
         return ApiResponseDto.success(SuccessCode.NOTICE_POST_SUCCESS);
     }
 
-    @GetMapping("/v1/moim/{moimId}/noitce-list")
+    @GetMapping("/v1/moim/{moimId}/notice-list")
     public ApiResponseDto<List<NoticeListGetByMoimResponse>> getNoticeListByMoimId(@PathVariable Long moimId) {
         return ApiResponseDto.success(SuccessCode.NOTICE_LIST_GET_SUCCESS,
                 noticeQueryService.getNoticeListByMoimId(moimId));
