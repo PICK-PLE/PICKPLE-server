@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SubmitterRepository extends JpaRepository<Submitter, Long> {
     boolean existsByGuestAndSubmitterState(Guest guest, String submitterState);
+
+    boolean existsByNickname(String nickname);
 }
