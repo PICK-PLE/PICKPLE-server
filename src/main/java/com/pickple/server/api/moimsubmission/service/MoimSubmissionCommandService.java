@@ -35,8 +35,8 @@ public class MoimSubmissionCommandService {
     }
 
     private void isDuplicatedMoimSubmission(MoimSubmission moimSubmission) {
-        if (moimSubmissionRepository.existsByMoimAndMoimSubmissionState(moimSubmission.getMoim(),
-                moimSubmission.getMoimSubmissionState())) {
+        if (moimSubmissionRepository.existsByMoimAndMoimSubmissionStateAndGuestId(moimSubmission.getMoim(),
+                moimSubmission.getMoimSubmissionState(), moimSubmission.getGuestId())) {
             throw new BadRequestException(ErrorCode.DUPLICATION_MOIM_SUBMISSION);
         }
     }
