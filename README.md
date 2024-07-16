@@ -25,6 +25,7 @@
 
 
 ## 📌 Architecture
+<img width="774" alt="스크린샷 2024-07-16 오후 9 48 22" src="https://github.com/user-attachments/assets/aa371985-3a03-464f-9655-28478d7e43f8">
 
 <br>
 
