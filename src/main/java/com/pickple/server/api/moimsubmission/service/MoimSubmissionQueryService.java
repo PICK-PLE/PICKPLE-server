@@ -5,6 +5,7 @@ import com.pickple.server.api.guest.repository.GuestRepository;
 import com.pickple.server.api.host.dto.response.SubmittionDetailResponse;
 import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.dto.response.SubmittedMoimByGuestResponse;
+import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmissionState;
 import com.pickple.server.api.moimsubmission.domain.SubmitterInfo;
@@ -29,6 +30,7 @@ public class MoimSubmissionQueryService {
 
     private final GuestRepository guestRepository;
     private final MoimSubmissionRepository moimSubmissionRepository;
+    private final MoimRepository moimRepository;
 
     public List<SubmittedMoimByGuestResponse> getSubmittedMoimListByGuest(final Long guestId,
                                                                           final String moimSubmissionState) {
@@ -93,20 +95,32 @@ public class MoimSubmissionQueryService {
                 .collect(Collectors.toList());
     }
 
-    public List<MoimSubmissionByMoimResponse> getSubmitterListByMoim(Long moimId) {
+    public MoimSubmissionByMoimResponse getSubmitterListByMoim(Long moimId) {
+        Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
+
+        // moimSubmissionList 가져오기
         List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimListByMoimId(moimId);
 
         if (moimSubmissionList.isEmpty()) {
             throw new CustomException(ErrorCode.SUBMITTER_BY_MOIM_NOT_FOUND);
         }
+        // guestId를 추출하여 리스트에 저장
+        List<Long> guestIdList = moimSubmissionList.stream()
+                .map(MoimSubmission::getGuestId)
+                .toList();
 
-        return moimSubmissionList.stream()
-                .map(oneMoimSubmission -> MoimSubmissionByMoimResponse.builder()
-                        .maxGuest(oneMoimSubmission.getMoim().getMaxGuest())
-                        .isApprovable(isApprovable(oneMoimSubmission.getMoim()))
-                        .submitterList(getSubmitterInfo(oneMoimSubmission.getGuestId()))
-                        .build())
-                .collect(Collectors.toList());
+        // guestId를 이용하여 SubmitterInfo 객체 생성 후 리스트에 저장
+        List<SubmitterInfo> submitterInfoList = guestIdList.stream()
+                .map(this::getSubmitterInfo)
+                .toList();
+
+        return MoimSubmissionByMoimResponse
+                .builder()
+                .maxGuest(moim.getMaxGuest())
+                .isApprovable(isApprovable(moim))
+                .submitterList(submitterInfoList)
+                .build();
+
     }
 
     private boolean isApprovable(Moim moim) {

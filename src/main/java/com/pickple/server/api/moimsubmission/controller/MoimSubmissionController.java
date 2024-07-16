@@ -65,7 +65,7 @@ public class MoimSubmissionController implements MoimSubmissionControllerDocs {
     }
 
     @GetMapping("/v1/moim/{moimId}/submitter-list")
-    public ApiResponseDto<List<MoimSubmissionByMoimResponse>> getSubmitterListByMoim(@PathVariable Long moimId) {
+    public ApiResponseDto<MoimSubmissionByMoimResponse> getSubmitterListByMoim(@PathVariable Long moimId) {
         return ApiResponseDto.success(SuccessCode.SUBMITTER_LIST_BY_MOIM_GET_SUCCESS,
                 moimSubmissionQueryService.getSubmitterListByMoim(moimId));
     }
