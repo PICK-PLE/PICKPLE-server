@@ -36,7 +36,7 @@ public class SubmitterController implements SubmitterControllerDocs {
 
     @GetMapping("/v1/submitter-list")
     public ApiResponseDto<List<SubmitterListGetResponse>> getSubmitterList(@UserId final Long userId) {
-        if (userId == 12 || userId == 13) {
+        if (userId == 3 || userId == 4) {
             return ApiResponseDto.success(SuccessCode.SUBMITTER_LIST_GET_SUCCESS,
                     submitterQueryService.getSubmitterList());
         } else {
@@ -47,7 +47,7 @@ public class SubmitterController implements SubmitterControllerDocs {
     @PatchMapping("/v1/submitter/{submitterId}")
     public ApiResponseDto approveSubmitter(@PathVariable("submitterId") final Long submitterId,
                                            @UserId final Long userId) {
-        if (userId == 12 || userId == 13) {
+        if (userId == 3 || userId == 4) {
             submitterCommandService.approveSubmitter(submitterId);
             return ApiResponseDto.success(SuccessCode.HOST_SUBMITTER_APPROVE_SUCCESS);
         } else {
