@@ -148,7 +148,7 @@ public class UserService {
     }
 
     private boolean isExistingHost(final Long userId) {
-        return hostRepository.existsById(userId);
+        return hostRepository.existsByUserId(userId);
     }
 
     private Guest getOrCreateGuest(final User user) {

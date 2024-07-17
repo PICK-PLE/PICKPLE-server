@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface HostRepository extends JpaRepository<Host, Long> {
 
+    boolean existsByUserId(Long userId);
+
     Host findHostByUserId(Long userId);
 
     Optional<Host> findHostById(Long id);
