@@ -22,7 +22,7 @@ public class NoticeQueryService {
 
     public List<NoticeListGetByMoimResponse> getNoticeListByMoimId(Long moimId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
-        List<Notice> noticeList = noticeRepository.findNoticeByMoimId(moimId);
+        List<Notice> noticeList = noticeRepository.findNoticeByMoimIdOrderByCreatedAtDesc(moimId);
 
         return noticeList.stream()
                 .map(oneNotice -> NoticeListGetByMoimResponse.builder()
