@@ -113,6 +113,7 @@ public class MoimSubmissionQueryService {
 
         return MoimSubmissionByMoimResponse
                 .builder()
+                .moimTitle(moim.getTitle())
                 .maxGuest(moim.getMaxGuest())
                 .isApprovable(isApprovable(moim))
                 .submitterList(submitterInfoList)
