@@ -5,7 +5,9 @@ import com.pickple.server.api.submitter.dto.response.SubmitterListGetResponse;
 import com.pickple.server.api.submitter.service.SubmitterCommandService;
 import com.pickple.server.api.submitter.service.SubmitterQueryService;
 import com.pickple.server.global.common.annotation.GuestId;
+import com.pickple.server.global.common.annotation.UserId;
 import com.pickple.server.global.response.ApiResponseDto;
+import com.pickple.server.global.response.enums.ErrorCode;
 import com.pickple.server.global.response.enums.SuccessCode;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +40,11 @@ public class SubmitterController implements SubmitterControllerDocs {
     }
 
     @PatchMapping("/v1/submitter/{submitterId}")
-    public ApiResponseDto approveSubmitter(@PathVariable("submitterId") final Long submitterId) {
+    public ApiResponseDto approveSubmitter(@PathVariable("submitterId") final Long submitterId,
+                                           @UserId final Long userId) {
+        if (userId != 12 && userId != 13) {
+            ApiResponseDto.fail(ErrorCode.NOT_ADMIN);
+        }
         submitterCommandService.approveSubmitter(submitterId);
         return ApiResponseDto.success(SuccessCode.HOST_SUBMITTER_APPROVE_SUCCESS);
     }
