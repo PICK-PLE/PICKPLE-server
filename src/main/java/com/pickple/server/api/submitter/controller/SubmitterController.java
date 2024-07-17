@@ -10,6 +10,8 @@ import com.pickple.server.global.response.enums.SuccessCode;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,8 +32,14 @@ public class SubmitterController implements SubmitterControllerDocs {
         return ApiResponseDto.success(SuccessCode.SUBMITTER_POST_SUCCESS);
     }
 
-    @GetMapping("v1/submitter-list")
+    @GetMapping("/v1/submitter-list")
     public ApiResponseDto<List<SubmitterListGetResponse>> getSubmitterList() {
         return ApiResponseDto.success(SuccessCode.SUBMITTER_LIST_GET_SUCCESS, submitterQueryService.getSubmitterList());
+    }
+
+    @PatchMapping("/v1/submitter/{submitterId}")
+    public ApiResponseDto approveSubmitter(@PathVariable("submitterId") final Long submitterId) {
+        submitterCommandService.approveSubmitter(submitterId);
+        return ApiResponseDto.success(SuccessCode.HOST_SUBMITTER_APPROVE_SUCCESS);
     }
 }

@@ -50,4 +50,8 @@ public class Submitter extends BaseTimeEntity {
     private String email;
 
     private String submitterState;
+
+    public void updateSubmitterState(String submitterState) {
+        this.submitterState = submitterState;
+    }
 }
