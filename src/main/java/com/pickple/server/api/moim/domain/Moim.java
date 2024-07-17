@@ -6,6 +6,7 @@ import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.api.notice.domain.Notice;
 import com.pickple.server.global.common.domain.BaseTimeEntity;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -63,6 +64,7 @@ public class Moim extends BaseTimeEntity {
 
     private String title;
 
+    @Column(length = 2000)
     private String description;
 
     @JdbcTypeCode(SqlTypes.JSON)
