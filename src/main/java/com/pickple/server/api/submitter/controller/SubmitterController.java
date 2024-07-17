@@ -1,7 +1,7 @@
 package com.pickple.server.api.submitter.controller;
 
 import com.pickple.server.api.submitter.dto.request.SubmitterCreateRequest;
-import com.pickple.server.api.submitter.dto.response.SubmitterGetResponse;
+import com.pickple.server.api.submitter.dto.response.SubmitterListGetResponse;
 import com.pickple.server.api.submitter.service.SubmitterCommandService;
 import com.pickple.server.api.submitter.service.SubmitterQueryService;
 import com.pickple.server.global.common.annotation.GuestId;
@@ -31,7 +31,7 @@ public class SubmitterController implements SubmitterControllerDocs {
     }
 
     @GetMapping("v1/submitter-list")
-    public ApiResponseDto<List<SubmitterGetResponse>> getSubmitterList() {
+    public ApiResponseDto<List<SubmitterListGetResponse>> getSubmitterList() {
         return ApiResponseDto.success(SuccessCode.SUBMITTER_LIST_GET_SUCCESS, submitterQueryService.getSubmitterList());
     }
 }

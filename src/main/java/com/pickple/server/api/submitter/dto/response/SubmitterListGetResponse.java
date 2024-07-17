@@ -4,7 +4,7 @@ import com.pickple.server.api.submitter.domain.SubmitterCategoryInfo;
 import lombok.Builder;
 
 @Builder
-public record SubmitterGetResponse(
+public record SubmitterListGetResponse(
         String guestNickname,
         Long guestId,
 

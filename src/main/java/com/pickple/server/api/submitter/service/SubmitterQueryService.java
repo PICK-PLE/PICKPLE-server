@@ -2,7 +2,7 @@ package com.pickple.server.api.submitter.service;
 
 
 import com.pickple.server.api.submitter.domain.Submitter;
-import com.pickple.server.api.submitter.dto.response.SubmitterGetResponse;
+import com.pickple.server.api.submitter.dto.response.SubmitterListGetResponse;
 import com.pickple.server.api.submitter.repository.SubmitterRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,11 +17,11 @@ public class SubmitterQueryService {
 
     private final SubmitterRepository submitterRepository;
 
-    public List<SubmitterGetResponse> getSubmitterList() {
+    public List<SubmitterListGetResponse> getSubmitterList() {
         List<Submitter> submitterList = submitterRepository.findAll();
 
         return submitterList.stream()
-                .map(submitter -> SubmitterGetResponse.builder()
+                .map(submitter -> SubmitterListGetResponse.builder()
                         .guestNickname(submitter.getGuest().getNickname())
                         .guestId(submitter.getGuest().getId())
                         .submitterId(submitter.getId())
