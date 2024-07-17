@@ -75,7 +75,7 @@ public class UserService {
         Guest guest = Guest.builder()
                 .user(user)
                 .nickname(user.getSocialNickname() + "#" + user.getId())
-                .imageUrl("testImage")
+                .imageUrl("https://pickple-bucket.s3.ap-northeast-2.amazonaws.com/profile/guestProfileImage.png")
                 .build();
         return guestRepository.save(guest);
     }
