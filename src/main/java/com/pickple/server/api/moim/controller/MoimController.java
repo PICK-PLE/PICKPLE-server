@@ -4,6 +4,7 @@ import com.pickple.server.api.moim.domain.QuestionInfo;
 import com.pickple.server.api.moim.domain.enums.Category;
 import com.pickple.server.api.moim.dto.request.MoimCreateRequest;
 import com.pickple.server.api.moim.dto.response.MoimByCategoryResponse;
+import com.pickple.server.api.moim.dto.response.MoimCreateResponse;
 import com.pickple.server.api.moim.dto.response.MoimDescriptionResponse;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
 import com.pickple.server.api.moim.dto.response.MoimListByHostGetResponse;
@@ -32,9 +33,10 @@ public class MoimController implements MoimControllerDocs {
     private final MoimCommandService moimCommandService;
 
     @PostMapping("/v1/moim")
-    public ApiResponseDto createMoim(@HostId Long hostId, @RequestBody MoimCreateRequest moimCreateRequest) {
-        moimCommandService.createMoim(hostId, moimCreateRequest);
-        return ApiResponseDto.success(SuccessCode.MOIM_CREATE_SUCCESS);
+    public ApiResponseDto<MoimCreateResponse> createMoim(@HostId Long hostId,
+                                                         @RequestBody MoimCreateRequest moimCreateRequest) {
+        return ApiResponseDto.success(SuccessCode.MOIM_CREATE_SUCCESS,
+                moimCommandService.createMoim(hostId, moimCreateRequest));
     }
 
     @GetMapping("/v1/moim/categories")

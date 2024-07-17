@@ -5,6 +5,7 @@ import com.pickple.server.api.host.repository.HostRepository;
 import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.domain.enums.MoimState;
 import com.pickple.server.api.moim.dto.request.MoimCreateRequest;
+import com.pickple.server.api.moim.dto.response.MoimCreateResponse;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class MoimCommandService {
     private final HostRepository hostRepository;
     private final MoimRepository moimRepository;
 
-    public void createMoim(Long hostId, MoimCreateRequest request) {
+    public MoimCreateResponse createMoim(Long hostId, MoimCreateRequest request) {
         Host host = hostRepository.findHostByIdOrThrow(hostId);
         Moim moim = Moim.builder()
                 .host(host)
@@ -36,5 +37,8 @@ public class MoimCommandService {
                 .moimState(MoimState.ONGOING.getMoimState())
                 .build();
         moimRepository.save(moim);
+        return MoimCreateResponse.builder()
+                .moimId(moim.getId())
+                .build();
     }
 }
