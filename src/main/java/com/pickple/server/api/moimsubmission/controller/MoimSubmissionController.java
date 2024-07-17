@@ -76,6 +76,6 @@ public class MoimSubmissionController implements MoimSubmissionControllerDocs {
             @RequestBody MoimSubmitterUpdateRequest moimSubmitterUpdateRequest
     ) {
         moimSubmissionCommandService.updateSubmissionState(moimId, moimSubmitterUpdateRequest.submitterIdList());
-        return ApiResponseDto.success(SuccessCode.SUBMITTER_APPROVE_SUCCESS);
+        return ApiResponseDto.success(SuccessCode.MOIM_SUBMITTER_APPROVE_SUCCESS);
     }
 }
