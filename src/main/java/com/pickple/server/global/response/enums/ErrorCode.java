@@ -34,7 +34,6 @@ public enum ErrorCode {
     MOIM_BY_STATE_NOT_FOUND(40406, HttpStatus.NOT_FOUND, "상태에 맞는 모임이 없습니다"),
     MOIM_SUBMISSION_NOT_FOUND(40407, HttpStatus.NOT_FOUND, "해당 모임에 신청한 내역이 없습니다."),
     MOIM_BY_HOST_AND_STATE_NOT_FOUND(40408, HttpStatus.NOT_FOUND, "호스트와 상태에 해당하는 모임이 없습니다."),
-    SUBMITTER_BY_MOIM_NOT_FOUND(40409, HttpStatus.NOT_FOUND, "해당 모임에 신청자가 없습니다."),
 
     // 405 Method Not Allowed Error
     METHOD_NOT_ALLOWED(40500, HttpStatus.METHOD_NOT_ALLOWED, "지원하지 않는 메소드입니다."),

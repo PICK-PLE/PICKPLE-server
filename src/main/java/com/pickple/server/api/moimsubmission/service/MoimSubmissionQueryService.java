@@ -101,9 +101,6 @@ public class MoimSubmissionQueryService {
         // moimSubmissionList 가져오기
         List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimListByMoimId(moimId);
 
-        if (moimSubmissionList.isEmpty()) {
-            throw new CustomException(ErrorCode.SUBMITTER_BY_MOIM_NOT_FOUND);
-        }
         // guestId를 추출하여 리스트에 저장
         List<Long> guestIdList = moimSubmissionList.stream()
                 .map(MoimSubmission::getGuestId)
