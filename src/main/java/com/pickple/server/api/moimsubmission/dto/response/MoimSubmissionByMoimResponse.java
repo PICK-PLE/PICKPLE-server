@@ -6,6 +6,7 @@ import lombok.Builder;
 
 @Builder
 public record MoimSubmissionByMoimResponse(
+        String moimTitle,
         int maxGuest,    //신청자 최대 인원
         Boolean isApprovable,    //승인가능여부
         List<SubmitterInfo> submitterList    //신청자 리스트
