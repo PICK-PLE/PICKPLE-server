@@ -42,10 +42,11 @@ public class SubmitterController implements SubmitterControllerDocs {
     @PatchMapping("/v1/submitter/{submitterId}")
     public ApiResponseDto approveSubmitter(@PathVariable("submitterId") final Long submitterId,
                                            @UserId final Long userId) {
-        if (userId != 12 && userId != 13) {
-            ApiResponseDto.fail(ErrorCode.NOT_ADMIN);
+        if (userId == 12 || userId == 13) {
+            submitterCommandService.approveSubmitter(submitterId);
+            return ApiResponseDto.success(SuccessCode.HOST_SUBMITTER_APPROVE_SUCCESS);
+        } else {
+            return ApiResponseDto.fail(ErrorCode.NOT_ADMIN);
         }
-        submitterCommandService.approveSubmitter(submitterId);
-        return ApiResponseDto.success(SuccessCode.HOST_SUBMITTER_APPROVE_SUCCESS);
     }
 }
