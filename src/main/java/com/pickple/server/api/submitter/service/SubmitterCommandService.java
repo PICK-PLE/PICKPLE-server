@@ -45,7 +45,7 @@ public class SubmitterCommandService {
     }
 
     public void approveSubmitter(Long submitterId) {
-        Submitter submitter = submitterRepository.findById(submitterId).orElseThrow();
+        Submitter submitter = submitterRepository.findSubmitterByIdOrThrow(submitterId);
 
         submitter.updateSubmitterState(SubmitterState.APPROVE.getSubmitterState());
 
