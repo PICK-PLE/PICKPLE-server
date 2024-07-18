@@ -53,7 +53,7 @@ public class MoimSubmissionController implements MoimSubmissionControllerDocs {
             @PathVariable Long moimId, @PathVariable Long submitterId
     ) {
         return ApiResponseDto.success(SuccessCode.SUBMISSION_DETAIL_GET_SUCCESS,
-                moimSubmissionQueryService.getSubmittionDetail(moimId, submitterId));
+                moimSubmissionQueryService.getSubmissionDetail(moimId, submitterId));
     }
 
     @GetMapping("/v1/guest/{guestId}/completed-moim-list")
