@@ -46,7 +46,11 @@ public class MoimSubmissionCommandService {
 
         for (MoimSubmission moimSubmission : moimSubmissionList) {
             if (submitterIdList.contains(moimSubmission.getGuestId())) {
-                moimSubmission.updateMoimSubmissionState(MoimSubmissionState.APPROVED.getMoimSubmissionState());
+                //신청자 상태가 승인 대기(pendingApproval)일 때 승인
+                if (moimSubmission.getMoimSubmissionState()
+                        .equals(MoimSubmissionState.PENDING_APPROVAL.getMoimSubmissionState())) {
+                    moimSubmission.updateMoimSubmissionState(MoimSubmissionState.APPROVED.getMoimSubmissionState());
+                }
             } else {
                 moimSubmission.updateMoimSubmissionState(MoimSubmissionState.REJECTED.getMoimSubmissionState());
             }

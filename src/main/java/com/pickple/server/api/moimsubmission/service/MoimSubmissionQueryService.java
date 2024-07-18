@@ -95,11 +95,6 @@ public class MoimSubmissionQueryService {
         List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimListByMoimIdAndMoimSubmissionState(
                 moimId);
 
-        // guestId를 추출하여 리스트에 저장
-//        List<Long> guestIdList = moimSubmissionList.stream()
-//                .map(MoimSubmission::getGuestId)
-//                .toList();
-
         // guestId를 이용하여 SubmitterInfo 객체 생성 후 리스트에 저장
         List<SubmitterInfo> submitterInfoList = moimSubmissionList.stream()
                 .map(moimSubmission -> getSubmitterInfo(moimSubmission.getGuestId(), moimId))
