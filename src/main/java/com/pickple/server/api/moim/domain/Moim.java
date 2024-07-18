@@ -15,6 +15,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +70,8 @@ public class Moim extends BaseTimeEntity {
     @Size(max = 2000)
     private String description;
 
+    @Valid
+    @NotNull
     @JdbcTypeCode(SqlTypes.JSON)
     private ImageInfo imageList;
 
