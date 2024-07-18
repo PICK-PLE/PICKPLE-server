@@ -53,6 +53,7 @@ public interface SubmitterControllerDocs {
     )
     ApiResponseDto approveSubmitter(
             @PathVariable("submitterId") final Long submitterId,
+            @Parameter(schema = @Schema(implementation = String.class), in = ParameterIn.PATH)
             @UserId final Long userId
     );
 }
