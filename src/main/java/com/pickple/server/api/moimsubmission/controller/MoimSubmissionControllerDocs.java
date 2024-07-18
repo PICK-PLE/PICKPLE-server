@@ -38,7 +38,6 @@ public interface MoimSubmissionControllerDocs {
             value = {
                     @ApiResponse(responseCode = "20018", description = "게스트에 해당하는 신청한 모임 리스트 조회 성공"),
                     @ApiResponse(responseCode = "40403", description = "존재하지 않는 게스트입니다."),
-                    @ApiResponse(responseCode = "40406", description = "상태에 맞는 모임이 없습니다.")
             }
     )
     ApiResponseDto getSubmittedMoimListByGuest(
@@ -51,7 +50,7 @@ public interface MoimSubmissionControllerDocs {
             value = {
                     @ApiResponse(responseCode = "20019", description = "신청자에 해당하는 신청 내역 조회 성공"),
                     @ApiResponse(responseCode = "40404", description = "존재하지 않는 모임입니다."),
-                    @ApiResponse(responseCode = "40407", description = "해당 모임에 신청한 내역이 없습니다.")
+                    @ApiResponse(responseCode = "40406", description = "해당 모임에 신청한 내역이 없습니다.")
             }
     )
     ApiResponseDto getSubmissionDetail(
@@ -62,8 +61,7 @@ public interface MoimSubmissionControllerDocs {
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "20020", description = "게스트에 해당하는 참가한 모임 리스트 조회 성공"),
-                    @ApiResponse(responseCode = "40403", description = "존재하지 않는 게스트입니다."),
-                    @ApiResponse(responseCode = "40406", description = "상태에 맞는 모임이 없습니다.")
+                    @ApiResponse(responseCode = "40403", description = "존재하지 않는 게스트입니다.")
             }
     )
     ApiResponseDto getCompletedMoimListByGuest(
@@ -74,8 +72,7 @@ public interface MoimSubmissionControllerDocs {
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "20021", description = "모임에 해당하는 신청자 전체 조회 성공"),
-                    @ApiResponse(responseCode = "40404", description = "존재하지 않는 모임입니다."),
-                    @ApiResponse(responseCode = "40409", description = "해당 모임에 신청자가 없습니다.")
+                    @ApiResponse(responseCode = "40404", description = "존재하지 않는 모임입니다.")
             }
     )
     ApiResponseDto getSubmitterListByMoim(
