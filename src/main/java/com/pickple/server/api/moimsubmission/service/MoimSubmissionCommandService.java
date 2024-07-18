@@ -43,10 +43,7 @@ public class MoimSubmissionCommandService {
 
     public void updateSubmissionState(Long moimId, List<Long> submitterIdList) {
         List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findBymoimId(moimId);
-//        for (MoimSubmission moimSubmission : moimSubmissionList) {
-//            moimSubmission.updateMoimSubmissionState(MoimSubmissionState.APPROVED.getMoimSubmissionState());
-//            moimSubmissionRepository.save(moimSubmission);
-//        }
+
         for (MoimSubmission moimSubmission : moimSubmissionList) {
             if (submitterIdList.contains(moimSubmission.getGuestId())) {
                 moimSubmission.updateMoimSubmissionState(MoimSubmissionState.APPROVED.getMoimSubmissionState());
