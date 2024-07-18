@@ -28,15 +28,15 @@ public class MoimSubmissionCommandService {
                 .moim(moim)
                 .answerList(request.answerList())
                 .accountList(request.accountList())
-                .moimSubmissionState(MoimSubmissionState.PENDING_PAYMENT.getMoimSubmissionState())
+                .moimSubmissionState(MoimSubmissionState.PENDING_APPROVAL.getMoimSubmissionState())
                 .build();
         isDuplicatedMoimSubmission(moimSubmission);
         moimSubmissionRepository.save(moimSubmission);
     }
 
     private void isDuplicatedMoimSubmission(MoimSubmission moimSubmission) {
-        if (moimSubmissionRepository.existsByMoimAndMoimSubmissionStateAndGuestId(moimSubmission.getMoim(),
-                moimSubmission.getMoimSubmissionState(), moimSubmission.getGuestId())) {
+        if (moimSubmissionRepository.existsByMoimAndGuestId(moimSubmission.getMoim(),
+                moimSubmission.getGuestId())) {
             throw new BadRequestException(ErrorCode.DUPLICATION_MOIM_SUBMISSION);
         }
     }
