@@ -6,12 +6,13 @@ import com.pickple.server.api.moim.domain.ImageInfo;
 import com.pickple.server.api.moim.domain.QuestionInfo;
 import com.pickple.server.api.moimsubmission.domain.AccountInfo;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record MoimCreateRequest(
         CategoryInfo categoryList,
 
-        @NotBlank(message = "오프라인 여부가 비어있습니다")
+        @NotNull(message = "오프라인 여부가 비어있습니다")
         boolean isOffline,
 
         @NotBlank(message = "모임 장소가 비어있습니다.")
@@ -19,10 +20,10 @@ public record MoimCreateRequest(
 
         DateInfo dateList,
 
-        @NotBlank(message = "모임 정원이 비어있습니다.")
+        @NotNull(message = "모임 정원이 비어있습니다.")
         int maxGuest,
 
-        @NotBlank(message = "참가비가 비어있습니다.")
+        @NotNull(message = "참가비가 비어있습니다.")
         int fee,
 
         AccountInfo accountList,
