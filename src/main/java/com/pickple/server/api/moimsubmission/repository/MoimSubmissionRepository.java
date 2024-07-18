@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface MoimSubmissionRepository extends JpaRepository<MoimSubmission, Long> {
-    boolean existsByMoimAndMoimSubmissionStateAndGuestId(Moim moim, String moimSubmissionState, Long guestId);
+    boolean existsByMoimAndGuestId(Moim moim, Long guestId);
 
     List<MoimSubmission> findAllByGuestId(Long guestId);
 
