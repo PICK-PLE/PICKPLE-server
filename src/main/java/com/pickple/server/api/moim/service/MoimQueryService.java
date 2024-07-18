@@ -95,9 +95,7 @@ public class MoimQueryService {
 
     public List<MoimListByHostGetResponse> getMoimListByHost(Long hostId, String moimState) {
         List<Moim> moimList = moimRepository.findMoimByhostIdAndMoimState(hostId, moimState);
-//        if (moimList.isEmpty()) {
-//            throw new CustomException(ErrorCode.MOIM_BY_HOST_AND_STATE_NOT_FOUND);
-//        }
+
         return moimList.stream()
                 .map(oneMoim -> MoimListByHostGetResponse.builder()
                         .moimId(oneMoim.getId())

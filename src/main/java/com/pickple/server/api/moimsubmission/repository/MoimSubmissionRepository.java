@@ -12,7 +12,7 @@ public interface MoimSubmissionRepository extends JpaRepository<MoimSubmission, 
 
     List<MoimSubmission> findAllByGuestId(Long guestId);
 
-    List<MoimSubmission> findAllByMoimSubmissionState(String moimSubmissionState);
+    List<MoimSubmission> findAllByGuestIdAndMoimSubmissionState(Long guestId, String moimSubmissionState);
 
     MoimSubmission findBymoimIdAndGuestId(Long moimId, Long guestId);
 

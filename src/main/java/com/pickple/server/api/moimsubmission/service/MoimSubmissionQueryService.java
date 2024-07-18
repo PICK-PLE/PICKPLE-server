@@ -40,12 +40,9 @@ public class MoimSubmissionQueryService {
         if (moimSubmissionState.equals(MoimSubmissionState.ALL.getMoimSubmissionState())) {
             moimSubmissionList = moimSubmissionRepository.findAllByGuestId(guest.getId());
         } else {
-            moimSubmissionList = moimSubmissionRepository.findAllByMoimSubmissionState(moimSubmissionState);
+            moimSubmissionList = moimSubmissionRepository.findAllByGuestIdAndMoimSubmissionState(guestId,
+                    moimSubmissionState);
         }
-
-//        if (moimSubmissionList.isEmpty()) {
-//            throw new CustomException(ErrorCode.MOIM_BY_STATE_NOT_FOUND);
-//        }
 
         return moimSubmissionList.stream()
                 .map(oneMoimSubmission -> SubmittedMoimByGuestResponse.builder()
@@ -77,10 +74,6 @@ public class MoimSubmissionQueryService {
         Guest guest = guestRepository.findGuestByIdOrThrow(guestId);
         List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findCompletedMoimSubmissionsByGuest(
                 guest.getId());
-
-//        if (moimSubmissionList.isEmpty()) {
-//            throw new CustomException(ErrorCode.MOIM_BY_STATE_NOT_FOUND);
-//        }
 
         return moimSubmissionList.stream()
                 .map(oneMoimSubmission -> SubmittedMoimByGuestResponse.builder()
