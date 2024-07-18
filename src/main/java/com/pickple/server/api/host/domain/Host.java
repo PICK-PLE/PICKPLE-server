@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
@@ -41,6 +42,7 @@ public class Host extends BaseTimeEntity {
 
     private String nickname;
 
+    @Size(max = 500)
     private String imageUrl;
 
     @JdbcTypeCode(SqlTypes.JSON)

@@ -60,7 +60,7 @@ public class MoimSubmissionQueryService {
                 .collect(Collectors.toList());
     }
 
-    public SubmittionDetailResponse getSubmittionDetail(Long moimId, Long guestId) {
+    public SubmittionDetailResponse getSubmissionDetail(Long moimId, Long guestId) {
         MoimSubmission submission = moimSubmissionRepository.findBymoimIdAndGuestId(moimId, guestId);
 
         if (submission == null) {

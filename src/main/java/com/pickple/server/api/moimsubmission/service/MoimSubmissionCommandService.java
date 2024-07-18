@@ -42,10 +42,14 @@ public class MoimSubmissionCommandService {
     }
 
     public void updateSubmissionState(Long moimId, List<Long> submitterIdList) {
-        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findByMoimIdAndGuestIdIn(moimId,
-                submitterIdList);
+        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findBymoimId(moimId);
+
         for (MoimSubmission moimSubmission : moimSubmissionList) {
-            moimSubmission.updateMoimSubmissionState(MoimSubmissionState.APPROVED.getMoimSubmissionState());
+            if (submitterIdList.contains(moimSubmission.getGuestId())) {
+                moimSubmission.updateMoimSubmissionState(MoimSubmissionState.APPROVED.getMoimSubmissionState());
+            } else {
+                moimSubmission.updateMoimSubmissionState(MoimSubmissionState.REJECTED.getMoimSubmissionState());
+            }
             moimSubmissionRepository.save(moimSubmission);
         }
     }

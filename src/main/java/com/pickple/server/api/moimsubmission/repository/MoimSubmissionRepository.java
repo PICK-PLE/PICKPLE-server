@@ -16,7 +16,7 @@ public interface MoimSubmissionRepository extends JpaRepository<MoimSubmission, 
 
     MoimSubmission findBymoimIdAndGuestId(Long moimId, Long guestId);
 
-    List<MoimSubmission> findByMoimIdAndGuestIdIn(Long moimId, List<Long> submitterIdList);
+    List<MoimSubmission> findBymoimId(Long moimId);
 
     List<MoimSubmission> findMoimListByMoimId(Long moimId);
 
