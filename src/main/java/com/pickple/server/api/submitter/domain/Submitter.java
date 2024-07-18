@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,17 +35,21 @@ public class Submitter extends BaseTimeEntity {
     @JoinColumn(name = "guest_id")
     private Guest guest;
 
+    @Size(max = 300)
     private String intro;
 
+    @Size(max = 300)
     private String goal;
 
     private String link;
 
+    @Size(max = 10)
     private String nickname;
 
     @JdbcTypeCode(SqlTypes.JSON)
     private SubmitterCategoryInfo categoryList;
 
+    @Size(max = 300)
     private String plan;
 
     private String email;

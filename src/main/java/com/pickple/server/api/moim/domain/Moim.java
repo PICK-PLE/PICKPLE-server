@@ -6,7 +6,6 @@ import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.api.notice.domain.Notice;
 import com.pickple.server.global.common.domain.BaseTimeEntity;
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
@@ -62,9 +62,10 @@ public class Moim extends BaseTimeEntity {
     @JdbcTypeCode(SqlTypes.JSON)
     private QuestionInfo questionList;
 
+    @Size(max = 28)
     private String title;
 
-    @Column(length = 2000)
+    @Size(max = 2000)
     private String description;
 
     @JdbcTypeCode(SqlTypes.JSON)
