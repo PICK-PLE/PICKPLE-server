@@ -162,6 +162,6 @@ public class MoimSubmissionQueryService {
     public boolean isOngoing(Long moimId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
         int day = DateUtil.calculateCompletedDay(moim.getDateList().getDate());
-        return day > 0;
+        return day >= 0;
     }
 }
