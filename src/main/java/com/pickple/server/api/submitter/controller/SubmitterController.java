@@ -47,7 +47,7 @@ public class SubmitterController implements SubmitterControllerDocs {
     @PatchMapping("/v1/submitter/{submitterId}")
     public ApiResponseDto approveSubmitter(@PathVariable("submitterId") final Long submitterId,
                                            @UserId final Long userId) {
-        if (userId == 3 || userId == 4) {
+        if (userId == 1 || userId == 2) {
             submitterCommandService.approveSubmitter(submitterId);
             return ApiResponseDto.success(SuccessCode.HOST_SUBMITTER_APPROVE_SUCCESS);
         } else {
