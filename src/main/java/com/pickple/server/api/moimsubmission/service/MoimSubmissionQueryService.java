@@ -58,7 +58,7 @@ public class MoimSubmissionQueryService {
     }
 
     public SubmittionDetailResponse getSubmissionDetail(Long moimId, Long guestId) {
-        MoimSubmission submission = moimSubmissionRepository.findBymoimIdAndGuestId(moimId, guestId);
+        MoimSubmission submission = moimSubmissionRepository.findByMoimIdAndGuestId(moimId, guestId);
 
         if (submission == null) {
             throw new CustomException(ErrorCode.MOIM_SUBMISSION_NOT_FOUND);
@@ -92,17 +92,13 @@ public class MoimSubmissionQueryService {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
 
         // moimSubmissionList 가져오기
-        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimListByMoimId(moimId);
-
-        // guestId를 추출하여 리스트에 저장
-        List<Long> guestIdList = moimSubmissionList.stream()
-                .map(MoimSubmission::getGuestId)
-                .toList();
+        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimListByMoimIdAndMoimSubmissionState(
+                moimId);
 
         // guestId를 이용하여 SubmitterInfo 객체 생성 후 리스트에 저장
-        List<SubmitterInfo> submitterInfoList = guestIdList.stream()
-                .map(this::getSubmitterInfo)
-                .toList();
+        List<SubmitterInfo> submitterInfoList = moimSubmissionList.stream()
+                .map(moimSubmission -> getSubmitterInfo(moimSubmission.getGuestId(), moimId))
+                .collect(Collectors.toList());
 
         return MoimSubmissionByMoimResponse
                 .builder()
@@ -111,7 +107,6 @@ public class MoimSubmissionQueryService {
                 .isApprovable(isApprovable(moim))
                 .submitterList(submitterInfoList)
                 .build();
-
     }
 
     private boolean isApprovable(Moim moim) {
@@ -129,17 +124,21 @@ public class MoimSubmissionQueryService {
         return now.isAfter(deadline);
     }
 
-    public SubmitterInfo getSubmitterInfo(Long guestId) {
+    public SubmitterInfo getSubmitterInfo(Long guestId, Long moimId) {
         // Guest 객체를 가져옴
         Guest guest = guestRepository.findById(guestId)
                 .orElseThrow(() -> new CustomException(ErrorCode.GUEST_NOT_FOUND));
+
+        //MoimSubmission 객체를 가져옴
+        MoimSubmission moimSubmission = moimSubmissionRepository.findByMoimIdAndGuestId(moimId, guestId);
 
         // SubmitterInfo 객체 생성
         return new SubmitterInfo(
                 guest.getId(),
                 guest.getNickname(),
                 guest.getImageUrl(),
-                DateTimeUtil.refineDateAndTime(guest.getCreatedAt())
+                DateTimeUtil.refineDateAndTime(guest.getCreatedAt()),
+                moimSubmission.getMoimSubmissionState()
         );
     }
 }
