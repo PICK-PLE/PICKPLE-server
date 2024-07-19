@@ -141,7 +141,7 @@ public class MoimSubmissionQueryService {
                 guest.getId(),
                 guest.getNickname(),
                 guest.getImageUrl(),
-                DateTimeUtil.refineDateAndTime(guest.getCreatedAt()),
+                DateTimeUtil.refineDateAndTime(moimSubmission.getCreatedAt()),
                 moimSubmission.getMoimSubmissionState()
         );
     }
