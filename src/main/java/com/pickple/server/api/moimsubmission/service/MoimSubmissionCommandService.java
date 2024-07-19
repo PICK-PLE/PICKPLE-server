@@ -6,7 +6,7 @@ import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmissionState;
 import com.pickple.server.api.moimsubmission.dto.request.MoimSubmitRequest;
 import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository;
-import com.pickple.server.global.exception.BadRequestException;
+import com.pickple.server.global.exception.CustomException;
 import com.pickple.server.global.response.enums.ErrorCode;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +37,7 @@ public class MoimSubmissionCommandService {
     private void isDuplicatedMoimSubmission(MoimSubmission moimSubmission) {
         if (moimSubmissionRepository.existsByMoimAndGuestId(moimSubmission.getMoim(),
                 moimSubmission.getGuestId())) {
-            throw new BadRequestException(ErrorCode.DUPLICATION_MOIM_SUBMISSION);
+            throw new CustomException(ErrorCode.DUPLICATION_MOIM_SUBMISSION);
         }
     }
 
