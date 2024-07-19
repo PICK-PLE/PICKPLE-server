@@ -14,6 +14,7 @@ import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository
 import com.pickple.server.global.exception.CustomException;
 import com.pickple.server.global.response.enums.ErrorCode;
 import com.pickple.server.global.util.DateTimeUtil;
+import com.pickple.server.global.util.DateUtil;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -103,8 +104,11 @@ public class MoimSubmissionQueryService {
         return MoimSubmissionByMoimResponse
                 .builder()
                 .moimTitle(moim.getTitle())
+                .moimDate(moim.getDateList().getDate())
                 .maxGuest(moim.getMaxGuest())
                 .isApprovable(isApprovable(moim))
+                .isMoimSubmissionApproved(isMoimSubmissonApproved(moimId))
+                .isOngoing(isOngoing(moimId))
                 .submitterList(submitterInfoList)
                 .build();
     }
@@ -140,5 +144,24 @@ public class MoimSubmissionQueryService {
                 DateTimeUtil.refineDateAndTime(guest.getCreatedAt()),
                 moimSubmission.getMoimSubmissionState()
         );
+    }
+
+    public boolean isMoimSubmissonApproved(Long moimId) {
+        Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
+        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimListByMoimId(moimId);
+
+        //모임에 해당하는 신청 내역 중 approved가 있는 경우 true 리턴
+        for (MoimSubmission moimSubmission : moimSubmissionList) {
+            if (moimSubmission.getMoimSubmissionState().equals(MoimSubmissionState.APPROVED.getMoimSubmissionState())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isOngoing(Long moimId) {
+        Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
+        int day = DateUtil.calculateCompletedDay(moim.getDateList().getDate());
+        return day > 0;
     }
 }

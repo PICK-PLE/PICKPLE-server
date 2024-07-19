@@ -11,4 +11,9 @@ public class DateUtil {
         return dday;
     }
 
+    public static int calculateCompletedDay(LocalDate date) {
+        LocalDate today = LocalDate.now();
+        int day = (int) ChronoUnit.DAYS.between(today, date);
+        return day;
+    }
 }
