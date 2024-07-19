@@ -150,9 +150,11 @@ public class MoimSubmissionQueryService {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
         List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimListByMoimId(moimId);
 
-        //모임에 해당하는 신청 내역 중 approved가 있는 경우 true 리턴
+        //모임에 해당하는 신청 내역 중 approved or rejected가 있는 경우 true 리턴
         for (MoimSubmission moimSubmission : moimSubmissionList) {
-            if (moimSubmission.getMoimSubmissionState().equals(MoimSubmissionState.APPROVED.getMoimSubmissionState())) {
+            if (moimSubmission.getMoimSubmissionState().equals(MoimSubmissionState.APPROVED.getMoimSubmissionState()) ||
+                    moimSubmission.getMoimSubmissionState()
+                            .equals(MoimSubmissionState.REJECTED.getMoimSubmissionState())) {
                 return true;
             }
         }
