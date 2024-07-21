@@ -1,4 +1,6 @@
 # ❕ PICK!PLE
+![픽플이미지](https://github.com/user-attachments/assets/7083d8e6-5ac2-4465-8706-b342feddb073)
+
 내가 PICK!한 바로 '그 사람'과 함께하는 클래스 모임
 
 
