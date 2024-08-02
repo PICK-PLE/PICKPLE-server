@@ -36,6 +36,9 @@ public class HostIdResolver implements HandlerMethodArgumentResolver {
             throw new CustomException(ErrorCode.EMPTY_PRINCIPAL);
         }
         Host host = hostRepository.findHostByUserId(Long.valueOf(principal.getName()));
+        if (host == null) {
+            throw new CustomException(ErrorCode.HOST_NOT_FOUND);
+        }
         return host.getId();
     }
 }
