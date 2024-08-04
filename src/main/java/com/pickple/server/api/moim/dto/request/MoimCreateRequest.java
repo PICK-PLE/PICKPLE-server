@@ -5,10 +5,13 @@ import com.pickple.server.api.moim.domain.DateInfo;
 import com.pickple.server.api.moim.domain.ImageInfo;
 import com.pickple.server.api.moim.domain.QuestionInfo;
 import com.pickple.server.api.moimsubmission.domain.AccountInfo;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.springframework.validation.annotation.Validated;
 
+@Validated
 public record MoimCreateRequest(
         CategoryInfo categoryList,
 
@@ -37,6 +40,7 @@ public record MoimCreateRequest(
         @NotBlank(message = "소개글이 비어있습니다.")
         String description,
 
+        @Valid
         ImageInfo imageList
 ) {
 }
