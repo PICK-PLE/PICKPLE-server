@@ -33,9 +33,7 @@ public enum ErrorCode {
     GUEST_NOT_FOUND(40403, HttpStatus.NOT_FOUND, "존재하지 않는 게스트입니다"),
     MOIM_NOT_FOUND(40404, HttpStatus.NOT_FOUND, "존재하지 않는 모임입니다."),
     HOST_NOT_FOUND(40405, HttpStatus.NOT_FOUND, "존재하지 않는 호스트입니다"),
-    //MOIM_BY_STATE_NOT_FOUND(40406, HttpStatus.NOT_FOUND, "상태에 맞는 모임이 없습니다"),
     MOIM_SUBMISSION_NOT_FOUND(40406, HttpStatus.NOT_FOUND, "해당 모임에 신청한 내역이 없습니다."),
-    //MOIM_BY_HOST_AND_STATE_NOT_FOUND(40408, HttpStatus.NOT_FOUND, "호스트와 상태에 해당하는 모임이 없습니다."),
     SUBMITTER_NOT_FOUND(40408, HttpStatus.NOT_FOUND, "존재하지 않는 호스트 승인 신청입니다."),
 
     // 405 Method Not Allowed Error
