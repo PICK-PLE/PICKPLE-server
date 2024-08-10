@@ -15,7 +15,6 @@ import org.springframework.validation.annotation.Validated;
 public record MoimCreateRequest(
         CategoryInfo categoryList,
 
-        @NotNull(message = "오프라인 여부가 비어있습니다")
         boolean isOffline,
 
         @NotBlank(message = "모임 장소가 비어있습니다.")
@@ -30,6 +29,8 @@ public record MoimCreateRequest(
         int fee,
 
         AccountInfo accountList,
+
+        @Valid
         QuestionInfo questionList,
 
         @Size(max = 28, message = "28자 이내로 작성해 주세요.")

@@ -10,6 +10,7 @@ import com.pickple.server.api.moimsubmission.service.MoimSubmissionQueryService;
 import com.pickple.server.global.common.annotation.GuestId;
 import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.SuccessCode;
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +34,7 @@ public class MoimSubmissionController implements MoimSubmissionControllerDocs {
     public ApiResponseDto createMoimSubmission(
             @PathVariable Long moimId,
             @GuestId Long guestId,
-            @RequestBody MoimSubmitRequest moimSubmitRequest
+            @RequestBody @Valid MoimSubmitRequest moimSubmitRequest
     ) {
         moimSubmissionCommandService.createMoimSubmission(moimId, guestId, moimSubmitRequest);
         return ApiResponseDto.success(SuccessCode.MOIM_SUBMISSION_POST_SUCCESS);

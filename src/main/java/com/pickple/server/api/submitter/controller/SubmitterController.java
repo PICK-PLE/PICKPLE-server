@@ -9,6 +9,7 @@ import com.pickple.server.global.common.annotation.UserId;
 import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.ErrorCode;
 import com.pickple.server.global.response.enums.SuccessCode;
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,7 @@ public class SubmitterController implements SubmitterControllerDocs {
 
     @PostMapping("/v1/submitter")
     public ApiResponseDto postSubmitter(@GuestId final Long guestId,
-                                        @RequestBody SubmitterCreateRequest submitterCreateRequest) {
+                                        @RequestBody @Valid SubmitterCreateRequest submitterCreateRequest) {
         submitterCommandService.createSubmitter(guestId, submitterCreateRequest);
         return ApiResponseDto.success(SuccessCode.SUBMITTER_POST_SUCCESS);
     }
