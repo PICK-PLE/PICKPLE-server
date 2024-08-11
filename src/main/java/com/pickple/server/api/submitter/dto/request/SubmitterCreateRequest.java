@@ -3,6 +3,7 @@ package com.pickple.server.api.submitter.dto.request;
 import com.pickple.server.api.submitter.domain.SubmitterCategoryInfo;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import org.springframework.validation.annotation.Validated;
 
@@ -29,8 +30,10 @@ public record SubmitterCreateRequest(
         @Size(max = 300, message = "글모임명은 최대 300자 이내로 작성해주세요.")
         @NotBlank(message = "계획이 비어 있습니다.")
         String plan,    //클래스 모임 운영 계획
-        
+
         @NotBlank(message = "메일이 비어 있습니다.")
+        @Pattern(message = "이메일 형식이 올바르지 않습니다.", regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+                + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")
         String email    //호스트 승인 후 연락받을 메일 주소
 ) {
 }
