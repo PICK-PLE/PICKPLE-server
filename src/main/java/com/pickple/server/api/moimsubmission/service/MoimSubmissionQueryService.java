@@ -41,8 +41,8 @@ public class MoimSubmissionQueryService {
         if (moimSubmissionState.equals(MoimSubmissionState.ALL.getMoimSubmissionState())) {
             moimSubmissionList = moimSubmissionRepository.findAllByGuestId(guest.getId());
         } else {
-            moimSubmissionList = moimSubmissionRepository.findAllByGuestIdAndMoimSubmissionState(guestId,
-                    moimSubmissionState);
+            moimSubmissionList = moimSubmissionRepository.findSubmittedMoimSubmissionsByGuestIdAndMoimSubmissionState(
+                    guestId, moimSubmissionState);
         }
 
         return moimSubmissionList.stream()
