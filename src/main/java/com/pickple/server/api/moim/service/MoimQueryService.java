@@ -2,6 +2,7 @@ package com.pickple.server.api.moim.service;
 
 import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.domain.QuestionInfo;
+import com.pickple.server.api.moim.domain.enums.Category;
 import com.pickple.server.api.moim.dto.response.MoimByCategoryResponse;
 import com.pickple.server.api.moim.dto.response.MoimDescriptionResponse;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
@@ -10,6 +11,7 @@ import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.dto.response.MoimByGuestResponse;
 import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository;
 import com.pickple.server.global.util.DateUtil;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -114,5 +116,11 @@ public class MoimQueryService {
             // 테이블이 존재하지 않아서 발생한 예외일 경우 0 반환
             return 0L;
         }
+    }
+
+    public List<String> getCategories() {
+        return Arrays.stream(Category.values())
+                .map(category -> category.category)
+                .collect(Collectors.toList());
     }
 }
