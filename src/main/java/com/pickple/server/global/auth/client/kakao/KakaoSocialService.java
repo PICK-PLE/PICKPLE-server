@@ -21,13 +21,11 @@ import org.springframework.stereotype.Service;
 public class KakaoSocialService implements SocialService {
 
     private static final String AUTH_CODE = "authorization_code";
-    private static final String REDIRECT_URI = "http://localhost:5173/kakao/redirection";
 
     @Value("${kakao.clientId}")
     private String clientId;
     private final KakaoApiClient kakaoApiClient;
     private final KakaoAuthApiClient kakaoAuthApiClient;
-
 
     @Transactional
     @Override
@@ -38,7 +36,7 @@ public class KakaoSocialService implements SocialService {
         String accessToken;
         try {
             // 인가 코드로 Access Token + Refresh Token 받아오기
-            accessToken = getOAuth2Authentication(authorizationCode);
+            accessToken = getOAuth2Authentication(authorizationCode, loginRequest.redirectUri());
         } catch (FeignException e) {
             throw new CustomException(ErrorCode.AUTHENTICATION_CODE_EXPIRED);
         }
@@ -47,12 +45,13 @@ public class KakaoSocialService implements SocialService {
     }
 
     private String getOAuth2Authentication(
-            final String authorizationCode
+            final String authorizationCode,
+            final String redirectUri
     ) {
         KakaoAccessTokenResponse response = kakaoAuthApiClient.getOAuth2AccessToken(
                 AUTH_CODE,
                 clientId,
-                REDIRECT_URI,
+                redirectUri,
                 authorizationCode
         );
         return response.accessToken();
