@@ -37,7 +37,7 @@ public class SubmitterController implements SubmitterControllerDocs {
 
     @GetMapping("/v1/submitter-list")
     public ApiResponseDto<List<SubmitterListGetResponse>> getSubmitterList(@UserId final Long userId) {
-        if (userId == 3 || userId == 4) {
+        if (userId == 1 || userId == 2) {
             return ApiResponseDto.success(SuccessCode.SUBMITTER_LIST_GET_SUCCESS,
                     submitterQueryService.getSubmitterList());
         } else {
