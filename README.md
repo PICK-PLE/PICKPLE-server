@@ -5,7 +5,7 @@
 
 
 ## 💻 TEAM
-|**🐰 김보람**|**🦊 이예린**|
+|**🐰 김보람**|**🐱 이예린**|
 |:---:|:---:|
 | <img width="1012" alt="KakaoTalk_Photo_2024-07-25-19-15-10" src="https://github.com/user-attachments/assets/b766926d-7a58-40dc-a577-3885d4a20b18">| <img width="1012" alt="KakaoTalk_Photo_2024-07-19-00-38-01" src="https://github.com/user-attachments/assets/20b3e2ba-c886-46c4-b4ba-fac8294d163b">|
 |[bo-ram-bo-ram](https://github.com/bo-ram-bo-ram)|[lxxyxin](https://github.com/lxxyxin)|
@@ -33,8 +33,8 @@
 
 
 ## ✏️ ER Diagram
-![KakaoTalk_Photo_2024-07-09-22-21-37](https://github.com/PICK-PLE/PICKPLE-server/assets/91695537/2750aa8b-44b8-4e05-865f-e89a5837f950)
 
+<img width="1002" alt="스크린샷 2024-08-11 오후 7 30 38" src="https://github.com/user-attachments/assets/a3c2a18d-b54f-4bfe-9b2a-b53231c521b9">
 
 <br>
 
@@ -45,13 +45,12 @@
 │  ├─📁 java
 │  │  └─📁 com.pickple.server
 │  │      └─📁 api
-│  │      │  ├─📁 applicant
-│  │      │  ├─📁 enums
 │  │      │  ├─📁 guest
 │  │      │  ├─📁 host
 │  │      │  ├─📁 moim
-│  │      │  ├─📁 moimapplication
+│  │      │  ├─📁 moimsubmission
 │  │      │  ├─📁 notice
+│  │      │  ├─📁 submitter
 │  │      │  └─📁 user
 │  │      └─📁 global
 │  │         ├─📁 auth
@@ -70,9 +69,9 @@
 ## 👩🏻‍💻 역할 분담
 **🍀 공통** - api 명세서 작성 / erd 구상 / ci/cd관리
 
-**🐰 보람** - 카카오 소셜로그인
+**🐰 보람** - 카카오 소셜로그인 / 호스트 및 호스트 승인 관련 API / 공지사항 관련 API / 기타 세팅
 
-**🦊 예린** - sentry 연동
+**🦊 예린** - sentry 연동 / 모임 관련 API
 
 <br>
 
