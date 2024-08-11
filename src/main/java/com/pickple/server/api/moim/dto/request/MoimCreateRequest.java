@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 
 @Validated
 public record MoimCreateRequest(
+        @Valid
         CategoryInfo categoryList,
 
         boolean isOffline,
@@ -20,6 +21,7 @@ public record MoimCreateRequest(
         @NotBlank(message = "모임 장소가 비어있습니다.")
         String spot,
 
+        @Valid
         DateInfo dateList,
 
         @NotNull(message = "모임 정원이 비어있습니다.")
@@ -28,6 +30,7 @@ public record MoimCreateRequest(
         @NotNull(message = "참가비가 비어있습니다.")
         int fee,
 
+        @Valid
         AccountInfo accountList,
 
         @Valid
