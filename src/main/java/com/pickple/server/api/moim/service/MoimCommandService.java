@@ -7,8 +7,6 @@ import com.pickple.server.api.moim.domain.enums.MoimState;
 import com.pickple.server.api.moim.dto.request.MoimCreateRequest;
 import com.pickple.server.api.moim.dto.response.MoimCreateResponse;
 import com.pickple.server.api.moim.repository.MoimRepository;
-import com.pickple.server.global.exception.CustomException;
-import com.pickple.server.global.response.enums.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,9 +36,6 @@ public class MoimCommandService {
                 .imageList(request.imageList())
                 .moimState(MoimState.ONGOING.getMoimState())
                 .build();
-        if (moim.getImageList().getImageUrl1() == null) {
-            throw new CustomException(ErrorCode.MISSING_IMAGE_URL);
-        }
         moimRepository.save(moim);
         return MoimCreateResponse.builder()
                 .moimId(moim.getId())

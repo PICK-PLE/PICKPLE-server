@@ -14,9 +14,9 @@ import com.pickple.server.api.moimsubmission.dto.response.MoimByGuestResponse;
 import com.pickple.server.global.common.annotation.HostId;
 import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.SuccessCode;
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +35,7 @@ public class MoimController implements MoimControllerDocs {
 
     @PostMapping("/v1/moim")
     public ApiResponseDto<MoimCreateResponse> createMoim(@HostId Long hostId,
-                                                         @Validated @RequestBody MoimCreateRequest moimCreateRequest) {
+                                                         @RequestBody @Valid MoimCreateRequest moimCreateRequest) {
         return ApiResponseDto.success(SuccessCode.MOIM_CREATE_SUCCESS,
                 moimCommandService.createMoim(hostId, moimCreateRequest));
     }
