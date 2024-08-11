@@ -1,7 +1,6 @@
 package com.pickple.server.api.moim.controller;
 
 import com.pickple.server.api.moim.domain.QuestionInfo;
-import com.pickple.server.api.moim.domain.enums.Category;
 import com.pickple.server.api.moim.dto.request.MoimCreateRequest;
 import com.pickple.server.api.moim.dto.response.MoimByCategoryResponse;
 import com.pickple.server.api.moim.dto.response.MoimCreateResponse;
@@ -42,7 +41,7 @@ public class MoimController implements MoimControllerDocs {
 
     @GetMapping("/v1/moim/categories")
     public ApiResponseDto<List<String>> getAllCategories() {
-        return ApiResponseDto.success(SuccessCode.ALL_CATEGORY_GET_SUCCESS, Category.getCategories());
+        return ApiResponseDto.success(SuccessCode.ALL_CATEGORY_GET_SUCCESS, moimQueryService.getCategories());
     }
 
     @GetMapping("/v1/moim/{moimId}")
