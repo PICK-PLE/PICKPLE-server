@@ -37,6 +37,10 @@ public class User extends BaseTimeEntity {
 
     private String role;
 
+    public void updateRole(String role) {
+        this.role = role;
+    }
+
     public static User of(
             final Long socialId,
             final String email,
