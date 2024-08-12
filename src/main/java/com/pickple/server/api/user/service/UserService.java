@@ -4,6 +4,7 @@ import com.pickple.server.api.guest.domain.Guest;
 import com.pickple.server.api.guest.repository.GuestRepository;
 import com.pickple.server.api.host.domain.Host;
 import com.pickple.server.api.host.repository.HostRepository;
+import com.pickple.server.api.user.domain.Role;
 import com.pickple.server.api.user.domain.SocialType;
 import com.pickple.server.api.user.domain.User;
 import com.pickple.server.api.user.dto.AccessTokenGetSuccess;
@@ -66,7 +67,8 @@ public class UserService {
                 userResponse.socialId(),
                 userResponse.email(),
                 userResponse.socialType(),
-                userResponse.socialNickname()
+                userResponse.socialNickname(),
+                Role.GUEST.getRole()
         );
         return userRepository.save(user);
     }
