@@ -52,14 +52,13 @@ public class MoimSubmissionCommandService {
                     moimSubmission.updateMoimSubmissionState(MoimSubmissionState.APPROVED.getMoimSubmissionState());
                 }
             }
-            moimSubmissionRepository.save(moimSubmission);
-        }
-        //승인 이후에 승인 대기(pendingApproval)인 요청에 대해 승인 거절(rejected)상태로 변경
-        for (MoimSubmission moimSubmission : moimSubmissionList) {
+
+            //승인 이후에 승인 대기(pendingApproval)인 요청에 대해 승인 거절(rejected)상태로 변경
             if (moimSubmission.getMoimSubmissionState()
                     .equals(MoimSubmissionState.PENDING_APPROVAL.getMoimSubmissionState())) {
                 moimSubmission.updateMoimSubmissionState(MoimSubmissionState.REJECTED.getMoimSubmissionState());
             }
+            moimSubmissionRepository.save(moimSubmission);
         }
     }
 }
