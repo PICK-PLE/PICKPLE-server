@@ -11,6 +11,8 @@ import jakarta.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -53,6 +55,17 @@ public class JwtTokenProvider {
                 .setExpiration(new Date(now.getTime() + expiredTime));  // 만료 시간 설정
 
         claims.put(MEMBER_ID, authentication.getPrincipal());
+
+        // 권한 정보를 JWT에 추가
+        List<String> roles = authentication.getAuthorities().stream()
+                .map(authority -> authority.getAuthority())
+                .collect(Collectors.toList());
+
+        // roles 클레임을 JWT에 추가
+        if (!roles.isEmpty()) {
+            claims.put("roles", roles);
+        }
+
         return Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE) // Header
                 .setClaims(claims) // Claim
@@ -92,5 +105,10 @@ public class JwtTokenProvider {
     public Long getUserFromJwt(String token) {
         Claims claims = getBody(token);
         return Long.valueOf(claims.get(MEMBER_ID).toString());
+    }
+
+    public List<String> getRolesFromJwt(String token) {
+        Claims claims = getBody(token);
+        return claims.get("roles", List.class);
     }
 }

@@ -20,7 +20,10 @@ import com.pickple.server.global.auth.security.UserAuthentication;
 import com.pickple.server.global.exception.CustomException;
 import com.pickple.server.global.response.enums.ErrorCode;
 import jakarta.transaction.Transactional;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -99,7 +102,15 @@ public class UserService {
         if (!userId.equals(tokenService.findIdByRefreshToken(refreshToken))) {
             throw new CustomException(ErrorCode.TOKEN_INCORRECT_ERROR);
         }
-        UserAuthentication userAuthentication = new UserAuthentication(userId, null, null);
+
+        // 사용자 정보 가져오기
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+        // 사용자 역할을 기반으로 권한 설정
+        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
+        UserAuthentication userAuthentication = new UserAuthentication(userId.toString(), null, authorities);
+
         return AccessTokenGetSuccess.of(
                 jwtTokenProvider.issueAccessToken(userAuthentication)
         );
@@ -108,7 +119,14 @@ public class UserService {
     public TokenDto getTokenByUserId(
             final Long id
     ) {
-        UserAuthentication userAuthentication = new UserAuthentication(id, null, null);
+        // 사용자 정보 가져오기
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+        // 사용자 역할을 기반으로 권한 설정
+        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
+        UserAuthentication userAuthentication = new UserAuthentication(id.toString(), null, authorities);
+
         String refreshToken = jwtTokenProvider.issueRefreshToken(userAuthentication);
         tokenService.saveRefreshToken(id, refreshToken);
         return TokenDto.of(
