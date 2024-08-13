@@ -48,6 +48,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(auth -> {
                     auth.requestMatchers(AUTH_WHITELIST).permitAll();
+                    auth.requestMatchers("/api/v1/submitter-list", "/api/v1/submitter/*").hasRole("admin");
                     auth.anyRequest().authenticated();
                 })
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
