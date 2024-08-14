@@ -74,7 +74,7 @@ public class MoimSubmissionController implements MoimSubmissionControllerDocs {
     @PatchMapping("/v1/moim/{moimId}/submitter")
     public ApiResponseDto updateSubmitterState(
             @PathVariable Long moimId,
-            @RequestBody MoimSubmitterUpdateRequest moimSubmitterUpdateRequest
+            @RequestBody @Valid MoimSubmitterUpdateRequest moimSubmitterUpdateRequest
     ) {
         moimSubmissionCommandService.updateSubmissionState(moimId, moimSubmitterUpdateRequest.submitterIdList());
         return ApiResponseDto.success(SuccessCode.MOIM_SUBMITTER_APPROVE_SUCCESS);
