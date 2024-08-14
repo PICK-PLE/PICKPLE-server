@@ -7,6 +7,7 @@ import com.pickple.server.global.auth.client.dto.UserLoginRequest;
 import com.pickple.server.global.auth.jwt.service.TokenService;
 import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.SuccessCode;
+import jakarta.validation.Valid;
 import java.security.Principal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,7 +28,7 @@ public class UserController implements UserControllerDocs {
     @Override
     public ApiResponseDto<LoginSuccessResponse> login(
             @RequestParam final String authorizationCode,
-            @RequestBody final UserLoginRequest loginRequest
+            @RequestBody @Valid final UserLoginRequest loginRequest
     ) {
         return ApiResponseDto.success(SuccessCode.LOGIN_SUCCESS, userService.create(authorizationCode, loginRequest));
     }
