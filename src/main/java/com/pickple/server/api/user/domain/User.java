@@ -35,17 +35,25 @@ public class User extends BaseTimeEntity {
 
     private String socialNickname;
 
+    private String role;
+
+    public void updateRole(String role) {
+        this.role = role;
+    }
+
     public static User of(
             final Long socialId,
             final String email,
             final SocialType socialType,
-            final String socialNickname
+            final String socialNickname,
+            final String role
     ) {
         return User.builder()
                 .socialId(socialId)
                 .email(email)
                 .socialType(socialType)
                 .socialNickname(socialNickname)
+                .role(role)
                 .build();
     }
 }

@@ -9,8 +9,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -29,10 +32,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     @NonNull FilterChain filterChain) throws ServletException, IOException {
         try {
             final String token = getJwtFromRequest(request);
-            if (jwtTokenProvider.validateToken(token) == VALID_JWT) {
+            if (token != null && jwtTokenProvider.validateToken(token) == VALID_JWT) {
                 Long memberId = jwtTokenProvider.getUserFromJwt(token);
-                // authentication 객체 생성 -> principal에 유저정보를 담는다.
-                UserAuthentication authentication = new UserAuthentication(memberId.toString(), null, null);
+
+                // 토큰에서 roles 정보를 가져옴
+                List<String> roles = jwtTokenProvider.getRolesFromJwt(token);
+                List<SimpleGrantedAuthority> authorities = roles.stream()
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList());
+
+                UserAuthentication authentication = new UserAuthentication(memberId.toString(), null, authorities);
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

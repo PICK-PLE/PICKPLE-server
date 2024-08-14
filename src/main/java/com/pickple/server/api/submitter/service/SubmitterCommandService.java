@@ -10,6 +10,7 @@ import com.pickple.server.api.submitter.domain.Submitter;
 import com.pickple.server.api.submitter.domain.SubmitterState;
 import com.pickple.server.api.submitter.dto.request.SubmitterCreateRequest;
 import com.pickple.server.api.submitter.repository.SubmitterRepository;
+import com.pickple.server.api.user.domain.Role;
 import com.pickple.server.global.exception.BadRequestException;
 import com.pickple.server.global.exception.CustomException;
 import com.pickple.server.global.response.enums.ErrorCode;
@@ -54,6 +55,9 @@ public class SubmitterCommandService {
                 .category2(submitter.getCategoryList().getCategory2())
                 .category3(submitter.getCategoryList().getCategory3())
                 .build();
+
+        //호스트 승인 시 role host로 변경
+        submitter.getGuest().getUser().updateRole(Role.HOST.getRole());
 
         Host host = Host.builder()
                 .categoryList(hostCategoryInfo)
