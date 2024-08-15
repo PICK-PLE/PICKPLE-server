@@ -6,6 +6,7 @@ import com.pickple.server.api.notice.service.NoticeCommandService;
 import com.pickple.server.api.notice.service.NoticeQueryService;
 import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.SuccessCode;
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,7 @@ public class NoticeController implements NoticeControllerDocs {
 
     @PostMapping("/v1/moim/{moimId}/notice")
     public ApiResponseDto createNotice(@PathVariable Long moimId,
-                                       @RequestBody NoticeCreateRequest noticeCreateRequest) {
+                                       @RequestBody @Valid NoticeCreateRequest noticeCreateRequest) {
         noticeCommandService.createNotice(moimId, noticeCreateRequest);
         return ApiResponseDto.success(SuccessCode.NOTICE_POST_SUCCESS);
     }
