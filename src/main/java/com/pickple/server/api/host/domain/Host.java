@@ -21,8 +21,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 @Entity
 @Getter
@@ -44,9 +42,6 @@ public class Host extends BaseTimeEntity {
 
     @Size(max = 500)
     private String imageUrl;
-
-    @JdbcTypeCode(SqlTypes.JSON)
-    private HostCategoryInfo categoryList;
 
     private String link;
 

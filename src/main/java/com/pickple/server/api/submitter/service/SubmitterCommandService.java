@@ -4,7 +4,6 @@ package com.pickple.server.api.submitter.service;
 import com.pickple.server.api.guest.domain.Guest;
 import com.pickple.server.api.guest.repository.GuestRepository;
 import com.pickple.server.api.host.domain.Host;
-import com.pickple.server.api.host.domain.HostCategoryInfo;
 import com.pickple.server.api.host.repository.HostRepository;
 import com.pickple.server.api.submitter.domain.Submitter;
 import com.pickple.server.api.submitter.domain.SubmitterState;
@@ -51,17 +50,10 @@ public class SubmitterCommandService {
 
         submitter.updateSubmitterState(SubmitterState.APPROVE.getSubmitterState());
 
-        HostCategoryInfo hostCategoryInfo = HostCategoryInfo.builder()
-                .category1(submitter.getCategoryList().getCategory1())
-                .category2(submitter.getCategoryList().getCategory2())
-                .category3(submitter.getCategoryList().getCategory3())
-                .build();
-
         //호스트 승인 시 role host로 변경
         submitter.getGuest().getUser().updateRole(Role.HOST.getRole());
 
         Host host = Host.builder()
-                .categoryList(hostCategoryInfo)
                 .user(submitter.getGuest().getUser())
                 .link(submitter.getLink())
                 .imageUrl("https://pickple-bucket.s3.ap-northeast-2.amazonaws.com/profile/hostProfileImage.png")
