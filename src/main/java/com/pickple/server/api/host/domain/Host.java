@@ -45,6 +45,10 @@ public class Host extends BaseTimeEntity {
 
     private String link;
 
+    private String job;
+
+    private String description;
+
     @OneToMany(mappedBy = "host", cascade = CascadeType.REMOVE)
     private List<Moim> moims = new ArrayList<>();
 }

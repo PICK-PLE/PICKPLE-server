@@ -58,6 +58,8 @@ public class SubmitterCommandService {
                 .link(submitter.getLink())
                 .imageUrl("https://pickple-bucket.s3.ap-northeast-2.amazonaws.com/profile/hostProfileImage.png")
                 .nickname(submitter.getNickname())
+                .job(submitter.getJob())
+                .description("안녕하세요, 스픽커 " + submitter.getNickname() + "입니다.")
                 .build();
 
         hostRepository.save(host);

@@ -40,7 +40,7 @@ public class SubmitterController implements SubmitterControllerDocs {
                 submitterQueryService.getSubmitterList());
     }
 
-    @PatchMapping("/v1/submitter/{submitterId}")
+    @PatchMapping("/v2/submitter/{submitterId}")
     public ApiResponseDto approveSubmitter(@PathVariable("submitterId") final Long submitterId,
                                            @UserId final Long userId) {
         submitterCommandService.approveSubmitter(submitterId);
