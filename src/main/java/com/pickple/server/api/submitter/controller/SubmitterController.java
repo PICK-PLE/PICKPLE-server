@@ -27,7 +27,7 @@ public class SubmitterController implements SubmitterControllerDocs {
     private final SubmitterCommandService submitterCommandService;
     private final SubmitterQueryService submitterQueryService;
 
-    @PostMapping("/v1/submitter")
+    @PostMapping("/v2/submitter")
     public ApiResponseDto postSubmitter(@GuestId final Long guestId,
                                         @RequestBody @Valid SubmitterCreateRequest submitterCreateRequest) {
         submitterCommandService.createSubmitter(guestId, submitterCreateRequest);

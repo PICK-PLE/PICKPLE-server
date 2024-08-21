@@ -39,6 +39,7 @@ public class SubmitterCommandService {
                 .categoryList(request.categoryList())
                 .email(request.email())
                 .plan(request.plan())
+                .job(request.job())
                 .submitterState(SubmitterState.PENDING.getSubmitterState())
                 .build();
         isDuplicatedSubmission(submitter);
