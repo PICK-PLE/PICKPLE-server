@@ -43,7 +43,7 @@ public class Submitter extends BaseTimeEntity {
 
     private String link;
 
-    @Size(max = 10)
+    @Size(max = 15)
     private String nickname;
 
     @JdbcTypeCode(SqlTypes.JSON)
@@ -53,6 +53,8 @@ public class Submitter extends BaseTimeEntity {
     private String plan;
 
     private String email;
+
+    private String job;
 
     private String submitterState;
 
