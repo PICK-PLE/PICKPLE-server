@@ -12,7 +12,9 @@ public record NoticeCreateRequest(
         @NotBlank(message = "내용이 비어 있습니다.")
         String noticeContent,    //공지사항 내용
 
-        String imageUrl    //공지사항 이미지
+        String imageUrl,    //공지사항 이미지
+
+        boolean isPrivate
 ) {
 
 }
