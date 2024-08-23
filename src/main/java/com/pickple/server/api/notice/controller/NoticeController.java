@@ -1,6 +1,7 @@
 package com.pickple.server.api.notice.controller;
 
 import com.pickple.server.api.notice.dto.request.NoticeCreateRequest;
+import com.pickple.server.api.notice.dto.response.NoticeDetailGetResponse;
 import com.pickple.server.api.notice.dto.response.NoticeListGetByMoimResponse;
 import com.pickple.server.api.notice.service.NoticeCommandService;
 import com.pickple.server.api.notice.service.NoticeQueryService;
@@ -44,5 +45,13 @@ public class NoticeController implements NoticeControllerDocs {
                                        @PathVariable Long noticeId) {
         noticeCommandService.deleteNotice(hostId, noticeId);
         return ApiResponseDto.success(SuccessCode.NOTICE_DELETE_SUCCESS);
+    }
+
+    @GetMapping("/v2/moim/{moimId}/notice/{noticeId}")
+    public ApiResponseDto<NoticeDetailGetResponse> getNoticeDetail(@HostId Long hostId,
+                                                                   @PathVariable Long moimId,
+                                                                   @PathVariable Long noticeId) {
+        return ApiResponseDto.success(SuccessCode.NOTICE_DETAIL_GET_SUCCESS,
+                noticeQueryService.getNoticeDetail(hostId, moimId, noticeId));
     }
 }
