@@ -54,7 +54,7 @@ public class Submitter extends BaseTimeEntity {
 
     private String email;
 
-    private String job;
+    private String userTitle;
 
     private String submitterState;
 

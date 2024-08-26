@@ -38,7 +38,7 @@ public class SubmitterCommandService {
                 .categoryList(request.categoryList())
                 .email(request.email())
                 .plan(request.plan())
-                .job(request.job())
+                .userTitle(request.userTitle())
                 .submitterState(SubmitterState.PENDING.getSubmitterState())
                 .build();
         isDuplicatedSubmission(submitter);
@@ -58,7 +58,7 @@ public class SubmitterCommandService {
                 .link(submitter.getLink())
                 .imageUrl("https://pickple-bucket.s3.ap-northeast-2.amazonaws.com/profile/hostProfileImage.png")
                 .nickname(submitter.getNickname())
-                .job(submitter.getJob())
+                .userTitle(submitter.getUserTitle())
                 .description("안녕하세요, 스픽커 " + submitter.getNickname() + "입니다.")
                 .build();
 

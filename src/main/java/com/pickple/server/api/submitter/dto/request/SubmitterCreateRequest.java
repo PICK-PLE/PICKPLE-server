@@ -36,7 +36,7 @@ public record SubmitterCreateRequest(
                 + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")
         String email,    //호스트 승인 후 연락받을 메일 주소
 
-        @NotBlank(message = "직업이 비어 있습니다.")
-        String job
+        @NotBlank(message = "호칭이 비어 있습니다.")
+        String userTitle
 ) {
 }
