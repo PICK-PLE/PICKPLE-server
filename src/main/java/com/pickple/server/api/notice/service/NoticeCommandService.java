@@ -27,6 +27,7 @@ public class NoticeCommandService {
                 .content(request.noticeContent())
                 .imageUrl(request.imageUrl())
                 .moim(moim)
+                .isPrivate(request.isPrivate())
                 .build();
 
         noticeRepository.save(notice);

@@ -40,4 +40,6 @@ public class Notice extends BaseTimeEntity {
 
     @Size(max = 500)
     private String imageUrl;
+
+    private boolean isPrivate;
 }

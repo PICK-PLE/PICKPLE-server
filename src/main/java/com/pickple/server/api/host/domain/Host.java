@@ -45,7 +45,7 @@ public class Host extends BaseTimeEntity {
 
     private String link;
 
-    private String userTitle;
+    private String userKeyword;
 
     private String description;
 
