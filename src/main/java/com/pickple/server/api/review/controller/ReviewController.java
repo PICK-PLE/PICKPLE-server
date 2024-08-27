@@ -1,7 +1,7 @@
 package com.pickple.server.api.review.controller;
 
 import com.pickple.server.api.review.Service.ReviewQueryService;
-import com.pickple.server.api.review.dto.TagGetResponse;
+import com.pickple.server.api.review.dto.response.TagListGetResponse;
 import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.SuccessCode;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ public class ReviewController {
     private final ReviewQueryService reviewQueryService;
 
     @GetMapping("/v2/review/tag-list")
-    public ApiResponseDto<TagGetResponse> getAllTags() {
+    public ApiResponseDto<TagListGetResponse> getAllTags() {
         return ApiResponseDto.success(SuccessCode.REVIEW_TAG_LIST_GET_SUCCESS, reviewQueryService.getAllTags());
     }
 }
