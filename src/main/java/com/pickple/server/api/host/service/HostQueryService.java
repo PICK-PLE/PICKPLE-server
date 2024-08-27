@@ -56,4 +56,8 @@ public class HostQueryService {
 
         return moimSubmissionRepository.countApprovedSubmissionsByMoimIds(moimIds);
     }
+
+    private int moimCounter(Long hostId) {
+        return moimRepository.CompletedMoimNumber(hostId);
+    }
 }
