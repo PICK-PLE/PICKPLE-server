@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class CommentController {
+public class CommentController implements CommentControllerDocs {
 
     private final CommentCommandService commentCommandService;
 
