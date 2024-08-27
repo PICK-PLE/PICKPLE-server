@@ -18,4 +18,10 @@ public class HostGetResponse {
     private String hostLink; // 호스트가 추가한 링크
 
     private Long hostId;
+
+    private String keyword; //키워드
+
+    private int moimCount; // 모임 수
+
+    private int attendeeCount; // 참여자 수
 }
