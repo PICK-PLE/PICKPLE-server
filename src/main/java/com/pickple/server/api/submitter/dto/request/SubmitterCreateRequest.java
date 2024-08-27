@@ -34,6 +34,9 @@ public record SubmitterCreateRequest(
         @NotBlank(message = "메일이 비어 있습니다.")
         @Pattern(message = "이메일 형식이 올바르지 않습니다.", regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
                 + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")
-        String email    //호스트 승인 후 연락받을 메일 주소
+        String email,    //호스트 승인 후 연락받을 메일 주소
+
+        @NotBlank(message = "키워드가 비어 있습니다.")
+        String userKeyword
 ) {
 }
