@@ -1,6 +1,7 @@
 package com.pickple.server.api.notice.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record NoticeCreateRequest(
@@ -14,7 +15,8 @@ public record NoticeCreateRequest(
 
         String imageUrl,    //공지사항 이미지
 
-        boolean isPrivate
+        @NotNull(message = "isPrivate 필드가 비어 있습니다.")
+        Boolean isPrivate
 ) {
 
 }
