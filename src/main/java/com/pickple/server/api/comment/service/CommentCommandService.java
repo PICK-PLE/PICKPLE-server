@@ -32,7 +32,6 @@ public class CommentCommandService {
             Host host = hostRepository.findHostByIdOrThrow(hostId);
             Comment comment = Comment.builder()
                     .notice(notice)
-                    .commenterImageUrl(host.getImageUrl())
                     .commenter(host.getUser())
                     .commentContent(commentCreateRequest.commentContent())
                     .isOwner(true)
@@ -42,7 +41,6 @@ public class CommentCommandService {
             Guest guest = guestRepository.findGuestByIdOrThrow(guestId);
             Comment comment = Comment.builder()
                     .notice(notice)
-                    .commenterImageUrl(guest.getImageUrl())
                     .commenter(guest.getUser())
                     .commentContent(commentCreateRequest.commentContent())
                     .isOwner(false)

@@ -33,8 +33,6 @@ public class Comment extends BaseTimeEntity {
     @JoinColumn(name = "notice_id")
     private Notice notice;
 
-    private String commenterImageUrl;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User commenter;
