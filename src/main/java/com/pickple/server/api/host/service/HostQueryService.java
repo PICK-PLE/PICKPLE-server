@@ -23,7 +23,6 @@ public class HostQueryService {
         Host host = hostRepository.findHostByIdOrThrow(hostId);
         return HostGetResponse.builder()
                 .hostId(host.getId())
-                .hostCategoryList(host.getCategoryList())
                 .hostImageUrl(host.getImageUrl())
                 .hostNickName(host.getNickname())
                 .hostLink(host.getLink())
@@ -38,7 +37,6 @@ public class HostQueryService {
         return HostByMoimResponse.builder()
                 .hostNickName(host.getNickname())
                 .hostImageUrl(host.getImageUrl())
-                .hostCategoryList(host.getCategoryList())
                 .count(count)
                 .build();
     }
