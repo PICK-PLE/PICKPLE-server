@@ -48,4 +48,7 @@ public class Notice extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "notice", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
+
+    private boolean isPrivate;
+
 }
