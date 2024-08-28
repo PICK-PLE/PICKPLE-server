@@ -26,4 +26,10 @@ public interface MoimRepository extends JpaRepository<Moim, Long> {
             "WHERE categories.value = :category)",
             nativeQuery = true)
     List<Moim> findMoimListByCategory(@Param("category") String category);
+
+    //@Query(value = "SELECT * FROM moims m WHERE m.date_list->>'date' = :date", nativeQuery = true)
+    //List<Moim> findMoimListByDate(@Param("date") LocalDate date);
+
+    @Query(value = "SELECT * FROM moims WHERE date_list->>'date' = :date", nativeQuery = true)
+    List<Moim> findByDate(String date);
 }
