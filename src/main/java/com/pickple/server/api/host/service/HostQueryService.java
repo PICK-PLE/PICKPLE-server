@@ -44,6 +44,8 @@ public class HostQueryService {
                 .hostNickName(host.getNickname())
                 .hostImageUrl(host.getImageUrl())
                 .count(count)
+                .userKeyword(host.getUserKeyword())
+                .description(host.getDescription())
                 .build();
     }
 

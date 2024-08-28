@@ -24,7 +24,7 @@ public class HostController implements HostControllerDocs {
         return ApiResponseDto.success(SuccessCode.HOST_DETAIL_GET_SUCCESS, hostQueryService.getHost(hostId));
     }
 
-    @GetMapping("/v1/host/{hostId}")
+    @GetMapping("/v2/host/{hostId}")
     public ApiResponseDto<HostByMoimResponse> getMoimHost(@PathVariable Long hostId) {
         return ApiResponseDto.success(SuccessCode.HOST_BY_MOIM_GET_SUCCESS, hostQueryService.getHostByMoim(hostId));
     }
