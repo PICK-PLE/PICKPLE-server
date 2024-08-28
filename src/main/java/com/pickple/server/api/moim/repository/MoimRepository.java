@@ -26,4 +26,10 @@ public interface MoimRepository extends JpaRepository<Moim, Long> {
             "WHERE categories.value = :category)",
             nativeQuery = true)
     List<Moim> findMoimListByCategory(@Param("category") String category);
+
+    @Query("SELECT m FROM Moim m WHERE m.host.id = :hostId AND m.moimState = 'completed'")
+    List<Moim> findCompletedMoimsByHostId(@Param("hostId") Long hostId);
+
+    @Query("SELECT COUNT(m) FROM Moim m WHERE m.host.id = :hostId AND m.moimState = 'completed'")
+    int CompletedMoimNumber(Long hostId);
 }
