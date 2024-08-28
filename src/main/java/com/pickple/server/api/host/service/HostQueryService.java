@@ -42,7 +42,7 @@ public class HostQueryService {
                 .hostNickName(host.getNickname())
                 .hostImageUrl(host.getImageUrl())
                 .count(moimRepository.countByHostId(hostId))
-                .userKeyword(host.getUserKeyword())
+                .keyword(host.getUserKeyword())
                 .description(host.getDescription())
                 .build();
     }
