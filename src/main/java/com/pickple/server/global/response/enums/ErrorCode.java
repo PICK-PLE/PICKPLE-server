@@ -27,6 +27,7 @@ public enum ErrorCode {
 
     //403 Forbidden
     NOT_ADMIN(40301, HttpStatus.UNAUTHORIZED, "관리자 계정이 아닙니다."),
+    NOT_HOST(40302, HttpStatus.FORBIDDEN, "해당 모임의 호스트가 아닙니다."),
 
     // 404 Not Found
     NOT_FOUND_END_POINT(40400, HttpStatus.NOT_FOUND, "존재하지 않는 API입니다."),
@@ -37,6 +38,7 @@ public enum ErrorCode {
     HOST_NOT_FOUND(40405, HttpStatus.NOT_FOUND, "존재하지 않는 호스트입니다"),
     MOIM_SUBMISSION_NOT_FOUND(40406, HttpStatus.NOT_FOUND, "해당 모임에 신청한 내역이 없습니다."),
     SUBMITTER_NOT_FOUND(40408, HttpStatus.NOT_FOUND, "존재하지 않는 호스트 승인 신청입니다."),
+    NOTICE_NOT_FOUND(40409, HttpStatus.NOT_FOUND, "존재하지 않는 공지사항입니다."),
 
     // 405 Method Not Allowed Error
     METHOD_NOT_ALLOWED(40500, HttpStatus.METHOD_NOT_ALLOWED, "지원하지 않는 메소드입니다."),
