@@ -4,6 +4,7 @@ import com.pickple.server.api.host.dto.response.SubmittionDetailResponse;
 import com.pickple.server.api.moim.dto.response.SubmittedMoimByGuestResponse;
 import com.pickple.server.api.moimsubmission.dto.request.MoimSubmitRequest;
 import com.pickple.server.api.moimsubmission.dto.request.MoimSubmitterUpdateRequest;
+import com.pickple.server.api.moimsubmission.dto.response.MoimSubmissionAllResponse;
 import com.pickple.server.api.moimsubmission.dto.response.MoimSubmissionByMoimResponse;
 import com.pickple.server.api.moimsubmission.service.MoimSubmissionCommandService;
 import com.pickple.server.api.moimsubmission.service.MoimSubmissionQueryService;
@@ -78,5 +79,11 @@ public class MoimSubmissionController implements MoimSubmissionControllerDocs {
     ) {
         moimSubmissionCommandService.updateSubmissionState(moimId, moimSubmitterUpdateRequest.submitterIdList());
         return ApiResponseDto.success(SuccessCode.MOIM_SUBMITTER_APPROVE_SUCCESS);
+    }
+
+    @GetMapping("/v2/moim-submission-list")
+    public ApiResponseDto<List<MoimSubmissionAllResponse>> getAllMoimSubmissionList() {
+        return ApiResponseDto.success(SuccessCode.MOIM_SUBMISSION_ALL_GET_SUCCESS,
+                moimSubmissionQueryService.getAllMoimSubmissionList());
     }
 }
