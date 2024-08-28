@@ -12,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 public interface MoimRepository extends JpaRepository<Moim, Long> {
     Optional<Moim> findMoimById(Long id);
 
-    List<Moim> findMoimByHostId(Long hostId);
+    int countByHostId(Long hostId);
 
     List<Moim> findMoimByhostIdAndMoimState(Long hostId, String moimState);
 

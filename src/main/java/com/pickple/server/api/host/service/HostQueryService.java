@@ -37,13 +37,11 @@ public class HostQueryService {
 
     public HostByMoimResponse getHostByMoim(Long hostId) {
         Host host = hostRepository.findHostByIdOrThrow(hostId);
-        List<Moim> moimList = moimRepository.findMoimByHostId(hostId);
-        String count = String.format("%02d", moimList.size());
 
         return HostByMoimResponse.builder()
                 .hostNickName(host.getNickname())
                 .hostImageUrl(host.getImageUrl())
-                .count(count)
+                .count(moimRepository.countByHostId(hostId))
                 .userKeyword(host.getUserKeyword())
                 .description(host.getDescription())
                 .build();
