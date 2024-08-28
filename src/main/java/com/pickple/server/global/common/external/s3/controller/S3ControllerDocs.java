@@ -1,4 +1,4 @@
-package com.pickple.server.global.common.external.s3;
+package com.pickple.server.global.common.external.s3.controller;
 
 import com.pickple.server.global.common.external.s3.dto.PreSignedUrlClientRequest;
 import com.pickple.server.global.common.external.s3.dto.PreSignedUrlResponse;
