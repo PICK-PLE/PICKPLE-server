@@ -1,5 +1,8 @@
 package com.pickple.server.api.host.controller;
 
+import com.pickple.server.api.host.dto.response.HostByMoimResponse;
+import com.pickple.server.api.host.dto.response.HostGetResponse;
+import com.pickple.server.api.host.dto.response.HostIntroGetResponse;
 import com.pickple.server.global.common.annotation.HostId;
 import com.pickple.server.global.response.ApiResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +24,7 @@ public interface HostControllerDocs {
                     @ApiResponse(responseCode = "40405", description = "존재하지 않는 호스트입니다.")
             }
     )
-    ApiResponseDto getHost(
+    ApiResponseDto<HostGetResponse> getHost(
             @Parameter(schema = @Schema(implementation = String.class), in = ParameterIn.PATH)
             @HostId Long hostId
     );
@@ -34,7 +37,18 @@ public interface HostControllerDocs {
                     @ApiResponse(responseCode = "40405", description = "존재하지 않는 호스트입니다.")
             }
     )
-    ApiResponseDto getMoimHost(
+    ApiResponseDto<HostByMoimResponse> getMoimHost(
+            @PathVariable Long hostId
+    );
+
+    @Operation(summary = "호스트 소개 조회")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "20029", description = "호스트 소개 조회 성공"),
+                    @ApiResponse(responseCode = "40405", description = "존재하지 않는 호스트입니다.")
+            }
+    )
+    ApiResponseDto<HostIntroGetResponse> getHostIntro(
             @PathVariable Long hostId
     );
 }
