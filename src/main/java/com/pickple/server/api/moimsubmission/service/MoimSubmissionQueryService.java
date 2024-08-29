@@ -9,6 +9,7 @@ import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmissionState;
 import com.pickple.server.api.moimsubmission.domain.SubmitterInfo;
+import com.pickple.server.api.moimsubmission.dto.response.MoimSubmissionAllResponse;
 import com.pickple.server.api.moimsubmission.dto.response.MoimSubmissionByMoimResponse;
 import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository;
 import com.pickple.server.global.exception.CustomException;
@@ -112,6 +113,33 @@ public class MoimSubmissionQueryService {
                 .submitterList(submitterInfoList)
                 .build();
     }
+
+    public List<MoimSubmissionAllResponse> getAllMoimSubmissionList() {
+        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findAll();
+
+        return moimSubmissionList.stream()
+                .map(this::mapToMoimSubmissionAllResponse)
+                .collect(Collectors.toList());
+    }
+
+    private MoimSubmissionAllResponse mapToMoimSubmissionAllResponse(MoimSubmission moimSubmission) {
+        Guest guest = guestRepository.findGuestByIdOrThrow(moimSubmission.getGuestId());
+
+        return MoimSubmissionAllResponse.builder()
+                .moimSubmissionId(moimSubmission.getId())
+                .date(DateTimeUtil.refineDateAndTime(moimSubmission.getCreatedAt()))
+                .moimSubmissionState(moimSubmission.getMoimSubmissionState())
+                .moimId(moimSubmission.getMoim().getId())
+                .moimTitle(moimSubmission.getMoim().getTitle())
+                .hostNickname(moimSubmission.getMoim().getHost().getNickname())
+                .guestId(moimSubmission.getGuestId())
+                .kakaoNickname(guest.getUser().getSocialNickname())
+                .guestNickname(guest.getNickname())
+                .questionList(moimSubmission.getMoim().getQuestionList())
+                .answerList(moimSubmission.getAnswerList())
+                .build();
+    }
+
 
     private boolean isApprovable(Moim moim) {
         // 모임일
