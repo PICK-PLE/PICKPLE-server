@@ -61,4 +61,15 @@ public class MoimSubmissionCommandService {
             moimSubmissionRepository.save(moimSubmission);
         }
     }
+
+    public void updateMoimSubmissionStateToPendingApproval(Long moimSubmissionId) {
+        MoimSubmission moimSubmission = moimSubmissionRepository.findMoimSubmissionByIdOrThrow(moimSubmissionId);
+
+        if (moimSubmission.getMoimSubmissionState()
+                .equals(MoimSubmissionState.PENDING_PAYMENT.getMoimSubmissionState())) {
+            moimSubmission.updateMoimSubmissionState(MoimSubmissionState.PENDING_APPROVAL.getMoimSubmissionState());
+        } else {
+            throw new CustomException(ErrorCode.MOIM_SUBMISSION_STATE_TRANSITION_NOT_ALLOWED);
+        }
+    }
 }

@@ -12,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 public interface MoimRepository extends JpaRepository<Moim, Long> {
     Optional<Moim> findMoimById(Long id);
 
-    List<Moim> findMoimByHostId(Long hostId);
+    int countByHostId(Long hostId);
 
     List<Moim> findMoimByhostIdAndMoimState(Long hostId, String moimState);
 
@@ -27,9 +27,13 @@ public interface MoimRepository extends JpaRepository<Moim, Long> {
             nativeQuery = true)
     List<Moim> findMoimListByCategory(@Param("category") String category);
 
+    @Query(value = "SELECT * FROM moims WHERE date_list->>'date' = :date AND moim_state = 'ongoing'", nativeQuery = true)
+    List<Moim> findByDate(String date);
+
     @Query("SELECT m FROM Moim m WHERE m.host.id = :hostId AND m.moimState = 'completed'")
     List<Moim> findCompletedMoimsByHostId(@Param("hostId") Long hostId);
 
     @Query("SELECT COUNT(m) FROM Moim m WHERE m.host.id = :hostId AND m.moimState = 'completed'")
     int CompletedMoimNumber(Long hostId);
+
 }

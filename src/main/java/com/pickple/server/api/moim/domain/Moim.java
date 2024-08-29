@@ -80,4 +80,8 @@ public class Moim extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "moim", cascade = CascadeType.REMOVE)
     private List<MoimSubmission> moimSubmissions = new ArrayList<>();
+
+    public void updateMoimState(String moimState) {
+        this.moimState = moimState;
+    }
 }
