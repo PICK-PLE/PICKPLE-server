@@ -90,4 +90,15 @@ public interface MoimSubmissionControllerDocs {
             @PathVariable Long moimId,
             @RequestBody MoimSubmitterUpdateRequest moimSubmitterUpdateRequest
     );
+
+    @Operation(summary = "모임 신청 내역 승인대기로 변경")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "20030", description = "모임 신청 내역 승인대기로 변경 성공"),
+                    @ApiResponse(responseCode = "42200", description = "모임 신청 상태가 입금 대기 상태가 이닙니다.")
+            }
+    )
+    ApiResponseDto updateMoimSubmissionStateToPendingApproval(
+            @PathVariable Long moimSubmissionId
+    );
 }
