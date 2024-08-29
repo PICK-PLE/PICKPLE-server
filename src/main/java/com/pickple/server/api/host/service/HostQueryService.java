@@ -3,6 +3,7 @@ package com.pickple.server.api.host.service;
 import com.pickple.server.api.host.domain.Host;
 import com.pickple.server.api.host.dto.response.HostByMoimResponse;
 import com.pickple.server.api.host.dto.response.HostGetResponse;
+import com.pickple.server.api.host.dto.response.HostIntroGetResponse;
 import com.pickple.server.api.host.repository.HostRepository;
 import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.repository.MoimRepository;
@@ -37,13 +38,26 @@ public class HostQueryService {
 
     public HostByMoimResponse getHostByMoim(Long hostId) {
         Host host = hostRepository.findHostByIdOrThrow(hostId);
-        List<Moim> moimList = moimRepository.findMoimByHostId(hostId);
-        String count = String.format("%02d", moimList.size());
 
         return HostByMoimResponse.builder()
                 .hostNickName(host.getNickname())
                 .hostImageUrl(host.getImageUrl())
-                .count(count)
+                .count(moimRepository.countByHostId(hostId))
+                .keyword(host.getUserKeyword())
+                .description(host.getDescription())
+                .build();
+    }
+
+    public HostIntroGetResponse getHostIntro(Long hostId) {
+        Host host = hostRepository.findHostByIdOrThrow(hostId);
+
+        return HostIntroGetResponse.builder()
+                .nickName(host.getNickname())
+                .profileUrl(host.getImageUrl())
+                .count(moimRepository.countByHostId(hostId))
+                .keyword(host.getUserKeyword())
+                .description(host.getDescription())
+                .socialLink(host.getLink())
                 .build();
     }
 
