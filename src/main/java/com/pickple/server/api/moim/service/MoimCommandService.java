@@ -55,7 +55,6 @@ public class MoimCommandService {
         List<Moim> moimList = moimRepository.findByDate(formattedDate);
 
         for (Moim moim : moimList) {
-            System.out.println(moim.getId());
             if (moim.getDateList().getEndTime().isBefore(LocalTime.now())) {
                 moim.updateMoimState("completed");
             }
