@@ -20,6 +20,7 @@ public enum ErrorCode {
     DUPLICATION_HOST_NICKNAME(40008, HttpStatus.BAD_REQUEST, "이미 존재하는 닉네임입니다."),
     MISSING_IMAGE_URL(40009, HttpStatus.BAD_REQUEST, "필수 이미지가 없습니다."),
     DUPLICATION_REVIEW(40010, HttpStatus.BAD_REQUEST, "해당 사용자가 이미 작성한 리뷰가 존재합니다"),
+    NO_SUBMISSION_FOUND_FOR_REVIEW(40011, HttpStatus.BAD_REQUEST, "리뷰를 작성할 수 있는 신청이 없습니다"),
 
     // 401 Unauthorized
     ACCESS_TOKEN_EXPIRED(40100, HttpStatus.UNAUTHORIZED, "액세스 토큰이 만료되었습니다."),
