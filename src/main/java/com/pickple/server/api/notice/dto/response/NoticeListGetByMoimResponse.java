@@ -11,6 +11,7 @@ public record NoticeListGetByMoimResponse(
         String content,         //공지사항 내용
         String date,            //공지사항 등록 일자 및 시간 yyyy.mm.dd hh:mm:ss
         String noticeImageUrl,  //공지사항 이미지
-        Long hostId             //호스트 id
+        Long hostId,             //호스트 id
+        int commentNumber
 ) {
 }
