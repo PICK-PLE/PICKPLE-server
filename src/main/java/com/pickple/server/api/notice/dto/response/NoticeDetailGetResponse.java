@@ -8,6 +8,7 @@ public record NoticeDetailGetResponse(
         String hostNickname,
         String title,
         String content,
+        String noticeImageUrl,
         String dateTime,
         int commentNumber,
         boolean isPrivate,

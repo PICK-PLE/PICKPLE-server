@@ -51,6 +51,7 @@ public class NoticeQueryService {
                 .hostNickname(moim.getHost().getNickname())
                 .title(notice.getTitle())
                 .content(notice.getContent())
+                .noticeImageUrl(notice.getImageUrl())
                 .dateTime(notice.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")))
                 .commentNumber(commentRepository.countCommentByNoticeId(noticeId))
                 .isPrivate(notice.isPrivate())
