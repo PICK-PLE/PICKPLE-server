@@ -38,6 +38,7 @@ public class NoticeQueryService {
                         .date(DateTimeUtil.refineDateAndTime(oneNotice.getCreatedAt()))
                         .noticeImageUrl(oneNotice.getImageUrl())
                         .hostId(moim.getHost().getId())
+                        .commentNumber(commentRepository.countCommentByNoticeId(oneNotice.getId()))
                         .build())
                 .collect(Collectors.toList());
     }
