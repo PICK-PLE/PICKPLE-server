@@ -2,12 +2,18 @@ package com.pickple.server.api.moimsubmission.repository;
 
 import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
+import com.pickple.server.global.exception.CustomException;
+import com.pickple.server.global.response.enums.ErrorCode;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface MoimSubmissionRepository extends JpaRepository<MoimSubmission, Long> {
+
+    Optional<MoimSubmission> findMoimSubmissionById(Long id);
+
     boolean existsByMoimAndGuestId(Moim moim, Long guestId);
 
     List<MoimSubmission> findAllByGuestId(Long guestId);
@@ -31,4 +37,9 @@ public interface MoimSubmissionRepository extends JpaRepository<MoimSubmission, 
 
     @Query("SELECT COUNT(ms) FROM MoimSubmission ms WHERE ms.moim.id IN :moimIds AND ms.moimSubmissionState = 'approved'")
     int countApprovedSubmissionsByMoimIds(@Param("moimIds") List<Long> moimIds);
+
+    default MoimSubmission findMoimSubmissionByIdOrThrow(Long id) {
+        return findMoimSubmissionById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.MOIM_SUBMISSION_NOT_FOUND));
+    }
 }

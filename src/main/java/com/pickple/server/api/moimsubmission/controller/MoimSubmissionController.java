@@ -79,4 +79,10 @@ public class MoimSubmissionController implements MoimSubmissionControllerDocs {
         moimSubmissionCommandService.updateSubmissionState(moimId, moimSubmitterUpdateRequest.submitterIdList());
         return ApiResponseDto.success(SuccessCode.MOIM_SUBMITTER_APPROVE_SUCCESS);
     }
+
+    @PatchMapping("v2/moimSubmission/{moimSubmissionId}")
+    public ApiResponseDto updateMoimSubmissionStateToPendingApproval(@PathVariable Long moimSubmissionId) {
+        moimSubmissionCommandService.updateMoimSubmissionStateToPendingApproval(moimSubmissionId);
+        return ApiResponseDto.success(SuccessCode.MOIM_SUBMISSION_STATE_UPDATE_SUCCESS);
+    }
 }
