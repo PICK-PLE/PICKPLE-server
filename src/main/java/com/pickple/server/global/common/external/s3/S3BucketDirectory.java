@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 public enum S3BucketDirectory {
 
     MOIM_PREFIX("moim/"),
-    NOTICE_PREFIX("notice/");
+    NOTICE_PREFIX("notice/"),
+    REVIEW_PREFIX("review/"),
+    ;
 
     private final String name;
 
