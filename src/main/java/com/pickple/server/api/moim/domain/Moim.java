@@ -4,6 +4,7 @@ import com.pickple.server.api.host.domain.Host;
 import com.pickple.server.api.moimsubmission.domain.AccountInfo;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.api.notice.domain.Notice;
+import com.pickple.server.api.review.domain.Review;
 import com.pickple.server.global.common.domain.BaseTimeEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -81,6 +82,9 @@ public class Moim extends BaseTimeEntity {
     @OneToMany(mappedBy = "moim", cascade = CascadeType.REMOVE)
     private List<MoimSubmission> moimSubmissions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "moim", cascade = CascadeType.REMOVE)
+    private List<Review> reviews = new ArrayList<>();
+  
     public void updateMoimState(String moimState) {
         this.moimState = moimState;
     }
