@@ -27,7 +27,7 @@ public class NoticeController implements NoticeControllerDocs {
     private final NoticeCommandService noticeCommandService;
     private final NoticeQueryService noticeQueryService;
 
-    @PostMapping("/v1/moim/{moimId}/notice")
+    @PostMapping("/v2/moim/{moimId}/notice")
     public ApiResponseDto createNotice(@PathVariable Long moimId,
                                        @RequestBody @Valid NoticeCreateRequest noticeCreateRequest) {
         noticeCommandService.createNotice(moimId, noticeCreateRequest);

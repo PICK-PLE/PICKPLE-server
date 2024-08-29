@@ -27,7 +27,7 @@ public class SubmitterController implements SubmitterControllerDocs {
     private final SubmitterCommandService submitterCommandService;
     private final SubmitterQueryService submitterQueryService;
 
-    @PostMapping("/v1/submitter")
+    @PostMapping("/v2/submitter")
     public ApiResponseDto postSubmitter(@GuestId final Long guestId,
                                         @RequestBody @Valid SubmitterCreateRequest submitterCreateRequest) {
         submitterCommandService.createSubmitter(guestId, submitterCreateRequest);
@@ -40,7 +40,7 @@ public class SubmitterController implements SubmitterControllerDocs {
                 submitterQueryService.getSubmitterList());
     }
 
-    @PatchMapping("/v1/submitter/{submitterId}")
+    @PatchMapping("/v2/submitter/{submitterId}")
     public ApiResponseDto approveSubmitter(@PathVariable("submitterId") final Long submitterId,
                                            @UserId final Long userId) {
         submitterCommandService.approveSubmitter(submitterId);

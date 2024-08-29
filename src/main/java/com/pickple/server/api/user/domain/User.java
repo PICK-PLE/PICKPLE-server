@@ -1,13 +1,18 @@
 package com.pickple.server.api.user.domain;
 
+import com.pickple.server.api.comment.domain.Comment;
 import com.pickple.server.global.common.domain.BaseTimeEntity;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,6 +41,9 @@ public class User extends BaseTimeEntity {
     private String socialNickname;
 
     private String role;
+
+    @OneToMany(mappedBy = "commenter", cascade = CascadeType.REMOVE)
+    private List<Comment> commentList = new ArrayList<>();
 
     public void updateRole(String role) {
         this.role = role;
