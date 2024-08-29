@@ -19,7 +19,7 @@ public class HostController implements HostControllerDocs {
 
     private final HostQueryService hostQueryService;
 
-    @GetMapping("/v1/host")
+    @GetMapping("/v2/host")
     public ApiResponseDto<HostGetResponse> getHost(@HostId Long hostId) {
         return ApiResponseDto.success(SuccessCode.HOST_DETAIL_GET_SUCCESS, hostQueryService.getHost(hostId));
     }

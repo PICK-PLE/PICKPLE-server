@@ -8,7 +8,7 @@
 |**🐰 김보람**|**🐱 이예린**|
 |:---:|:---:|
 | <img width="1012" alt="KakaoTalk_Photo_2024-07-25-19-15-10" src="https://github.com/user-attachments/assets/b766926d-7a58-40dc-a577-3885d4a20b18">| <img width="1012" alt="KakaoTalk_Photo_2024-07-19-00-38-01" src="https://github.com/user-attachments/assets/20b3e2ba-c886-46c4-b4ba-fac8294d163b">|
-|[bo-ram-bo-ram](https://github.com/bo-ram-bo-ram)|[lxxyxin](https://github.com/lxxyxin)|
+|[bo-ram-bo-ram](https://github.com/bo-ram-bo-ram)|[lreowy](https://github.com/lreowy)|
 
 <br>
 
