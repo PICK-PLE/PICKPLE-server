@@ -34,7 +34,7 @@ public class CommentController implements CommentControllerDocs {
     }
 
     @GetMapping("/v2/notice/{noticeId}/comment-list")
-    public ApiResponseDto<List<CommentGetResponse>> getCommentByNotice(@PathVariable Long noticeId) {
+    public ApiResponseDto<List<CommentGetResponse>> getCommentListByNotice(@PathVariable Long noticeId) {
         return ApiResponseDto.success(SuccessCode.COMMENT_LIST_BY_NOTICE_GET_SUCCESS,
                 commentQueryService.getCommentListByNotice(noticeId));
     }
