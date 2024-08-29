@@ -36,9 +36,13 @@ public enum SuccessCode {
     SUBMITTER_LIST_GET_SUCCESS(20024, HttpStatus.OK, "호스트 승인 신청 내역 조회 성공"),
     HOST_SUBMITTER_APPROVE_SUCCESS(20025, HttpStatus.OK, "호스트 신청자 승인 성공"),
     NOTICE_DELETE_SUCCESS(20026, HttpStatus.OK, "공지사항 삭제 성공"),
-    REVIEW_TAG_LIST_GET_SUCCESS(20027, HttpStatus.OK, "리뷰 태그 전체 조회 성공"),
-    MOIM_SUBMISSION_STATE_UPDATE_SUCCESS(20031, HttpStatus.OK, "모임 신청 내역 승인대기로 변경 성공"),
-
+    COMMENT_POST_SUCCESS(20027, HttpStatus.OK, "공지사항 댓글 작성 성공"),
+    REVIEW_TAG_LIST_GET_SUCCESS(20028, HttpStatus.OK, "리뷰 태그 전체 조회 성공"),
+    HOSTINTRO_GET_SUCCESS(20029, HttpStatus.OK, "호스트 소개 조회 성공"),
+    MOIM_SUBMISSION_STATE_UPDATE_SUCCESS(20030, HttpStatus.OK, "모임 신청 내역 승인대기로 변경 성공"),
+    NOTICE_DETAIL_GET_SUCCESS(20031, HttpStatus.OK, "공지사항 상세 조회 성공"),
+    MOIM_SUBMISSION_ALL_GET_SUCCESS(20033, HttpStatus.OK, "모임 참여 신청 전체 조회 성공"),
+ 
     // 201 Created
     MOIM_CREATE_SUCCESS(20100, HttpStatus.CREATED, "모임 개설 성공"),
     REVIEW_CREATE_SUCCESS(20101, HttpStatus.CREATED, "리뷰 생성 성공");

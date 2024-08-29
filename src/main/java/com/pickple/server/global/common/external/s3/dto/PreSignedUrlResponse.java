@@ -1,4 +1,4 @@
-package com.pickple.server.global.common.external.s3;
+package com.pickple.server.global.common.external.s3.dto;
 
 public record PreSignedUrlResponse(
         String fileName,
