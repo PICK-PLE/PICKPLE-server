@@ -40,7 +40,8 @@ public enum SuccessCode {
     MOIM_SUBMISSION_STATE_UPDATE_SUCCESS(20031, HttpStatus.OK, "모임 신청 내역 승인대기로 변경 성공"),
 
     // 201 Created
-    MOIM_CREATE_SUCCESS(20100, HttpStatus.CREATED, "모임 개설 성공");
+    MOIM_CREATE_SUCCESS(20100, HttpStatus.CREATED, "모임 개설 성공"),
+    REVIEW_CREATE_SUCCESS(20101, HttpStatus.CREATED, "리뷰 생성 성공");
 
     private final int code;
     private final HttpStatus httpStatus;

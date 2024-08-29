@@ -13,7 +13,7 @@ public interface ReviewControllerDocs {
     @Operation(summary = "리뷰 태그 전체 조회")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "20027", description = "리뷰 태그 전체 조회 성공")
+                    @ApiResponse(responseCode = "20028", description = "리뷰 태그 전체 조회 성공")
             }
     )
     ApiResponseDto<TagListGetResponse> getAllTags(
