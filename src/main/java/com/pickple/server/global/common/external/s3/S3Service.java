@@ -1,6 +1,8 @@
 package com.pickple.server.global.common.external.s3;
 
 
+import com.pickple.server.global.common.external.s3.dto.PreSignedUrlClientRequest;
+import com.pickple.server.global.common.external.s3.dto.PreSignedUrlResponse;
 import com.pickple.server.global.config.AwsConfig;
 import com.pickple.server.global.exception.CustomException;
 import com.pickple.server.global.response.enums.ErrorCode;
@@ -37,12 +39,12 @@ public class S3Service {
     }
 
     // PreSigned Url을 통한 이미지 업로드
-    public List<PreSignedUrlResponse> getUploadPreSignedUrlList(final S3BucketDirectory prefix, int count) {
+    public List<PreSignedUrlResponse> getUploadPreSignedUrlList(PreSignedUrlClientRequest clientRequest) {
         List<PreSignedUrlResponse> preSignedUrlList = new ArrayList<>();
 
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < clientRequest.count(); i++) {
             final String fileName = generateImageFileName();   // UUID 문자열
-            final String key = prefix.value() + fileName;
+            final String key = clientRequest.prefix().value() + fileName;
 
             try {
                 final S3Presigner preSigner = awsConfig.getS3PreSigner();
