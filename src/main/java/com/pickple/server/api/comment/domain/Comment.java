@@ -39,5 +39,4 @@ public class Comment extends BaseTimeEntity {
 
     private String commentContent;
 
-    private boolean isOwner;
 }

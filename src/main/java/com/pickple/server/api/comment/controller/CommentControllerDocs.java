@@ -1,7 +1,6 @@
 package com.pickple.server.api.comment.controller;
 
 import com.pickple.server.api.comment.dto.request.CommentCreateRequest;
-import com.pickple.server.global.common.annotation.HostId;
 import com.pickple.server.global.common.annotation.UserId;
 import com.pickple.server.global.response.ApiResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,9 +27,7 @@ public interface CommentControllerDocs {
     )
     ApiResponseDto createComment(
             @Parameter(schema = @Schema(implementation = String.class), in = ParameterIn.PATH)
-            @UserId Long guestId,
-            @Parameter(schema = @Schema(implementation = String.class), in = ParameterIn.PATH)
-            @HostId Long hostId,
+            @UserId Long userId,
             @PathVariable Long noticeId,
             @RequestBody CommentCreateRequest commentCreateRequest
     );
