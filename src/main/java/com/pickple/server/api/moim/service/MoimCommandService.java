@@ -7,7 +7,12 @@ import com.pickple.server.api.moim.domain.enums.MoimState;
 import com.pickple.server.api.moim.dto.request.MoimCreateRequest;
 import com.pickple.server.api.moim.dto.response.MoimCreateResponse;
 import com.pickple.server.api.moim.repository.MoimRepository;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,5 +45,19 @@ public class MoimCommandService {
         return MoimCreateResponse.builder()
                 .moimId(moim.getId())
                 .build();
+    }
+
+    //1분마다 실행
+    @Scheduled(cron = "0 0/1 * * * *", zone = "Asia/Seoul")
+    public void changeMoimStateOfDday() {
+        LocalDate date = LocalDate.now();
+        String formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
+        List<Moim> moimList = moimRepository.findByDate(formattedDate);
+
+        for (Moim moim : moimList) {
+            if (moim.getDateList().getEndTime().isBefore(LocalTime.now())) {
+                moim.updateMoimState("completed");
+            }
+        }
     }
 }
