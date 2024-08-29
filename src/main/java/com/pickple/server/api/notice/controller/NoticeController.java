@@ -6,6 +6,7 @@ import com.pickple.server.api.notice.dto.response.NoticeListGetByMoimResponse;
 import com.pickple.server.api.notice.service.NoticeCommandService;
 import com.pickple.server.api.notice.service.NoticeQueryService;
 import com.pickple.server.global.common.annotation.HostId;
+import com.pickple.server.global.common.annotation.UserId;
 import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.SuccessCode;
 import jakarta.validation.Valid;
@@ -48,7 +49,7 @@ public class NoticeController implements NoticeControllerDocs {
     }
 
     @GetMapping("/v2/moim/{moimId}/notice/{noticeId}")
-    public ApiResponseDto<NoticeDetailGetResponse> getNoticeDetail(@HostId Long userId,
+    public ApiResponseDto<NoticeDetailGetResponse> getNoticeDetail(@UserId Long userId,
                                                                    @PathVariable Long moimId,
                                                                    @PathVariable Long noticeId) {
         return ApiResponseDto.success(SuccessCode.NOTICE_DETAIL_GET_SUCCESS,
