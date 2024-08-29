@@ -58,7 +58,7 @@ public class MoimSubmissionController implements MoimSubmissionControllerDocs {
                 moimSubmissionQueryService.getSubmissionDetail(moimId, submitterId));
     }
 
-    @GetMapping("/v1/guest/{guestId}/completed-moim-list")
+    @GetMapping("/v2/guest/{guestId}/completed-moim-list")
     public ApiResponseDto<List<SubmittedMoimByGuestResponse>> getCompletedMoimListByGuest(
             @PathVariable Long guestId
     ) {
@@ -86,7 +86,7 @@ public class MoimSubmissionController implements MoimSubmissionControllerDocs {
         return ApiResponseDto.success(SuccessCode.MOIM_SUBMISSION_ALL_GET_SUCCESS,
                 moimSubmissionQueryService.getAllMoimSubmissionList());
     }
-      
+
     @PatchMapping("v2/moimSubmission/{moimSubmissionId}")
     public ApiResponseDto updateMoimSubmissionStateToPendingApproval(@PathVariable Long moimSubmissionId) {
         moimSubmissionCommandService.updateMoimSubmissionStateToPendingApproval(moimSubmissionId);

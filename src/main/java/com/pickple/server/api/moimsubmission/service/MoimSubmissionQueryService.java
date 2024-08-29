@@ -12,6 +12,7 @@ import com.pickple.server.api.moimsubmission.domain.SubmitterInfo;
 import com.pickple.server.api.moimsubmission.dto.response.MoimSubmissionAllResponse;
 import com.pickple.server.api.moimsubmission.dto.response.MoimSubmissionByMoimResponse;
 import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository;
+import com.pickple.server.api.review.repository.ReviewRepository;
 import com.pickple.server.global.exception.CustomException;
 import com.pickple.server.global.response.enums.ErrorCode;
 import com.pickple.server.global.util.DateTimeUtil;
@@ -33,6 +34,7 @@ public class MoimSubmissionQueryService {
     private final GuestRepository guestRepository;
     private final MoimSubmissionRepository moimSubmissionRepository;
     private final MoimRepository moimRepository;
+    private final ReviewRepository reviewRepository;
 
     public List<SubmittedMoimByGuestResponse> getSubmittedMoimListByGuest(final Long guestId,
                                                                           final String moimSubmissionState) {
@@ -86,6 +88,8 @@ public class MoimSubmissionQueryService {
                         .dateList(oneMoimSubmission.getMoim().getDateList())
                         .fee(oneMoimSubmission.getMoim().getFee())
                         .imageUrl(oneMoimSubmission.getMoim().getImageList().getImageUrl1())
+                        .isReviewed(reviewRepository.existsByMoimIdAndGuestId(oneMoimSubmission.getMoim().getId(),
+                                guest.getId()))
                         .build())
                 .collect(Collectors.toList());
     }
