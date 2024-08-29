@@ -48,10 +48,10 @@ public class NoticeController implements NoticeControllerDocs {
     }
 
     @GetMapping("/v2/moim/{moimId}/notice/{noticeId}")
-    public ApiResponseDto<NoticeDetailGetResponse> getNoticeDetail(@HostId Long hostId,
+    public ApiResponseDto<NoticeDetailGetResponse> getNoticeDetail(@HostId Long userId,
                                                                    @PathVariable Long moimId,
                                                                    @PathVariable Long noticeId) {
         return ApiResponseDto.success(SuccessCode.NOTICE_DETAIL_GET_SUCCESS,
-                noticeQueryService.getNoticeDetail(hostId, moimId, noticeId));
+                noticeQueryService.getNoticeDetail(userId, moimId, noticeId));
     }
 }

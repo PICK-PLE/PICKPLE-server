@@ -1,6 +1,5 @@
 package com.pickple.server.api.notice.dto.response;
 
-import java.time.LocalDateTime;
 import lombok.Builder;
 
 @Builder
@@ -9,7 +8,7 @@ public record NoticeDetailGetResponse(
         String hostNickname,
         String title,
         String content,
-        LocalDateTime dateTime,
+        String dateTime,
         int commentNumber,
         boolean isPrivate,
         boolean isOwner
