@@ -37,6 +37,7 @@ public enum SuccessCode {
     HOST_SUBMITTER_APPROVE_SUCCESS(20025, HttpStatus.OK, "호스트 신청자 승인 성공"),
     NOTICE_DELETE_SUCCESS(20026, HttpStatus.OK, "공지사항 삭제 성공"),
     REVIEW_TAG_LIST_GET_SUCCESS(20027, HttpStatus.OK, "리뷰 태그 전체 조회 성공"),
+    MOIM_SUBMISSION_STATE_UPDATE_SUCCESS(20031, HttpStatus.OK, "모임 신청 내역 승인대기로 변경 성공"),
 
     // 201 Created
     MOIM_CREATE_SUCCESS(20100, HttpStatus.CREATED, "모임 개설 성공");
