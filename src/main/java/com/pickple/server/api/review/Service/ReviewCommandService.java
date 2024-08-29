@@ -26,7 +26,6 @@ public class ReviewCommandService {
         if (!moimSubmissionRepository
                 .existsByMoimIdAndGuestIdAndMoimSubmissionState(moimId, guestId,
                         MoimSubmissionState.COMPLETED.getMoimSubmissionState())) {
-            System.out.println();
             throw new CustomException(ErrorCode.NO_SUBMISSION_FOUND_FOR_REVIEW);
         }
 
