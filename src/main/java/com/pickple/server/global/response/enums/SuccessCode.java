@@ -40,7 +40,8 @@ public enum SuccessCode {
     REVIEW_TAG_LIST_GET_SUCCESS(20028, HttpStatus.OK, "리뷰 태그 전체 조회 성공"),
     HOSTINTRO_GET_SUCCESS(20029, HttpStatus.OK, "호스트 소개 조회 성공"),
     MOIM_SUBMISSION_STATE_UPDATE_SUCCESS(20030, HttpStatus.OK, "모임 신청 내역 승인대기로 변경 성공"),
- 
+    COMMENT_LIST_BY_NOTICE_GET_SUCCESS(20031, HttpStatus.OK, "공지사항에 해당하는 댓글 전체 조회 성공"),
+
     // 201 Created
     MOIM_CREATE_SUCCESS(20100, HttpStatus.CREATED, "모임 개설 성공");
 
