@@ -43,6 +43,9 @@ public enum ErrorCode {
     // 405 Method Not Allowed Error
     METHOD_NOT_ALLOWED(40500, HttpStatus.METHOD_NOT_ALLOWED, "지원하지 않는 메소드입니다."),
 
+    // 422 Unprocessable Entity
+    MOIM_SUBMISSION_STATE_TRANSITION_NOT_ALLOWED(42200, HttpStatus.UNPROCESSABLE_ENTITY, "모임 신청 상태가 입금 대기 상태가 이닙니다."),
+
     // 500 Internal Server Error
     INTERNAL_SERVER_ERROR(50000, HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류입니다."),
     PRESIGNED_URL_GET_ERROR(50001, HttpStatus.INTERNAL_SERVER_ERROR, "S3 presigned url을 받아오기에 실패했습니다."),
