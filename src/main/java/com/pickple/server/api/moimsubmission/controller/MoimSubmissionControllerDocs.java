@@ -94,7 +94,7 @@ public interface MoimSubmissionControllerDocs {
     @Operation(summary = "모임 참여 신청 내역 전체 조회")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "20028", description = "모임 참여 신청 내역 전체 조회 성공"),
+                    @ApiResponse(responseCode = "20033", description = "모임 참여 신청 내역 전체 조회 성공"),
                     @ApiResponse(responseCode = "40301", description = "관리자 권한이 아닙니다")
             }
     )
