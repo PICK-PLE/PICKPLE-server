@@ -49,12 +49,13 @@ public class MoimCommandService {
 
     //1분마다 실행
     @Scheduled(cron = "0 0/1 * * * *", zone = "Asia/Seoul")
-    public void scheduleDday() {
+    public void changeMoimStateOfDday() {
         LocalDate date = LocalDate.now();
         String formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
         List<Moim> moimList = moimRepository.findByDate(formattedDate);
 
         for (Moim moim : moimList) {
+            System.out.println(moim.getId());
             if (moim.getDateList().getEndTime().isBefore(LocalTime.now())) {
                 moim.updateMoimState("completed");
             }
