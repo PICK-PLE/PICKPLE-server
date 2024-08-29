@@ -1,5 +1,6 @@
 package com.pickple.server.api.notice.service;
 
+import com.pickple.server.api.comment.repository.CommentRepository;
 import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.notice.domain.Notice;
@@ -7,6 +8,7 @@ import com.pickple.server.api.notice.dto.response.NoticeDetailGetResponse;
 import com.pickple.server.api.notice.dto.response.NoticeListGetByMoimResponse;
 import com.pickple.server.api.notice.repository.NoticeRepository;
 import com.pickple.server.global.util.DateTimeUtil;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ public class NoticeQueryService {
 
     private final MoimRepository moimRepository;
     private final NoticeRepository noticeRepository;
+    private final CommentRepository commentRepository;
 
     public List<NoticeListGetByMoimResponse> getNoticeListByMoimId(Long moimId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
@@ -39,7 +42,7 @@ public class NoticeQueryService {
                 .collect(Collectors.toList());
     }
 
-    public NoticeDetailGetResponse getNoticeDetail(Long hostId, Long moimId, Long noticeId) {
+    public NoticeDetailGetResponse getNoticeDetail(Long userId, Long moimId, Long noticeId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
         Notice notice = noticeRepository.findNoticeByIdOrThrow(noticeId);
 
@@ -48,15 +51,15 @@ public class NoticeQueryService {
                 .hostNickname(moim.getHost().getNickname())
                 .title(notice.getTitle())
                 .content(notice.getContent())
-                .dateTime(notice.getCreatedAt())
-                .commentNumber(0)
+                .dateTime(notice.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")))
+                .commentNumber(commentRepository.countCommentByNoticeId(noticeId))
                 .isPrivate(notice.isPrivate())
-                .isOwner(checkOwner(hostId, moimId))
+                .isOwner(checkOwner(userId, moim.getId()))
                 .build();
     }
 
-    public boolean checkOwner(Long hostId, Long moimId) {
+    public boolean checkOwner(Long userId, Long moimId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
-        return hostId.equals(moim.getHost().getId());
+        return moim.getHost().getUser().getId().equals(userId);
     }
 }
