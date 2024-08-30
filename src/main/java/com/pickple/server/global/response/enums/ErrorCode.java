@@ -21,6 +21,7 @@ public enum ErrorCode {
     MISSING_IMAGE_URL(40009, HttpStatus.BAD_REQUEST, "필수 이미지가 없습니다."),
     DUPLICATION_REVIEW(40010, HttpStatus.BAD_REQUEST, "해당 사용자가 이미 작성한 리뷰가 존재합니다"),
     NO_SUBMISSION_FOUND_FOR_REVIEW(40011, HttpStatus.BAD_REQUEST, "리뷰를 작성할 수 있는 신청이 없습니다"),
+    NOT_AUTHOR(40012, HttpStatus.BAD_REQUEST, "해당 댓글의 작성자가 아닙니다."),
 
     // 401 Unauthorized
     ACCESS_TOKEN_EXPIRED(40100, HttpStatus.UNAUTHORIZED, "액세스 토큰이 만료되었습니다."),
@@ -41,6 +42,7 @@ public enum ErrorCode {
     MOIM_SUBMISSION_NOT_FOUND(40406, HttpStatus.NOT_FOUND, "해당 모임에 신청한 내역이 없습니다."),
     SUBMITTER_NOT_FOUND(40408, HttpStatus.NOT_FOUND, "존재하지 않는 호스트 승인 신청입니다."),
     NOTICE_NOT_FOUND(40409, HttpStatus.NOT_FOUND, "존재하지 않는 공지사항입니다."),
+    COMMENT_NOT_FOUND(40410, HttpStatus.NOT_FOUND, "존재하지 않는 댓글입니다."),
 
     // 405 Method Not Allowed Error
     METHOD_NOT_ALLOWED(40500, HttpStatus.METHOD_NOT_ALLOWED, "지원하지 않는 메소드입니다."),
