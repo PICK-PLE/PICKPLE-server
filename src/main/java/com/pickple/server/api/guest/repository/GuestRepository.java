@@ -18,4 +18,6 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
         return findGuestById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.GUEST_NOT_FOUND));
     }
+
+    boolean existsByNickname(String nickname);
 }

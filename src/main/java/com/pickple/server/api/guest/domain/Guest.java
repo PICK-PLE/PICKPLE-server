@@ -55,4 +55,8 @@ public class Guest extends BaseTimeEntity {
         this.nickname = nickname;
         this.imageUrl = imageUrl;
     }
+
+    public void updateNickname(String nickname) {
+        this.nickname = nickname;
+    }
 }
