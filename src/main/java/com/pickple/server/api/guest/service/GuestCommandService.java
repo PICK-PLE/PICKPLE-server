@@ -28,12 +28,9 @@ public class GuestCommandService {
     }
 
     public void isDuplicatedNickname(String nickname) {
-        if (hostRepository.existsByNickname(nickname)) {
-            throw new CustomException(ErrorCode.DUPLICATION_HOST_NICKNAME);
-        } else if (submitterRepository.existsByNickname(nickname)) {
-            throw new CustomException(ErrorCode.DUPLICATION_HOST_NICKNAME);
-        } else if (guestRepository.existsByNickname(nickname)) {
-            throw new CustomException(ErrorCode.DUPLICATION_GUEST_NICKNAME);
+        if (hostRepository.existsByNickname(nickname) || guestRepository.existsByNickname(nickname) ||
+                submitterRepository.existsByNickname(nickname)) {
+            throw new CustomException(ErrorCode.DUPLICATION_NICKNAME);
         }
     }
 }
