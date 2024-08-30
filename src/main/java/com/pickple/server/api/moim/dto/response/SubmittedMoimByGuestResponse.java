@@ -11,6 +11,7 @@ public record SubmittedMoimByGuestResponse(
         String hostNickname,
         DateInfo dateList,
         int fee,
-        String imageUrl
+        String imageUrl,
+        boolean isReviewed
 ) {
 }
