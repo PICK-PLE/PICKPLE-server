@@ -1,9 +1,12 @@
 package com.pickple.server.api.comment.service;
 
 import com.pickple.server.api.comment.domain.Comment;
+import com.pickple.server.api.comment.domain.CommenterInfo;
 import com.pickple.server.api.comment.dto.response.CommentGetResponse;
 import com.pickple.server.api.comment.repository.CommentRepository;
+import com.pickple.server.api.guest.domain.Guest;
 import com.pickple.server.api.guest.repository.GuestRepository;
+import com.pickple.server.api.host.domain.Host;
 import com.pickple.server.api.host.repository.HostRepository;
 import com.pickple.server.api.notice.domain.Notice;
 import com.pickple.server.api.notice.repository.NoticeRepository;
@@ -24,34 +27,32 @@ public class CommentQueryService {
     private final GuestRepository guestRepository;
 
     public List<CommentGetResponse> getCommentListByNotice(Long noticeId) {
-        Notice notice = noticeRepository.findNoticeByIdOrThrow(noticeId);
         List<Comment> commentList = commentRepository.findCommentsByNoticeId(noticeId);
-
-        return commentList.stream().map(comment -> CommentGetResponse.builder()
-                        .isOwner(checkOwner(comment.getCommenter().getId(), noticeId))
-                        .commenterImageUrl(getCommenterImageUrl(comment.getCommenter().getId(),
-                                checkOwner(comment.getCommenter().getId(), noticeId)))
-                        .commenterNickname(getCommenterNickname(comment.getCommenter().getId(),
-                                checkOwner(comment.getCommenter().getId(), noticeId)))
-                        .commentContent(comment.getCommentContent())
-                        .commentDate(comment.getCommentContent().formatted(DateTimeFormatter.ofPattern("yyyy.MM.dd")))
-                        .build())
+        return commentList.stream().map(comment -> {
+                    boolean isOwner = checkOwner(comment.getCommenter().getId(), noticeId);
+                    return buildCommentGetResponse(comment, checkOwner(comment.getCommenter().getId(), noticeId),
+                            getCommenterInfo(comment.getCommenter().getId(), isOwner));
+                })
                 .collect(Collectors.toList());
     }
 
-    public String getCommenterNickname(Long userId, boolean isOwner) {
-        if (isOwner) {
-            return hostRepository.findHostByUserId(userId).getNickname();
-        } else {
-            return guestRepository.findGuestByUserId(userId).getNickname();
-        }
+    private CommentGetResponse buildCommentGetResponse(Comment comment, boolean isOwner, CommenterInfo commenterInfo) {
+        return CommentGetResponse.builder()
+                .isOwner(isOwner)
+                .commenterImageUrl(commenterInfo.getProfileImageUrl())
+                .commenterNickname(commenterInfo.getProfileNickname())
+                .commentContent(comment.getCommentContent())
+                .commentDate(comment.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")))
+                .build();
     }
 
-    public String getCommenterImageUrl(Long userId, boolean isOwner) {
+    public CommenterInfo getCommenterInfo(Long userId, boolean isOwner) {
         if (isOwner) {
-            return hostRepository.findHostByUserId(userId).getImageUrl();
+            Host host = hostRepository.findHostByUserId(userId);
+            return new CommenterInfo(host.getImageUrl(), host.getNickname());
         } else {
-            return guestRepository.findGuestByUserId(userId).getImageUrl();
+            Guest guest = guestRepository.findGuestByUserId(userId);
+            return new CommenterInfo(guest.getImageUrl(), guest.getNickname());
         }
     }
 

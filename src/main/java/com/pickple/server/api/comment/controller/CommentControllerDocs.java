@@ -34,7 +34,7 @@ public interface CommentControllerDocs {
             @RequestBody CommentCreateRequest commentCreateRequest
     );
 
-    @Operation(summary = "공지사항 댓글 전체 조회")
+    @Operation(summary = "공지사항에 해당하는 댓글 전체 조회")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "20032", description = "공지사항 댓글 작성 성공"),
