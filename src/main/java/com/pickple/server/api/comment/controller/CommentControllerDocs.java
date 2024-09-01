@@ -44,4 +44,18 @@ public interface CommentControllerDocs {
     ApiResponseDto<List<CommentGetResponse>> getCommentListByNotice(
             @PathVariable Long noticeId
     );
+
+    @Operation(summary = "공지사항 댓글 삭제")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "20036", description = "공지사항 댓글 삭제 성공"),
+                    @ApiResponse(responseCode = "40409", description = "존재하지 않는 공지사항입니다."),
+                    @ApiResponse(responseCode = "40410", description = "존재하지 않는 댓글입니다.")
+            }
+    )
+    ApiResponseDto deleteComment(
+            @UserId Long userId,
+            @PathVariable final Long noticeId,
+            @PathVariable final Long commentId
+    );
 }
