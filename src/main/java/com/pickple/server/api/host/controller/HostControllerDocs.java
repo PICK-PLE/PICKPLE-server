@@ -57,7 +57,7 @@ public interface HostControllerDocs {
     @Operation(summary = "호스트 프로필 수정")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "20029", description = "호스트 프로필 수정 성공"),
+                    @ApiResponse(responseCode = "20035", description = "호스트 프로필 수정 성공"),
                     @ApiResponse(responseCode = "40405", description = "존재하지 않는 호스트입니다.")
             }
     )
