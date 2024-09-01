@@ -8,7 +8,6 @@ import com.pickple.server.api.notice.dto.response.NoticeDetailGetResponse;
 import com.pickple.server.api.notice.dto.response.NoticeListGetByMoimResponse;
 import com.pickple.server.api.notice.repository.NoticeRepository;
 import com.pickple.server.global.util.DateTimeUtil;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -53,7 +52,7 @@ public class NoticeQueryService {
                 .title(notice.getTitle())
                 .content(notice.getContent())
                 .noticeImageUrl(notice.getImageUrl())
-                .dateTime(notice.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")))
+                .dateTime(DateTimeUtil.refineDateAndTime(notice.getCreatedAt()))
                 .commentNumber(commentRepository.countCommentByNoticeId(noticeId))
                 .isPrivate(notice.isPrivate())
                 .isOwner(checkOwner(userId, moim.getId()))
