@@ -36,4 +36,5 @@ public interface MoimRepository extends JpaRepository<Moim, Long> {
     @Query("SELECT COUNT(m) FROM Moim m WHERE m.host.id = :hostId AND m.moimState = 'completed'")
     int CompletedMoimNumber(Long hostId);
 
+    List<Moim> findMoimByHostId(Long hostId);
 }

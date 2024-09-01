@@ -1,9 +1,11 @@
 package com.pickple.server.api.review.Service;
 
 import com.pickple.server.api.review.domain.Review;
+import com.pickple.server.api.moim.domain.Moim;
+import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.review.domain.enums.HostTag;
 import com.pickple.server.api.review.domain.enums.MoimTag;
-import com.pickple.server.api.review.dto.response.ReviewListGetByMoimResponse;
+import com.pickple.server.api.review.dto.response.ReviewListGetByHostResponse;
 import com.pickple.server.api.review.dto.response.TagListGetResponse;
 import com.pickple.server.api.review.repository.ReviewRepository;
 import com.pickple.server.global.util.DateTimeUtil;
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class ReviewQueryService {
 
+    private final MoimRepository moimRepository;
     private final ReviewRepository reviewRepository;
 
     public TagListGetResponse getAllTags() {
@@ -44,6 +47,25 @@ public class ReviewQueryService {
                         .guestImageUrl(review.getGuest().getImageUrl())
                         .date(DateTimeUtil.refineDateAndTime(review.getCreatedAt()))
                         .build())
+                .collect(Collectors.toList());
+  }
+
+    public List<ReviewListGetByHostResponse> getReviewListByHost(Long hostId) {
+        List<Moim> moimList = moimRepository.findMoimByHostId(hostId);
+
+        return moimList.stream()
+                .flatMap(oneMoim -> reviewRepository.findReviewByMoimId(oneMoim.getId()).stream()
+                        .map(review -> ReviewListGetByHostResponse.builder()
+                                .moimId(oneMoim.getId())
+                                .moimTitle(oneMoim.getTitle())
+                                .tagList(review.getTagList())
+                                .content(review.getContent())
+                                .reviewImageUrl(review.getImageUrl())
+                                .guestNickname(review.getGuest().getNickname())
+                                .guestImageUrl(review.getGuest()
+                                        .getImageUrl())
+                                .date(DateTimeUtil.refineDateAndTime(review.getCreatedAt()))
+                                .build()))
                 .collect(Collectors.toList());
     }
 }

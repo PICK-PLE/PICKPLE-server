@@ -48,4 +48,12 @@ public class ReviewController implements ReviewControllerDocs {
         return ApiResponseDto.success(SuccessCode.REVIEW_LIST_BY_MOIM_GET_SUCCESS,
                 reviewQueryService.getReviewListByMoim(moimId));
     }
+
+    @GetMapping("/v2/host/{hostId}/review-list")
+    public ApiResponseDto<List<ReviewListGetByHostResponse>> getReviewListByHost(
+            @PathVariable("hostId") final Long hostId
+    ) {
+        return ApiResponseDto.success(SuccessCode.REVIEW_LIST_BY_HOST_GET_SUCCESS,
+                reviewQueryService.getReviewListByHost(hostId));
+    }
 }
