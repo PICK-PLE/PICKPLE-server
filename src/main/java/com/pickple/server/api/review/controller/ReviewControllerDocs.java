@@ -1,6 +1,7 @@
 package com.pickple.server.api.review.controller;
 
 import com.pickple.server.api.review.dto.request.ReviewCreateReqeust;
+import com.pickple.server.api.review.dto.response.ReviewListGetByHostResponse;
 import com.pickple.server.api.review.dto.response.ReviewListGetByMoimResponse;
 import com.pickple.server.api.review.dto.response.TagListGetResponse;
 import com.pickple.server.global.common.annotation.GuestId;
@@ -48,7 +49,7 @@ public interface ReviewControllerDocs {
     @Operation(summary = "모임에 해당하는 리뷰 조회")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "20038", description = "모임에 해당하는 리뷰 조회 성공"),
+                    @ApiResponse(responseCode = "20037", description = "모임에 해당하는 리뷰 조회 성공"),
                     @ApiResponse(responseCode = "40404", description = "존재하지 않는 모임입니다.")
             }
     )
