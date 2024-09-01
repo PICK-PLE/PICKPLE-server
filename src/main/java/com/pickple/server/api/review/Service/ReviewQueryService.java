@@ -1,5 +1,6 @@
 package com.pickple.server.api.review.Service;
 
+import com.pickple.server.api.review.domain.Review;
 import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.review.domain.enums.HostTag;
@@ -33,6 +34,21 @@ public class ReviewQueryService {
                         .collect(Collectors.toList()))
                 .build();
     }
+
+    public List<ReviewListGetByMoimResponse> getReviewListByMoim(Long moimId) {
+        List<Review> reviews = reviewRepository.findReviewListByMoimId(moimId);
+
+        return reviews.stream()
+                .map(review -> ReviewListGetByMoimResponse.builder()
+                        .tagList(review.getTagList())
+                        .content(review.getContent())
+                        .reviewImageUrl(review.getImageUrl())
+                        .guestNickname(review.getGuest().getNickname())
+                        .guestImageUrl(review.getGuest().getImageUrl())
+                        .date(DateTimeUtil.refineDateAndTime(review.getCreatedAt()))
+                        .build())
+                .collect(Collectors.toList());
+  }
 
     public List<ReviewListGetByHostResponse> getReviewListByHost(Long hostId) {
         List<Moim> moimList = moimRepository.findMoimByHostId(hostId);
