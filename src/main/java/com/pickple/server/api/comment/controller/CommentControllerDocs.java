@@ -54,6 +54,7 @@ public interface CommentControllerDocs {
             }
     )
     ApiResponseDto deleteComment(
+            @Parameter(schema = @Schema(implementation = String.class), in = ParameterIn.PATH)
             @UserId Long userId,
             @PathVariable final Long noticeId,
             @PathVariable final Long commentId
