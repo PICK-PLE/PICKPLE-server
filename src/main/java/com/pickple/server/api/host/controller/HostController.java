@@ -9,6 +9,7 @@ import com.pickple.server.api.host.service.HostQueryService;
 import com.pickple.server.global.common.annotation.HostId;
 import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.SuccessCode;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -43,7 +44,7 @@ public class HostController implements HostControllerDocs {
 
     @PatchMapping("v2/host/{hostId}")
     public ApiResponseDto<HostUpdateRequest> updateHostProfile(@PathVariable final Long hostId,
-                                                               @RequestBody HostUpdateRequest hostUpdateRequest) {
+                                                               @RequestBody @Valid HostUpdateRequest hostUpdateRequest) {
         hostCommandService.updateHostProfile(hostId, hostUpdateRequest);
         return ApiResponseDto.success(SuccessCode.HOST_PROFILE_UPDATE_SUCCESS);
     }

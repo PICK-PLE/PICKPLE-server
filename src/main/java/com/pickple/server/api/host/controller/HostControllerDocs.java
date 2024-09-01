@@ -1,5 +1,6 @@
 package com.pickple.server.api.host.controller;
 
+import com.pickple.server.api.host.dto.request.HostUpdateRequest;
 import com.pickple.server.api.host.dto.response.HostByMoimResponse;
 import com.pickple.server.api.host.dto.response.HostGetResponse;
 import com.pickple.server.api.host.dto.response.HostIntroGetResponse;
@@ -13,6 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Tag(name = "Host", description = "Host 관련 API")
 public interface HostControllerDocs {
@@ -50,5 +52,17 @@ public interface HostControllerDocs {
     )
     ApiResponseDto<HostIntroGetResponse> getHostIntro(
             @PathVariable Long hostId
+    );
+
+    @Operation(summary = "호스트 프로필 수정")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "20029", description = "호스트 프로필 수정 성공"),
+                    @ApiResponse(responseCode = "40405", description = "존재하지 않는 호스트입니다.")
+            }
+    )
+    ApiResponseDto<HostUpdateRequest> updateHostProfile(
+            @PathVariable final Long hostId,
+            @RequestBody HostUpdateRequest hostUpdateRequest
     );
 }
