@@ -48,7 +48,7 @@ public class MoimCommandService {
     }
 
     //1분마다 실행
-    @Scheduled(cron = "0 0/1 * * * *", zone = "Asia/Seoul")
+    @Scheduled(cron = "0 0 0/1 * * *", zone = "Asia/Seoul")
     public void changeMoimStateOfDday() {
         LocalDate date = LocalDate.now();
         String formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
