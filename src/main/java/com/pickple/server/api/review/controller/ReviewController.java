@@ -4,6 +4,7 @@ import com.pickple.server.api.review.Service.ReviewCommandService;
 import com.pickple.server.api.review.Service.ReviewQueryService;
 import com.pickple.server.api.review.dto.request.ReviewCreateReqeust;
 import com.pickple.server.api.review.dto.response.ReviewListGetByHostResponse;
+import com.pickple.server.api.review.dto.response.ReviewListGetByMoimResponse;
 import com.pickple.server.api.review.dto.response.TagListGetResponse;
 import com.pickple.server.global.common.annotation.GuestId;
 import com.pickple.server.global.response.ApiResponseDto;
@@ -39,6 +40,14 @@ public class ReviewController implements ReviewControllerDocs {
     ) {
         reviewCommandService.createReview(moimId, guestId, reviewCreateRequest);
         return ApiResponseDto.success(SuccessCode.REVIEW_CREATE_SUCCESS);
+    }
+
+    @GetMapping("/v2/moim/{moimId}/review-list")
+    public ApiResponseDto<List<ReviewListGetByMoimResponse>> getReviewListByMoim(
+            @PathVariable("moimId") final Long moimId
+    ) {
+        return ApiResponseDto.success(SuccessCode.REVIEW_LIST_BY_MOIM_GET_SUCCESS,
+                reviewQueryService.getReviewListByMoim(moimId));
     }
 
     @GetMapping("/v2/host/{hostId}/review-list")
