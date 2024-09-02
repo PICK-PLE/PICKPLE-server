@@ -7,9 +7,9 @@ import com.pickple.server.api.moim.domain.enums.MoimState;
 import com.pickple.server.api.moim.dto.request.MoimCreateRequest;
 import com.pickple.server.api.moim.dto.response.MoimCreateResponse;
 import com.pickple.server.api.moim.repository.MoimRepository;
+import com.pickple.server.global.util.DateUtil;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -51,7 +51,7 @@ public class MoimCommandService {
     @Scheduled(cron = "0 0 0/1 * * *", zone = "Asia/Seoul")
     public void changeMoimStateOfDday() {
         LocalDate date = LocalDate.now();
-        String formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
+        String formattedDate = DateUtil.refineDate(date);
         List<Moim> moimList = moimRepository.findByDate(formattedDate);
 
         for (Moim moim : moimList) {
