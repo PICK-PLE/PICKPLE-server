@@ -10,6 +10,7 @@ import com.pickple.server.global.response.enums.SuccessCode;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,5 +38,13 @@ public class CommentController implements CommentControllerDocs {
     public ApiResponseDto<List<CommentGetResponse>> getCommentListByNotice(@PathVariable Long noticeId) {
         return ApiResponseDto.success(SuccessCode.COMMENT_LIST_BY_NOTICE_GET_SUCCESS,
                 commentQueryService.getCommentListByNotice(noticeId));
+    }
+
+    @DeleteMapping("/v2/notice/{noticeId}/comment/{commentId}")
+    public ApiResponseDto deleteComment(@UserId Long userId,
+                                        @PathVariable final Long noticeId,
+                                        @PathVariable final Long commentId) {
+        commentCommandService.deleteComment(userId, noticeId, commentId);
+        return ApiResponseDto.success(SuccessCode.COMMENT_DELETE_SUCCESS);
     }
 }
