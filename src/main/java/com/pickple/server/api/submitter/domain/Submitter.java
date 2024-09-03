@@ -16,8 +16,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 @Entity
 @Getter
@@ -45,9 +43,6 @@ public class Submitter extends BaseTimeEntity {
 
     @Size(max = 15)
     private String nickname;
-
-    @JdbcTypeCode(SqlTypes.JSON)
-    private SubmitterCategoryInfo categoryList;
 
     @Size(max = 300)
     private String plan;
