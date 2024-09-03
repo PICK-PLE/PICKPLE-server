@@ -9,7 +9,7 @@ public enum S3BucketDirectory {
     MOIM_PREFIX("moim/"),
     NOTICE_PREFIX("notice/"),
     REVIEW_PREFIX("review/"),
-    ;
+    HOST_PROFILE_PREFIX("host/");
 
     private final String name;
 

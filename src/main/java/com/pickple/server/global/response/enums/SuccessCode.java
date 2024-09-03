@@ -44,6 +44,7 @@ public enum SuccessCode {
     COMMENT_LIST_BY_NOTICE_GET_SUCCESS(20032, HttpStatus.OK, "공지사항에 해당하는 댓글 전체 조회 성공"),
     MOIM_SUBMISSION_ALL_GET_SUCCESS(20033, HttpStatus.OK, "모임 참여 신청 전체 조회 성공"),
     GUEST_PROFILE_UPDATE_SUCCESS(20034, HttpStatus.OK, "게스트 프로필 수정 성공"),
+    HOST_PROFILE_UPDATE_SUCCESS(20035, HttpStatus.OK, "호스트 프로필 수정 성공"),
     COMMENT_DELETE_SUCCESS(20036, HttpStatus.OK, "공지사항 댓글 삭제 성공"),
     REVIEW_LIST_BY_MOIM_GET_SUCCESS(20037, HttpStatus.OK, "모임에 해당하는 리뷰 조회 성공"),
     REVIEW_LIST_BY_HOST_GET_SUCCESS(20038, HttpStatus.OK, "호스트에 해당하는 리뷰 전체 조회 성공"),

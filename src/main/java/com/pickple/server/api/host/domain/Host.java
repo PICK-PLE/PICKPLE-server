@@ -51,4 +51,13 @@ public class Host extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "host", cascade = CascadeType.REMOVE)
     private List<Moim> moims = new ArrayList<>();
+
+    public void updateHostProfile(String imageUrl, String nickname, String userKeyword, String description,
+                                  String link) {
+        this.imageUrl = imageUrl;
+        this.nickname = nickname;
+        this.userKeyword = userKeyword;
+        this.description = description;
+        this.link = link;
+    }
 }
