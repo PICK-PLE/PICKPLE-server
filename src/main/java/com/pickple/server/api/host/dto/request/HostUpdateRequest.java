@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record HostUpdateRequest(
+
+        @NotBlank(message = "이미지가 비어있습니다.")
         String profileUrl,
 
         @Size(max = 50)
