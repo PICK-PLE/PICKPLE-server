@@ -6,6 +6,7 @@ import com.pickple.server.api.moim.dto.response.MoimByCategoryResponse;
 import com.pickple.server.api.moim.dto.response.MoimCreateResponse;
 import com.pickple.server.api.moim.dto.response.MoimDescriptionResponse;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
+import com.pickple.server.api.moim.dto.response.MoimGetResponse;
 import com.pickple.server.api.moim.dto.response.MoimListByHostGetResponse;
 import com.pickple.server.api.moim.service.MoimCommandService;
 import com.pickple.server.api.moim.service.MoimQueryService;
@@ -84,5 +85,11 @@ public class MoimController implements MoimControllerDocs {
                                                                                @RequestParam String moimState) {
         return ApiResponseDto.success(SuccessCode.MOIM_LIST_BY_HOST,
                 moimQueryService.getMoimListByHost(hostId, moimState));
+    }
+
+    @GetMapping("/v2/moim/{moimId}/review")
+    public ApiResponseDto<MoimGetResponse> getMoimForReview(@PathVariable Long moimId) {
+        return ApiResponseDto.success(SuccessCode.MOIM_FOR_REVIEW_GET_SUCCESS,
+                moimQueryService.getMoimForReview(moimId));
     }
 }
