@@ -6,6 +6,7 @@ import com.pickple.server.api.moim.domain.enums.Category;
 import com.pickple.server.api.moim.dto.response.MoimByCategoryResponse;
 import com.pickple.server.api.moim.dto.response.MoimDescriptionResponse;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
+import com.pickple.server.api.moim.dto.response.MoimGetResponse;
 import com.pickple.server.api.moim.dto.response.MoimListByHostGetResponse;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.dto.response.MoimByGuestResponse;
@@ -122,5 +123,15 @@ public class MoimQueryService {
         return Arrays.stream(Category.values())
                 .map(category -> category.category)
                 .collect(Collectors.toList());
+    }
+
+    public MoimGetResponse getMoimForReview(Long moimId) {
+        Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
+
+        return MoimGetResponse.builder()
+                .title(moim.getTitle())
+                .hostNickname(moim.getHost().getNickname())
+                .dateList(moim.getDateList())
+                .build();
     }
 }
