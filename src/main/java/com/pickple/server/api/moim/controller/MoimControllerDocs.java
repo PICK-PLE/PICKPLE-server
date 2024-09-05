@@ -2,6 +2,7 @@ package com.pickple.server.api.moim.controller;
 
 import com.pickple.server.api.moim.dto.request.MoimCreateRequest;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
+import com.pickple.server.api.moim.dto.response.MoimGetResponse;
 import com.pickple.server.api.moimsubmission.dto.response.MoimByGuestResponse;
 import com.pickple.server.global.common.annotation.HostId;
 import com.pickple.server.global.response.ApiResponseDto;
@@ -114,5 +115,16 @@ public interface MoimControllerDocs {
     ApiResponseDto getMoimListByHostId(
             @PathVariable Long hostId,
             @RequestParam String moimState
+    );
+
+    @Operation(summary = "리뷰 작성 시 모임 정보 조회")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "20039", description = "리뷰 작성 시 모임 정보 조회 성공"),
+                    @ApiResponse(responseCode = "40404", description = "존재하지 않는 모임입니다.")
+            }
+    )
+    ApiResponseDto<MoimGetResponse> getMoimForReview(
+            @PathVariable Long moimId
     );
 }
