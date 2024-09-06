@@ -7,6 +7,10 @@ import lombok.Builder;
 public record MoimGetResponse(
         String title,
 
+        String moimImage,
+
+        String hostImage,
+
         String hostNickname,
 
         DateInfo dateList
