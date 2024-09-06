@@ -116,4 +116,14 @@ public interface MoimControllerDocs {
             @RequestParam String moimState
     );
 
+    @Operation(summary = "호스트에 해당하는 모임 조회")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "20040", description = "호스트에 해당하는 모임 조회 성공"),
+                    @ApiResponse(responseCode = "40408", description = "호스트에 해당하는 모임이 없습니다.")
+            }
+    )
+    ApiResponseDto getMoimListByHost(
+            @PathVariable Long hostId
+    );
 }
