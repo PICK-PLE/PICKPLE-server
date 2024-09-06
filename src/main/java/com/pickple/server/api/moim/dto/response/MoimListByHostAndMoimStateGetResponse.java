@@ -3,7 +3,7 @@ package com.pickple.server.api.moim.dto.response;
 import lombok.Builder;
 
 @Builder
-public record MoimListByHostGetResponse(
+public record MoimListByHostAndMoimStateGetResponse(
         Long moimId,            //모임 id
         String title,          //모임 제목
         Long approvedGuest,     //승인된 인원
