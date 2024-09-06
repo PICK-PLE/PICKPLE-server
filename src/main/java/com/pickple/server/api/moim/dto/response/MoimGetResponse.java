@@ -5,6 +5,7 @@ import lombok.Builder;
 
 @Builder
 public record MoimGetResponse(
+
         String title,
 
         String moimImage,
