@@ -127,6 +127,7 @@ public interface MoimControllerDocs {
     )
     ApiResponseDto<MoimGetResponse> getMoimForReview(
             @PathVariable Long moimId
+    );
 
     @Operation(summary = "호스트에 해당하는 모임 조회")
     @ApiResponses(
