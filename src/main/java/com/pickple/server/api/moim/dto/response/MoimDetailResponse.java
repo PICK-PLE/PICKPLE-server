@@ -6,14 +6,23 @@ import lombok.Builder;
 
 @Builder
 public record MoimDetailResponse(
+
         int dayOfDay,
+
         String title,
+
         DateInfo dateList,
+
         boolean isOffline,
+
         String spot,
+
         int maxGuest,
+
         int fee,
+
         ImageInfo imageList,
+
         Long hostId
 ) {
 }

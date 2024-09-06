@@ -5,7 +5,9 @@ import lombok.Builder;
 
 @Builder
 public record TagListGetResponse(
+
         List<String> moimTag,
+
         List<String> hostTag
 ) {
 }
