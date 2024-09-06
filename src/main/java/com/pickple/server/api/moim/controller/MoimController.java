@@ -7,6 +7,7 @@ import com.pickple.server.api.moim.dto.response.MoimCreateResponse;
 import com.pickple.server.api.moim.dto.response.MoimDescriptionResponse;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
 import com.pickple.server.api.moim.dto.response.MoimListByHostAndMoimStateGetResponse;
+import com.pickple.server.api.moim.dto.response.MoimListByHostGetResponse;
 import com.pickple.server.api.moim.service.MoimCommandService;
 import com.pickple.server.api.moim.service.MoimQueryService;
 import com.pickple.server.api.moimsubmission.dto.response.MoimByGuestResponse;
@@ -87,4 +88,9 @@ public class MoimController implements MoimControllerDocs {
                 moimQueryService.getMoimListByHostAndMoimState(hostId, moimState));
     }
 
+    @GetMapping("/v2/host/{hostId}/moim-list")
+    public ApiResponseDto<List<MoimListByHostGetResponse>> getMoimListByHost(@PathVariable Long hostId) {
+        return ApiResponseDto.success(SuccessCode.MOIM_LIST_BY_HOST,
+                moimQueryService.getMoimListByHost(hostId));
+    }
 }

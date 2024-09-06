@@ -7,6 +7,7 @@ import com.pickple.server.api.moim.dto.response.MoimByCategoryResponse;
 import com.pickple.server.api.moim.dto.response.MoimDescriptionResponse;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
 import com.pickple.server.api.moim.dto.response.MoimListByHostAndMoimStateGetResponse;
+import com.pickple.server.api.moim.dto.response.MoimListByHostGetResponse;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.dto.response.MoimByGuestResponse;
 import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository;
@@ -109,6 +110,21 @@ public class MoimQueryService {
                 .collect(Collectors.toList());
     }
 
+    public List<MoimListByHostGetResponse> getMoimListByHost(Long hostId) {
+        List<Moim> moimList = moimRepository.findMoimByHostId(hostId);
+
+        return moimList.stream()
+                .map(oneMoim -> MoimListByHostGetResponse.builder()
+                        .moimId(oneMoim.getId())
+                        .dayOfDay(DateUtil.calculateDayOfDay(oneMoim.getDateList().getDate()))
+                        .title(oneMoim.getTitle())
+                        .hostNickName(oneMoim.getHost().getNickname())
+                        .dateList(oneMoim.getDateList())
+                        .moimImageUrl(oneMoim.getImageList().getImageUrl1())
+                        .hostImageUrl(oneMoim.getHost().getImageUrl())
+                        .build())
+                .collect(Collectors.toList());
+    }
 
     private Long calculateApprovedGuest(Long moimId) {
         try {
