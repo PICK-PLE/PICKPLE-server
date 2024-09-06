@@ -7,6 +7,7 @@ import com.pickple.server.api.moim.dto.response.MoimCreateResponse;
 import com.pickple.server.api.moim.dto.response.MoimDescriptionResponse;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
 import com.pickple.server.api.moim.dto.response.MoimGetResponse;
+import com.pickple.server.api.moim.dto.response.MoimListByHostAndMoimStateGetResponse;
 import com.pickple.server.api.moim.dto.response.MoimListByHostGetResponse;
 import com.pickple.server.api.moim.service.MoimCommandService;
 import com.pickple.server.api.moim.service.MoimQueryService;
@@ -81,10 +82,17 @@ public class MoimController implements MoimControllerDocs {
     }
 
     @GetMapping("/v1/host/{hostId}/moim-list")
-    public ApiResponseDto<List<MoimListByHostGetResponse>> getMoimListByHostId(@PathVariable Long hostId,
-                                                                               @RequestParam String moimState) {
+    public ApiResponseDto<List<MoimListByHostAndMoimStateGetResponse>> getMoimListByHostAndMoimState(
+            @PathVariable Long hostId,
+            @RequestParam String moimState) {
+        return ApiResponseDto.success(SuccessCode.MOIM_LIST_BY_HOST_AND_MOIMSTATE,
+                moimQueryService.getMoimListByHostAndMoimState(hostId, moimState));
+    }
+
+    @GetMapping("/v2/host/{hostId}/moim-list")
+    public ApiResponseDto<List<MoimListByHostGetResponse>> getMoimListByHost(@PathVariable Long hostId) {
         return ApiResponseDto.success(SuccessCode.MOIM_LIST_BY_HOST,
-                moimQueryService.getMoimListByHost(hostId, moimState));
+                moimQueryService.getMoimListByHost(hostId));
     }
 
     @GetMapping("/v2/moim/{moimId}/review")

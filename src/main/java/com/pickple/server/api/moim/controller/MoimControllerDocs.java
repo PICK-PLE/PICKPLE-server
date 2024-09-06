@@ -105,17 +105,18 @@ public interface MoimControllerDocs {
     )
     ApiResponseDto getMoimBanner();
 
-    @Operation(summary = "호스트에 해당하는 모임 조회")
+    @Operation(summary = "호스트와 모임상태에 해당하는 모임 조회")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "20023", description = "호스트에 해당하는 모임 조회 성공"),
+                    @ApiResponse(responseCode = "20023", description = "호스트와 모임상태에 해당하는 모임 조회 성공"),
                     @ApiResponse(responseCode = "40408", description = "호스트와 상태에 해당하는 모임이 없습니다.")
             }
     )
-    ApiResponseDto getMoimListByHostId(
+    ApiResponseDto getMoimListByHostAndMoimState(
             @PathVariable Long hostId,
             @RequestParam String moimState
     );
+
 
     @Operation(summary = "리뷰 작성 시 모임 정보 조회")
     @ApiResponses(
@@ -126,5 +127,15 @@ public interface MoimControllerDocs {
     )
     ApiResponseDto<MoimGetResponse> getMoimForReview(
             @PathVariable Long moimId
+
+    @Operation(summary = "호스트에 해당하는 모임 조회")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "20040", description = "호스트에 해당하는 모임 조회 성공"),
+                    @ApiResponse(responseCode = "40408", description = "호스트에 해당하는 모임이 없습니다.")
+            }
+    )
+    ApiResponseDto getMoimListByHost(
+            @PathVariable Long hostId
     );
 }

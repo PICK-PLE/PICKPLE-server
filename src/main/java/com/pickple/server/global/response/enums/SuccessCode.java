@@ -32,7 +32,7 @@ public enum SuccessCode {
     COMPLETED_MOIM_LIST_BY_GUEST_GET_SUCCESS(20020, HttpStatus.OK, "게스트에 해당하는 참가한 모임 리스트 조회 성공"),
     SUBMITTER_LIST_BY_MOIM_GET_SUCCESS(20021, HttpStatus.OK, "모임에 해당하는 신청자 전체 조회 성공"),
     MOIM_SUBMITTER_APPROVE_SUCCESS(20022, HttpStatus.OK, "모임 신청자 승인 성공"),
-    MOIM_LIST_BY_HOST(20023, HttpStatus.OK, "호스트에 해당하는 모임 조회 성공"),
+    MOIM_LIST_BY_HOST_AND_MOIMSTATE(20023, HttpStatus.OK, "호스트와 모임상태에 해당하는 모임 조회 성공"),
     SUBMITTER_LIST_GET_SUCCESS(20024, HttpStatus.OK, "호스트 승인 신청 내역 조회 성공"),
     HOST_SUBMITTER_APPROVE_SUCCESS(20025, HttpStatus.OK, "호스트 신청자 승인 성공"),
     NOTICE_DELETE_SUCCESS(20026, HttpStatus.OK, "공지사항 삭제 성공"),
@@ -48,6 +48,8 @@ public enum SuccessCode {
     COMMENT_DELETE_SUCCESS(20036, HttpStatus.OK, "공지사항 댓글 삭제 성공"),
     REVIEW_LIST_BY_MOIM_GET_SUCCESS(20037, HttpStatus.OK, "모임에 해당하는 리뷰 조회 성공"),
     REVIEW_LIST_BY_HOST_GET_SUCCESS(20038, HttpStatus.OK, "호스트에 해당하는 리뷰 전체 조회 성공"),
+
+    MOIM_LIST_BY_HOST(20040, HttpStatus.OK, "호스트에 해당하는 모임 조회 성공"),
 
     // 201 Created
     MOIM_CREATE_SUCCESS(20100, HttpStatus.CREATED, "모임 개설 성공"),

@@ -7,6 +7,7 @@ import com.pickple.server.api.moim.dto.response.MoimByCategoryResponse;
 import com.pickple.server.api.moim.dto.response.MoimDescriptionResponse;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
 import com.pickple.server.api.moim.dto.response.MoimGetResponse;
+import com.pickple.server.api.moim.dto.response.MoimListByHostAndMoimStateGetResponse;
 import com.pickple.server.api.moim.dto.response.MoimListByHostGetResponse;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.dto.response.MoimByGuestResponse;
@@ -96,16 +97,32 @@ public class MoimQueryService {
         return moimIdList.get(randomIndex);
     }
 
-    public List<MoimListByHostGetResponse> getMoimListByHost(Long hostId, String moimState) {
+    public List<MoimListByHostAndMoimStateGetResponse> getMoimListByHostAndMoimState(Long hostId, String moimState) {
         List<Moim> moimList = moimRepository.findMoimByhostIdAndMoimState(hostId, moimState);
 
         return moimList.stream()
-                .map(oneMoim -> MoimListByHostGetResponse.builder()
+                .map(oneMoim -> MoimListByHostAndMoimStateGetResponse.builder()
                         .moimId(oneMoim.getId())
                         .moimImage(oneMoim.getImageList().getImageUrl1())
                         .approvedGuest(calculateApprovedGuest(oneMoim.getId()))
                         .title(oneMoim.getTitle())
                         .maxGuest(oneMoim.getMaxGuest())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    public List<MoimListByHostGetResponse> getMoimListByHost(Long hostId) {
+        List<Moim> moimList = moimRepository.findMoimByHostId(hostId);
+
+        return moimList.stream()
+                .map(oneMoim -> MoimListByHostGetResponse.builder()
+                        .moimId(oneMoim.getId())
+                        .dayOfDay(DateUtil.calculateDayOfDay(oneMoim.getDateList().getDate()))
+                        .title(oneMoim.getTitle())
+                        .hostNickName(oneMoim.getHost().getNickname())
+                        .dateList(oneMoim.getDateList())
+                        .moimImageUrl(oneMoim.getImageList().getImageUrl1())
+                        .hostImageUrl(oneMoim.getHost().getImageUrl())
                         .build())
                 .collect(Collectors.toList());
     }
