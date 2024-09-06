@@ -7,8 +7,10 @@ import org.springframework.validation.annotation.Validated;
 
 @Validated
 public record MoimSubmitRequest(
+
         @Valid
         AnswerInfo answerList,
+
         AccountInfo accountList
 ) {
 }

@@ -6,7 +6,9 @@ import lombok.Builder;
 
 @Builder
 public record SubmittionDetailResponse(
+
         QuestionInfo questionList,
+
         AnswerInfo answerList
 ) {
 }

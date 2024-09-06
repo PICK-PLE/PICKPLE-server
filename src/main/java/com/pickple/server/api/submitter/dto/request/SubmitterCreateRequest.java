@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated;
 
 @Validated
 public record SubmitterCreateRequest(
+
         @Size(max = 300, message = "소개글은 최대 300자 이내로 작성해주세요.")
         @NotBlank(message = "소개글이 비어 있습니다.")
         String intro,      //관리자에게 보여질 intro
