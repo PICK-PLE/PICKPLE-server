@@ -49,8 +49,8 @@ public enum SuccessCode {
     REVIEW_LIST_BY_MOIM_GET_SUCCESS(20037, HttpStatus.OK, "모임에 해당하는 리뷰 조회 성공"),
     REVIEW_LIST_BY_HOST_GET_SUCCESS(20038, HttpStatus.OK, "호스트에 해당하는 리뷰 전체 조회 성공"),
     MOIM_FOR_REVIEW_GET_SUCCESS(20039, HttpStatus.OK, "리뷰 작성 시 모임 정보 조회 성공"),
-
     MOIM_LIST_BY_HOST(20040, HttpStatus.OK, "호스트에 해당하는 모임 조회 성공"),
+    GUEST_GET_SUCCESS(20041, HttpStatus.OK, "게스트 프로필 조회 성공"),
 
     // 201 Created
     MOIM_CREATE_SUCCESS(20100, HttpStatus.CREATED, "모임 개설 성공"),
