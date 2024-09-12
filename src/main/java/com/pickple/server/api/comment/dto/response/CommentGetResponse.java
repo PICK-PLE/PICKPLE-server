@@ -5,6 +5,8 @@ import lombok.Builder;
 @Builder
 public record CommentGetResponse(
 
+        Long commentId,
+
         boolean isOwner,
 
         String commenterImageUrl,
