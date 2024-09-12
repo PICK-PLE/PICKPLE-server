@@ -1,6 +1,7 @@
 package com.pickple.server.api.guest.controller;
 
 import com.pickple.server.api.guest.dto.request.GuestUpdateRequest;
+import com.pickple.server.api.guest.dto.response.GuestGetResponse;
 import com.pickple.server.api.guest.service.GuestCommandService;
 import com.pickple.server.api.guest.service.GuestQueryService;
 import com.pickple.server.global.response.ApiResponseDto;
@@ -30,7 +31,7 @@ public class GuestController implements GuestControllerDocs {
     }
 
     @GetMapping("/v2/guest/{guestId}")
-    public ApiResponseDto getGuest(@PathVariable final Long guestId) {
+    public ApiResponseDto<GuestGetResponse> getGuest(@PathVariable final Long guestId) {
         return ApiResponseDto.success(SuccessCode.GUEST_GET_SUCCESS, guestQueryService.getGuest(guestId));
     }
 
