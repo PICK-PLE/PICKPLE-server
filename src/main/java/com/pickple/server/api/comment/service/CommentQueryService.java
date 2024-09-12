@@ -27,7 +27,8 @@ public class CommentQueryService {
     private final GuestRepository guestRepository;
 
     public List<CommentGetResponse> getCommentListByNotice(Long noticeId) {
-        List<Comment> commentList = commentRepository.findCommentsByNoticeId(noticeId);
+        Notice notice = noticeRepository.findNoticeByIdOrThrow(noticeId);
+        List<Comment> commentList = commentRepository.findCommentsByNoticeId(notice.getId());
         return commentList.stream().map(comment -> {
                     boolean isOwner = checkOwner(comment.getCommenter().getId(), noticeId);
                     return buildCommentGetResponse(comment, checkOwner(comment.getCommenter().getId(), noticeId),
@@ -38,6 +39,7 @@ public class CommentQueryService {
 
     private CommentGetResponse buildCommentGetResponse(Comment comment, boolean isOwner, CommenterInfo commenterInfo) {
         return CommentGetResponse.builder()
+                .commentId(comment.getId())
                 .isOwner(isOwner)
                 .commenterImageUrl(commenterInfo.getProfileImageUrl())
                 .commenterNickname(commenterInfo.getProfileNickname())
