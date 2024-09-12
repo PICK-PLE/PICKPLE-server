@@ -1,6 +1,5 @@
 package com.pickple.server.api.submitter.dto.response;
 
-import com.pickple.server.api.submitter.domain.SubmitterCategoryInfo;
 import lombok.Builder;
 
 @Builder
@@ -18,7 +17,7 @@ public record SubmitterListGetResponse(
 
         String nickname,
 
-        SubmitterCategoryInfo categoryList,
+        String userKeyword,
 
         String plan,
 

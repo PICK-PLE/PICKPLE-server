@@ -29,6 +29,7 @@ public class SubmitterQueryService {
                         .goal(submitter.getGoal())
                         .link(submitter.getLink())
                         .nickname(submitter.getNickname())
+                        .userKeyword(submitter.getUserKeyword())
                         .plan(submitter.getPlan())
                         .email(submitter.getEmail())
                         .submitterState(submitter.getSubmitterState())
