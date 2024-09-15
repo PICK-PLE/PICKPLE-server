@@ -41,7 +41,9 @@ public class CommentCommandService {
         Notice notice = noticeRepository.findNoticeByIdOrThrow(noticeId);
         Comment comment = commentRepository.findCommentByIdOrThrow(commentId);
 
-        if (comment.getCommenter().getId().equals(userId)) {
+        //댓글 작성자가 사용자 본인인 경우 or 사용자가 해당 모임의 호스트인 경우 삭제 가능
+        if (comment.getCommenter().getId().equals(userId) || userId.equals(
+                notice.getMoim().getHost().getUser().getId())) {
             commentRepository.delete(comment);
         } else {
             throw new CustomException(ErrorCode.NOT_AUTHOR);
