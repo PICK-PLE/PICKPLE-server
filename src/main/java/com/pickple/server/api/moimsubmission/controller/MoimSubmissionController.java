@@ -41,7 +41,7 @@ public class MoimSubmissionController implements MoimSubmissionControllerDocs {
         return ApiResponseDto.success(SuccessCode.MOIM_SUBMISSION_POST_SUCCESS);
     }
 
-    @GetMapping("/v1/guest/{guestId}/submitted-moim-list")
+    @GetMapping("/v2/guest/{guestId}/submitted-moim-list")
     public ApiResponseDto<List<SubmittedMoimByGuestResponse>> getSubmittedMoimListByGuest(
             @PathVariable Long guestId,
             @RequestParam String moimSubmissionState

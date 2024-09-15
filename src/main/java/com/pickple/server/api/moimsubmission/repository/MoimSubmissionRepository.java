@@ -44,4 +44,7 @@ public interface MoimSubmissionRepository extends JpaRepository<MoimSubmission, 
         return findMoimSubmissionById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.MOIM_SUBMISSION_NOT_FOUND));
     }
+
+    @Query("SELECT ms FROM MoimSubmission ms WHERE ms.guestId = :guestId AND ms.moimSubmissionState IN ('pendingPayment','pendingApproval', 'approved', 'rejected','refunded')")
+    List<MoimSubmission> findAllSubmittedMoimSubmission(@Param("guestId") Long guestId);
 }
