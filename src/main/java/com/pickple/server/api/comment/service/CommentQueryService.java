@@ -44,7 +44,7 @@ public class CommentQueryService {
                 .commenterImageUrl(commenterInfo.getProfileImageUrl())
                 .commenterNickname(commenterInfo.getProfileNickname())
                 .commentContent(comment.getCommentContent())
-                .commentDate(comment.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd")))
+                .commentDate(comment.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")))
                 .build();
     }
 
