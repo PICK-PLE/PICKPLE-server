@@ -3,6 +3,8 @@ package com.pickple.server.api.notice.service;
 import com.pickple.server.api.comment.repository.CommentRepository;
 import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.repository.MoimRepository;
+import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
+import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository;
 import com.pickple.server.api.notice.domain.Notice;
 import com.pickple.server.api.notice.dto.response.NoticeDetailGetResponse;
 import com.pickple.server.api.notice.dto.response.NoticeListGetByMoimResponse;
@@ -22,12 +24,16 @@ public class NoticeQueryService {
     private final MoimRepository moimRepository;
     private final NoticeRepository noticeRepository;
     private final CommentRepository commentRepository;
+    private final MoimSubmissionRepository moimSubmissionRepository;
 
-    public List<NoticeListGetByMoimResponse> getNoticeListByMoimId(Long moimId) {
+    public List<NoticeListGetByMoimResponse> getNoticeListByMoimId(Long moimId, Long guestId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
         List<Notice> noticeList = noticeRepository.findNoticeByMoimIdOrderByCreatedAtDesc(moimId);
 
+        boolean isAppliedUser = isUserAppliedToMoim(moimId, guestId);
+
         return noticeList.stream()
+                .filter(notice -> canAccessNotice(notice, isAppliedUser))
                 .map(oneNotice -> NoticeListGetByMoimResponse.builder()
                         .noticeId(oneNotice.getId())
                         .hostNickName(moim.getHost().getNickname())
@@ -59,8 +65,26 @@ public class NoticeQueryService {
                 .build();
     }
 
-    public boolean checkOwner(Long userId, Long moimId) {
+    private boolean checkOwner(Long userId, Long moimId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
         return moim.getHost().getUser().getId().equals(userId);
+    }
+
+    private boolean isUserAppliedToMoim(Long moimId, Long guestId) {
+        if (moimSubmissionRepository.existsByMoimIdAndGuestId(moimId, guestId)) {
+            MoimSubmission moimSubmission = moimSubmissionRepository.findByMoimIdAndGuestId(moimId, guestId);
+
+            // 참가한 상태일 경우(승인된 상태 - approved , completed
+            if (moimSubmission.getMoimSubmissionState().equals("completed")
+                    || moimSubmission.getMoimSubmissionState().equals("approved")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean canAccessNotice(Notice notice, boolean isUserApplied) {
+        // 공개 공지사항이면 누구나 접근 가능하고, 비공개 공지사항이면 모임에 신청한 사람만 접근 가능
+        return !notice.isPrivate() || isUserApplied;
     }
 }
