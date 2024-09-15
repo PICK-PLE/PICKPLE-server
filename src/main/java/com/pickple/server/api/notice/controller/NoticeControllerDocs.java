@@ -1,6 +1,10 @@
 package com.pickple.server.api.notice.controller;
 
 import com.pickple.server.api.notice.dto.request.NoticeCreateRequest;
+import com.pickple.server.api.notice.dto.response.NoticeDetailGetResponse;
+import com.pickple.server.global.common.annotation.GuestId;
+import com.pickple.server.global.common.annotation.HostId;
+import com.pickple.server.global.common.annotation.UserId;
 import com.pickple.server.global.response.ApiResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -32,6 +36,32 @@ public interface NoticeControllerDocs {
             }
     )
     ApiResponseDto getNoticeListByMoimId(
-            @PathVariable Long moimId
+            @PathVariable Long moimId,
+            @GuestId Long guestId
+    );
+
+    @Operation(summary = "공지사항 삭제")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "20026", description = "공지사항 삭제 성공"),
+                    @ApiResponse(responseCode = "40409", description = "존재하지 않는 공지사항입니다.")
+            }
+    )
+    ApiResponseDto deleteNotice(
+            @HostId Long hostId,
+            @PathVariable Long noticeId
+    );
+
+    @Operation(summary = "공지사항 상세 조회")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "20031", description = "공지사항 상세 조회 성공"),
+                    @ApiResponse(responseCode = "40409", description = "존재하지 않는 공지사항입니다.")
+            }
+    )
+    ApiResponseDto<NoticeDetailGetResponse> getNoticeDetail(
+            @UserId Long userId,
+            @PathVariable Long moimId,
+            @PathVariable Long noticeId
     );
 }
