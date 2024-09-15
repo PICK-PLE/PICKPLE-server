@@ -12,14 +12,14 @@ import org.springframework.data.repository.query.Param;
 public interface MoimRepository extends JpaRepository<Moim, Long> {
     Optional<Moim> findMoimById(Long id);
 
-    int countByHostId(Long hostId);
-
-    List<Moim> findMoimByhostIdAndMoimState(Long hostId, String moimState);
-
     default Moim findMoimByIdOrThrow(Long id) {
         return findMoimById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.MOIM_NOT_FOUND));
     }
+
+    int countByHostId(Long hostId);
+
+    List<Moim> findMoimByhostIdAndMoimState(Long hostId, String moimState);
 
     @Query(value = "SELECT * FROM moims WHERE EXISTS (" +
             "SELECT 1 FROM jsonb_each_text(category_list) AS categories " +
@@ -37,4 +37,5 @@ public interface MoimRepository extends JpaRepository<Moim, Long> {
     int CompletedMoimNumber(Long hostId);
 
     List<Moim> findMoimByHostId(Long hostId);
+
 }
