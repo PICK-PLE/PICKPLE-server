@@ -23,10 +23,12 @@ public class HostCommandService {
 
     public void updateHostProfile(Long hostId, HostUpdateRequest hostUpdateRequest) {
         Host host = hostRepository.findHostByIdOrThrow(hostId);
-        if (hostRepository.existsByNickname(hostUpdateRequest.nickname()) || guestRepository.existsByNickname(
-                hostUpdateRequest.nickname()) || submitterRepository.existsByNickname(hostUpdateRequest.nickname())) {
+        if (!host.getNickname().equals(hostUpdateRequest.nickname()) && (hostRepository.existsByNickname(
+                hostUpdateRequest.nickname()) || guestRepository.existsByNickname(
+                hostUpdateRequest.nickname()) || submitterRepository.existsByNickname(hostUpdateRequest.nickname()))) {
             throw new CustomException(ErrorCode.DUPLICATION_NICKNAME);
         }
+
         host.updateHostProfile(hostUpdateRequest.profileUrl(), hostUpdateRequest.nickname(),
                 hostUpdateRequest.keyword(),
                 hostUpdateRequest.description(), hostUpdateRequest.socialLink());
