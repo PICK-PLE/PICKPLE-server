@@ -20,7 +20,6 @@ public record HostUpdateRequest(
         @NotBlank(message = "소개글이 비어있습니다.")
         String description,
 
-        @Size(max = 50)
         @NotBlank(message = "소셜 링크가 비어있습니다.")
         String socialLink
 ) {
