@@ -1,6 +1,7 @@
 package com.pickple.server.api.notice.service;
 
 import com.pickple.server.api.comment.repository.CommentRepository;
+import com.pickple.server.api.guest.repository.GuestRepository;
 import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
@@ -25,6 +26,7 @@ public class NoticeQueryService {
     private final NoticeRepository noticeRepository;
     private final CommentRepository commentRepository;
     private final MoimSubmissionRepository moimSubmissionRepository;
+    private final GuestRepository guestRepository;
 
     public List<NoticeListGetByMoimResponse> getNoticeListByMoimId(Long moimId, Long guestId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
@@ -71,7 +73,10 @@ public class NoticeQueryService {
     }
 
     private boolean isUserAppliedToMoim(Long moimId, Long guestId) {
-        if (moimSubmissionRepository.existsByMoimIdAndGuestId(moimId, guestId)) {
+        if ((moimRepository.findMoimByIdOrThrow(moimId).getHost().getUser())
+                .equals(guestRepository.findGuestByIdOrThrow(guestId).getUser().getId())) {
+            return true;
+        } else if (moimSubmissionRepository.existsByMoimIdAndGuestId(moimId, guestId)) {
             MoimSubmission moimSubmission = moimSubmissionRepository.findByMoimIdAndGuestId(moimId, guestId);
 
             // 참가한 상태일 경우(승인된 상태 - approved , completed
