@@ -7,6 +7,9 @@ import com.pickple.server.global.common.annotation.HostId;
 import com.pickple.server.global.common.annotation.UserId;
 import com.pickple.server.global.response.ApiResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -36,8 +39,9 @@ public interface NoticeControllerDocs {
             }
     )
     ApiResponseDto getNoticeListByMoimId(
-            @PathVariable Long moimId,
-            @GuestId Long guestId
+            @Parameter(schema = @Schema(implementation = String.class), in = ParameterIn.PATH)
+            @GuestId Long guestId,
+            @PathVariable Long moimId
     );
 
     @Operation(summary = "공지사항 삭제")
@@ -48,6 +52,7 @@ public interface NoticeControllerDocs {
             }
     )
     ApiResponseDto deleteNotice(
+            @Parameter(schema = @Schema(implementation = String.class), in = ParameterIn.PATH)
             @HostId Long hostId,
             @PathVariable Long noticeId
     );
@@ -60,6 +65,7 @@ public interface NoticeControllerDocs {
             }
     )
     ApiResponseDto<NoticeDetailGetResponse> getNoticeDetail(
+            @Parameter(schema = @Schema(implementation = String.class), in = ParameterIn.PATH)
             @UserId Long userId,
             @PathVariable Long moimId,
             @PathVariable Long noticeId
