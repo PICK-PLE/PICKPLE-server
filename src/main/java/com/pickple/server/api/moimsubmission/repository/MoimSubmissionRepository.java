@@ -14,9 +14,14 @@ public interface MoimSubmissionRepository extends JpaRepository<MoimSubmission, 
 
     Optional<MoimSubmission> findMoimSubmissionById(Long id);
 
+    default MoimSubmission findMoimSubmissionByIdOrThrow(Long id) {
+        return findMoimSubmissionById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.MOIM_SUBMISSION_NOT_FOUND));
+    }
+
     boolean existsByMoimAndGuestId(Moim moim, Long guestId);
 
-    List<MoimSubmission> findAllByGuestId(Long guestId);
+    boolean existsByMoimIdAndGuestId(Long moimId, Long guestId);
 
     List<MoimSubmission> findAllByGuestIdAndMoimSubmissionState(Long guestId, String moimSubmissionState);
 
@@ -40,11 +45,7 @@ public interface MoimSubmissionRepository extends JpaRepository<MoimSubmission, 
 
     boolean existsByMoimIdAndGuestIdAndMoimSubmissionState(Long moimId, Long guestId, String MoimSubmissionState);
 
-    default MoimSubmission findMoimSubmissionByIdOrThrow(Long id) {
-        return findMoimSubmissionById(id)
-                .orElseThrow(() -> new CustomException(ErrorCode.MOIM_SUBMISSION_NOT_FOUND));
-    }
-
     @Query("SELECT ms FROM MoimSubmission ms WHERE ms.guestId = :guestId AND ms.moimSubmissionState IN ('pendingPayment','pendingApproval', 'approved', 'rejected','refunded')")
     List<MoimSubmission> findAllSubmittedMoimSubmission(@Param("guestId") Long guestId);
+
 }

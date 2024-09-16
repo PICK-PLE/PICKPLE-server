@@ -5,6 +5,7 @@ import com.pickple.server.api.notice.dto.response.NoticeDetailGetResponse;
 import com.pickple.server.api.notice.dto.response.NoticeListGetByMoimResponse;
 import com.pickple.server.api.notice.service.NoticeCommandService;
 import com.pickple.server.api.notice.service.NoticeQueryService;
+import com.pickple.server.global.common.annotation.GuestId;
 import com.pickple.server.global.common.annotation.HostId;
 import com.pickple.server.global.common.annotation.UserId;
 import com.pickple.server.global.response.ApiResponseDto;
@@ -36,9 +37,10 @@ public class NoticeController implements NoticeControllerDocs {
     }
 
     @GetMapping("/v2/moim/{moimId}/notice-list")
-    public ApiResponseDto<List<NoticeListGetByMoimResponse>> getNoticeListByMoimId(@PathVariable Long moimId) {
+    public ApiResponseDto<List<NoticeListGetByMoimResponse>> getNoticeListByMoimId(
+            @PathVariable final Long moimId, @GuestId final Long guestId) {
         return ApiResponseDto.success(SuccessCode.NOTICE_LIST_GET_SUCCESS,
-                noticeQueryService.getNoticeListByMoimId(moimId));
+                noticeQueryService.getNoticeListByMoimId(moimId, guestId));
     }
 
     @DeleteMapping("/v2/notice/{noticeId}")
