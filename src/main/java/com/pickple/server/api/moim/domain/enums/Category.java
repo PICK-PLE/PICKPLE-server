@@ -7,25 +7,25 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Category {
 
-    NJOB("njob"),
+    NJOB("njob"),   //n잡
 
-    INVESTMENT("investment"),
+    INVESTMENT("investment"),   //재테크
 
-    STARTUP("startup"),
+    STARTUP("startup"), //창업
 
-    EMPLOYMENT("employment"),
+    EMPLOYMENT("employment"),   //취업
 
-    PRODUCTIVITY("productivity"),
+    PRODUCTIVITY("productivity"),   //생산성
 
-    LIFESTYLE("lifestyle"),
+    SPEECH("speech"),   //스피치
 
-    HEALTH("health"),
+    SELF("self"),   //자기계발
 
-    MIND("mind"),
+    MARKETING("marketing"), //마케팅
 
-    HOBBY("hobby"),
+    EDUCATION("education"), //교육
 
-    LANGUAGE("language");
+    IT("it");   //it
 
     public final String category;
 }
