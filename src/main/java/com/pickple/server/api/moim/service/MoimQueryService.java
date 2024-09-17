@@ -31,7 +31,7 @@ public class MoimQueryService {
     private final Random random = new Random();
     private final MoimSubmissionRepository moimSubmissionRepository;
 
-    public MoimDetailResponse getMoimDetail(final Long moimId) {
+    public MoimDetailResponse getMoimDetail(Long moimId, Long guestId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
         return MoimDetailResponse.builder()
                 .dayOfDay(DateUtil.calculateDayOfDay(moim.getDateList().getDate()))
@@ -43,6 +43,7 @@ public class MoimQueryService {
                 .fee(moim.getFee())
                 .imageList(moim.getImageList())
                 .hostId(moim.getHost().getId())
+                .isSubmitted(moimSubmissionRepository.existsByMoimAndGuestId(moim, guestId))
                 .build();
     }
 
@@ -153,4 +154,5 @@ public class MoimQueryService {
                 .dateList(moim.getDateList())
                 .build();
     }
+
 }

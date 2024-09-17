@@ -12,6 +12,7 @@ import com.pickple.server.api.moim.dto.response.MoimListByHostGetResponse;
 import com.pickple.server.api.moim.service.MoimCommandService;
 import com.pickple.server.api.moim.service.MoimQueryService;
 import com.pickple.server.api.moimsubmission.dto.response.MoimByGuestResponse;
+import com.pickple.server.global.common.annotation.GuestId;
 import com.pickple.server.global.common.annotation.HostId;
 import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.SuccessCode;
@@ -46,9 +47,11 @@ public class MoimController implements MoimControllerDocs {
         return ApiResponseDto.success(SuccessCode.ALL_CATEGORY_GET_SUCCESS, moimQueryService.getCategories());
     }
 
-    @GetMapping("/v1/moim/{moimId}")
-    public ApiResponseDto<MoimDetailResponse> getMoimDetail(@PathVariable Long moimId) {
-        return ApiResponseDto.success(SuccessCode.MOIM_DETAIL_GET_SUCCESS, moimQueryService.getMoimDetail(moimId));
+    @GetMapping("/v2/moim/{moimId}")
+    public ApiResponseDto<MoimDetailResponse> getMoimDetail(@PathVariable final Long moimId,
+                                                            @GuestId final Long guestId) {
+        return ApiResponseDto.success(SuccessCode.MOIM_DETAIL_GET_SUCCESS,
+                moimQueryService.getMoimDetail(moimId, guestId));
     }
 
     @GetMapping("/v1/submitted-moim/{moimId}")
