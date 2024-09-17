@@ -8,6 +8,10 @@ import com.pickple.server.api.host.repository.HostRepository;
 import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository;
+import com.pickple.server.api.submitter.domain.Submitter;
+import com.pickple.server.api.submitter.repository.SubmitterRepository;
+import com.pickple.server.global.exception.BadRequestException;
+import com.pickple.server.global.response.enums.ErrorCode;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -22,9 +26,14 @@ public class HostQueryService {
     private final HostRepository hostRepository;
     private final MoimRepository moimRepository;
     private final MoimSubmissionRepository moimSubmissionRepository;
+    private final SubmitterRepository submitterRepository;
 
-    public HostGetResponse getHost(Long hostId) {
+    public HostGetResponse getHost(Long hostId, Long guestId) {
+        Submitter submitter = submitterRepository.findSubmitterByGuestIdOrThrow(guestId);
+        isDuplicatedSubmission(submitter);
+
         Host host = hostRepository.findHostByIdOrThrow(hostId);
+
         return HostGetResponse.builder()
                 .hostId(host.getId())
                 .hostImageUrl(host.getImageUrl())
@@ -74,4 +83,11 @@ public class HostQueryService {
     private int moimCounter(Long hostId) {
         return moimRepository.CompletedMoimNumber(hostId);
     }
+
+    private void isDuplicatedSubmission(Submitter submitter) {
+        if (submitterRepository.existsByGuestAndSubmitterState(submitter.getGuest(), submitter.getSubmitterState())) {
+            throw new BadRequestException(ErrorCode.DUPLICATION_SUBMITTER);
+        }
+    }
+
 }

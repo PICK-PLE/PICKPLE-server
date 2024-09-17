@@ -6,6 +6,7 @@ import com.pickple.server.api.host.dto.response.HostGetResponse;
 import com.pickple.server.api.host.dto.response.HostIntroGetResponse;
 import com.pickple.server.api.host.service.HostCommandService;
 import com.pickple.server.api.host.service.HostQueryService;
+import com.pickple.server.global.common.annotation.GuestId;
 import com.pickple.server.global.common.annotation.HostId;
 import com.pickple.server.global.response.ApiResponseDto;
 import com.pickple.server.global.response.enums.SuccessCode;
@@ -27,8 +28,8 @@ public class HostController implements HostControllerDocs {
     private final HostCommandService hostCommandService;
 
     @GetMapping("/v2/host")
-    public ApiResponseDto<HostGetResponse> getHost(@HostId Long hostId) {
-        return ApiResponseDto.success(SuccessCode.HOST_DETAIL_GET_SUCCESS, hostQueryService.getHost(hostId));
+    public ApiResponseDto<HostGetResponse> getHost(@HostId final Long hostId, @GuestId final Long guestId) {
+        return ApiResponseDto.success(SuccessCode.HOST_DETAIL_GET_SUCCESS, hostQueryService.getHost(hostId, guestId));
     }
 
     @GetMapping("/v2/host/{hostId}")

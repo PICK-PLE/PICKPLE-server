@@ -48,7 +48,7 @@ public interface SubmitterControllerDocs {
             value = {
                     @ApiResponse(responseCode = "20025", description = "호스트 신청자 승인 성공"),
                     @ApiResponse(responseCode = "40104", description = "관리자 계정이 아닙니다."),
-                    @ApiResponse(responseCode = "40409", description = "존재하지 않는 호스트 승인 신청입니다.")
+                    @ApiResponse(responseCode = "40408", description = "호스트 승인 신청이 존재하지 않습니다.")
             }
     )
     ApiResponseDto approveSubmitter(

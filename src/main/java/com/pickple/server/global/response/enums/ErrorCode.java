@@ -40,7 +40,7 @@ public enum ErrorCode {
     MOIM_NOT_FOUND(40404, HttpStatus.NOT_FOUND, "존재하지 않는 모임입니다."),
     HOST_NOT_FOUND(40405, HttpStatus.NOT_FOUND, "존재하지 않는 호스트입니다"),
     MOIM_SUBMISSION_NOT_FOUND(40406, HttpStatus.NOT_FOUND, "해당 모임에 신청한 내역이 없습니다."),
-    SUBMITTER_NOT_FOUND(40408, HttpStatus.NOT_FOUND, "존재하지 않는 호스트 승인 신청입니다."),
+    SUBMITTER_NOT_FOUND(40408, HttpStatus.NOT_FOUND, "호스트 승인 신청이 존재하지 않습니다."),
     NOTICE_NOT_FOUND(40409, HttpStatus.NOT_FOUND, "존재하지 않는 공지사항입니다."),
     COMMENT_NOT_FOUND(40410, HttpStatus.NOT_FOUND, "존재하지 않는 댓글입니다."),
 

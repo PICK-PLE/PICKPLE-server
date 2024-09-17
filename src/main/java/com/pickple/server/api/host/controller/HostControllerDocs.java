@@ -4,6 +4,7 @@ import com.pickple.server.api.host.dto.request.HostUpdateRequest;
 import com.pickple.server.api.host.dto.response.HostByMoimResponse;
 import com.pickple.server.api.host.dto.response.HostGetResponse;
 import com.pickple.server.api.host.dto.response.HostIntroGetResponse;
+import com.pickple.server.global.common.annotation.GuestId;
 import com.pickple.server.global.common.annotation.HostId;
 import com.pickple.server.global.response.ApiResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,12 +24,16 @@ public interface HostControllerDocs {
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "20007", description = "호스트 정보 조회 성공"),
-                    @ApiResponse(responseCode = "40405", description = "존재하지 않는 호스트입니다.")
+                    @ApiResponse(responseCode = "40405", description = "존재하지 않는 호스트입니다."),
+                    @ApiResponse(responseCode = "40408", description = "호스트 승인 신청이 존재하지 않습니다."),
+                    @ApiResponse(responseCode = "40003", description = "대기중인 호스트 승인 신청이 있습니다.")
             }
     )
     ApiResponseDto<HostGetResponse> getHost(
             @Parameter(schema = @Schema(implementation = String.class), in = ParameterIn.PATH)
-            @HostId Long hostId
+            @HostId Long hostId,
+            @Parameter(schema = @Schema(implementation = String.class), in = ParameterIn.PATH)
+            @GuestId Long guestId
     );
 
     @Operation(summary = "모임에 해당하는 호스트 정보 조회")
