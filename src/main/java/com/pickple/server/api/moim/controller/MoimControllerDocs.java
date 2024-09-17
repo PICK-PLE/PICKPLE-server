@@ -4,6 +4,7 @@ import com.pickple.server.api.moim.dto.request.MoimCreateRequest;
 import com.pickple.server.api.moim.dto.response.MoimDetailResponse;
 import com.pickple.server.api.moim.dto.response.MoimGetResponse;
 import com.pickple.server.api.moimsubmission.dto.response.MoimByGuestResponse;
+import com.pickple.server.global.common.annotation.GuestId;
 import com.pickple.server.global.common.annotation.HostId;
 import com.pickple.server.global.response.ApiResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -51,7 +52,9 @@ public interface MoimControllerDocs {
             }
     )
     ApiResponseDto<MoimDetailResponse> getMoimDetail(
-            @PathVariable Long moimId
+            @PathVariable Long moimId,
+            @Parameter(schema = @Schema(implementation = String.class), in = ParameterIn.PATH)
+            @GuestId Long guestId
     );
 
     @Operation(summary = "신청한 모임 상세 정보 조회")

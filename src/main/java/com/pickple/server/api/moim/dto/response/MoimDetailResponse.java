@@ -23,6 +23,8 @@ public record MoimDetailResponse(
 
         ImageInfo imageList,
 
-        Long hostId
+        Long hostId,
+
+        boolean isSubmitted
 ) {
 }
