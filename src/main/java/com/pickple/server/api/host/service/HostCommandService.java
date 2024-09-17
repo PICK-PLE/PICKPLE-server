@@ -23,9 +23,10 @@ public class HostCommandService {
 
     public void updateHostProfile(Long hostId, HostUpdateRequest hostUpdateRequest) {
         Host host = hostRepository.findHostByIdOrThrow(hostId);
-        if (!host.getNickname().equals(hostUpdateRequest.nickname()) && (hostRepository.existsByNickname(
-                hostUpdateRequest.nickname()) || guestRepository.existsByNickname(
-                hostUpdateRequest.nickname()) || submitterRepository.existsByNickname(hostUpdateRequest.nickname()))) {
+        if (!host.getNickname().equals(hostUpdateRequest.nickname())
+                && (hostRepository.existsByNickname(hostUpdateRequest.nickname())
+                || guestRepository.existsByNickname(hostUpdateRequest.nickname())
+                || submitterRepository.existsByNicknameAndSubmitterState(hostUpdateRequest.nickname(), "pending"))) {
             throw new CustomException(ErrorCode.DUPLICATION_NICKNAME);
         }
 
