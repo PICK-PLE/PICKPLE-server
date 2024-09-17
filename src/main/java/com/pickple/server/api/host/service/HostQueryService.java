@@ -11,8 +11,6 @@ import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository;
 import com.pickple.server.api.submitter.repository.SubmitterRepository;
-import com.pickple.server.global.exception.BadRequestException;
-import com.pickple.server.global.response.enums.ErrorCode;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +30,6 @@ public class HostQueryService {
 
     public HostGetResponse getHost(Long hostId, Long guestId) {
         Guest guest = guestRepository.findGuestByIdOrThrow(guestId);
-
-        isDuplicatedSubmission(guest);
 
         Host host = hostRepository.findHostByIdOrThrow(hostId);
 
@@ -85,12 +81,6 @@ public class HostQueryService {
 
     private int moimCounter(Long hostId) {
         return moimRepository.CompletedMoimNumber(hostId);
-    }
-
-    private void isDuplicatedSubmission(Guest guest) {
-        if (submitterRepository.existsByGuestAndSubmitterState(guest, "pending")) {
-            throw new BadRequestException(ErrorCode.DUPLICATION_SUBMITTER);
-        }
     }
 
 }

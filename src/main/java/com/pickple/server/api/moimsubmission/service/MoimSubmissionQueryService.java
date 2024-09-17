@@ -147,7 +147,6 @@ public class MoimSubmissionQueryService {
 
     private boolean isApprovable(Moim moim) {
         // 모임일
-        System.out.println(moim.getId());
         LocalDate date = moim.getDateList().getDate();
 
         // 마감일: 신청일 + 3일의 자정
