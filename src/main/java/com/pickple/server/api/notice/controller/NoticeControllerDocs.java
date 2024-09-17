@@ -41,7 +41,7 @@ public interface NoticeControllerDocs {
     ApiResponseDto getNoticeListByMoimId(
             @PathVariable Long moimId,
             @Parameter(schema = @Schema(implementation = String.class), in = ParameterIn.PATH)
-            @GuestId Long geustId
+            @GuestId Long guestId
     );
 
     @Operation(summary = "공지사항 삭제")
