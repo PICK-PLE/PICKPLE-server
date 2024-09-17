@@ -148,9 +148,9 @@ public class MoimQueryService {
 
         return MoimGetResponse.builder()
                 .title(moim.getTitle())
-                .moimImage(moim.getImageList().getImageUrl1())
-                .hostImage(moim.getHost().getImageUrl())
-                .hostNickname(moim.getHost().getNickname())
+                .moimImageUrl(moim.getImageList().getImageUrl1())
+                .hostImageUrl(moim.getHost().getImageUrl())
+                .hostNickName(moim.getHost().getNickname())
                 .dateList(moim.getDateList())
                 .build();
     }

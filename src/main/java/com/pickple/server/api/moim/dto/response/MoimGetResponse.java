@@ -8,11 +8,11 @@ public record MoimGetResponse(
 
         String title,
 
-        String moimImage,
+        String moimImageUrl,
 
-        String hostImage,
+        String hostImageUrl,
 
-        String hostNickname,
+        String hostNickName,
 
         DateInfo dateList
 ) {
