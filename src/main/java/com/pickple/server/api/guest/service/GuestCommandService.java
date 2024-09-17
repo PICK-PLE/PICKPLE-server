@@ -29,7 +29,7 @@ public class GuestCommandService {
 
     public void isDuplicatedNickname(String nickname) {
         if (hostRepository.existsByNickname(nickname) || guestRepository.existsByNickname(nickname) ||
-                submitterRepository.existsByNickname(nickname)) {
+                submitterRepository.existsByNicknameAndSubmitterState(nickname, "pending")) {
             throw new CustomException(ErrorCode.DUPLICATION_NICKNAME);
         }
     }
