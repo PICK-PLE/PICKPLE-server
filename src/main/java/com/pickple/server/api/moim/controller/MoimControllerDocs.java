@@ -108,8 +108,7 @@ public interface MoimControllerDocs {
     @Operation(summary = "호스트와 모임상태에 해당하는 모임 조회")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "20023", description = "호스트와 모임상태에 해당하는 모임 조회 성공"),
-                    @ApiResponse(responseCode = "40408", description = "호스트와 상태에 해당하는 모임이 없습니다.")
+                    @ApiResponse(responseCode = "20023", description = "호스트와 모임상태에 해당하는 모임 조회 성공")
             }
     )
     ApiResponseDto getMoimListByHostAndMoimState(
