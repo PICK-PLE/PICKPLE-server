@@ -73,7 +73,7 @@ public class SubmitterCommandService {
     private void isDuplicatedNickname(String nickname) {
         if (hostRepository.existsByNickname(nickname)) {
             throw new CustomException(ErrorCode.DUPLICATION_NICKNAME);
-        } else if (submitterRepository.existsByNickname(nickname)) {
+        } else if (submitterRepository.existsByNicknameAndSubmitterState(nickname, "pending")) {
             throw new CustomException(ErrorCode.DUPLICATION_NICKNAME);
         }
     }
