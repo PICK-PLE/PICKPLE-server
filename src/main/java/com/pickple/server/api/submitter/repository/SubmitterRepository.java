@@ -18,6 +18,5 @@ public interface SubmitterRepository extends JpaRepository<Submitter, Long> {
                 .orElseThrow(() -> new CustomException(ErrorCode.SUBMITTER_NOT_FOUND));
     }
 
-    boolean existsByNickname(String nickname);
-
+    boolean existsByNicknameAndSubmitterState(String nickname, String submitterState);
 }
