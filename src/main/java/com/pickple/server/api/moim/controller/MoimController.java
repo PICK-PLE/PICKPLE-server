@@ -42,7 +42,7 @@ public class MoimController implements MoimControllerDocs {
                 moimCommandService.createMoim(hostId, moimCreateRequest));
     }
 
-    @GetMapping("/v1/moim/categories")
+    @GetMapping("/v2/moim/categories")
     public ApiResponseDto<List<String>> getAllCategories() {
         return ApiResponseDto.success(SuccessCode.ALL_CATEGORY_GET_SUCCESS, moimQueryService.getCategories());
     }
