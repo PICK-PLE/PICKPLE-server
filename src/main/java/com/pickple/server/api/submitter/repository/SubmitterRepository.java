@@ -20,11 +20,4 @@ public interface SubmitterRepository extends JpaRepository<Submitter, Long> {
 
     boolean existsByNickname(String nickname);
 
-    Optional<Submitter> findSubmitterByGuestId(Long guestId);
-
-    default Submitter findSubmitterByGuestIdOrThrow(Long guestId) {
-        return findSubmitterByGuestId(guestId)
-                .orElseThrow(() -> new CustomException(ErrorCode.SUBMITTER_NOT_FOUND));
-    }
-
 }

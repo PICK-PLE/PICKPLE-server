@@ -1,5 +1,7 @@
 package com.pickple.server.api.host.service;
 
+import com.pickple.server.api.guest.domain.Guest;
+import com.pickple.server.api.guest.repository.GuestRepository;
 import com.pickple.server.api.host.domain.Host;
 import com.pickple.server.api.host.dto.response.HostByMoimResponse;
 import com.pickple.server.api.host.dto.response.HostGetResponse;
@@ -8,7 +10,6 @@ import com.pickple.server.api.host.repository.HostRepository;
 import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository;
-import com.pickple.server.api.submitter.domain.Submitter;
 import com.pickple.server.api.submitter.repository.SubmitterRepository;
 import com.pickple.server.global.exception.BadRequestException;
 import com.pickple.server.global.response.enums.ErrorCode;
@@ -27,10 +28,12 @@ public class HostQueryService {
     private final MoimRepository moimRepository;
     private final MoimSubmissionRepository moimSubmissionRepository;
     private final SubmitterRepository submitterRepository;
+    private final GuestRepository guestRepository;
 
     public HostGetResponse getHost(Long hostId, Long guestId) {
-        Submitter submitter = submitterRepository.findSubmitterByGuestIdOrThrow(guestId);
-        isDuplicatedSubmission(submitter);
+        Guest guest = guestRepository.findGuestByIdOrThrow(guestId);
+
+        isDuplicatedSubmission(guest);
 
         Host host = hostRepository.findHostByIdOrThrow(hostId);
 
@@ -84,8 +87,8 @@ public class HostQueryService {
         return moimRepository.CompletedMoimNumber(hostId);
     }
 
-    private void isDuplicatedSubmission(Submitter submitter) {
-        if (submitterRepository.existsByGuestAndSubmitterState(submitter.getGuest(), submitter.getSubmitterState())) {
+    private void isDuplicatedSubmission(Guest guest) {
+        if (submitterRepository.existsByGuestAndSubmitterState(guest, "pending")) {
             throw new BadRequestException(ErrorCode.DUPLICATION_SUBMITTER);
         }
     }
