@@ -74,7 +74,7 @@ public class NoticeQueryService {
 
     private boolean isUserAppliedToMoim(Long moimId, Long guestId) {
         if ((moimRepository.findMoimByIdOrThrow(moimId).getHost().getUser())
-                .equals(guestRepository.findGuestByIdOrThrow(guestId).getUser().getId())) {
+                .equals(guestRepository.findGuestByIdOrThrow(guestId).getUser())) {
             return true;
         } else if (moimSubmissionRepository.existsByMoimIdAndGuestId(moimId, guestId)) {
             MoimSubmission moimSubmission = moimSubmissionRepository.findByMoimIdAndGuestId(moimId, guestId);
