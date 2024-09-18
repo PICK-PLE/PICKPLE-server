@@ -56,4 +56,5 @@ public class Submitter extends BaseTimeEntity {
     public void updateSubmitterState(String submitterState) {
         this.submitterState = submitterState;
     }
+
 }

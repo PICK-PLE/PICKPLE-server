@@ -84,8 +84,9 @@ public class Moim extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "moim", cascade = CascadeType.REMOVE)
     private List<Review> reviews = new ArrayList<>();
-  
+
     public void updateMoimState(String moimState) {
         this.moimState = moimState;
     }
+
 }
