@@ -21,6 +21,9 @@ public record NoticeListGetByMoimResponse(
 
         Long hostId,             //호스트 id
 
-        int commentNumber
+        int commentNumber,
+
+        boolean isPrivate
+
 ) {
 }

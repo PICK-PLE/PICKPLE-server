@@ -46,6 +46,7 @@ public class NoticeQueryService {
                         .noticeImageUrl(oneNotice.getImageUrl())
                         .hostId(moim.getHost().getId())
                         .commentNumber(commentRepository.countCommentByNoticeId(oneNotice.getId()))
+                        .isPrivate(oneNotice.isPrivate())
                         .build())
                 .collect(Collectors.toList());
     }
