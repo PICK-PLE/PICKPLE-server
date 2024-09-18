@@ -5,6 +5,7 @@ import com.pickple.server.api.guest.repository.GuestRepository;
 import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
+import com.pickple.server.api.moimsubmission.domain.MoimSubmissionState;
 import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository;
 import com.pickple.server.api.notice.domain.Notice;
 import com.pickple.server.api.notice.dto.response.NoticeDetailGetResponse;
@@ -81,10 +82,10 @@ public class NoticeQueryService {
             MoimSubmission moimSubmission = moimSubmissionRepository.findByMoimIdAndGuestId(moimId, guestId);
 
             // 참가한 상태일 경우(승인된 상태 - approved , completed
-            if (moimSubmission.getMoimSubmissionState().equals("completed")
-                    || moimSubmission.getMoimSubmissionState().equals("approved")) {
-                return true;
-            }
+            return moimSubmission.getMoimSubmissionState()
+                    .equals(MoimSubmissionState.COMPLETED.getMoimSubmissionState())
+                    || moimSubmission.getMoimSubmissionState()
+                    .equals(MoimSubmissionState.APPROVED.getMoimSubmissionState());
         }
         return false;
     }
