@@ -10,7 +10,6 @@ import com.pickple.server.api.submitter.domain.SubmitterState;
 import com.pickple.server.api.submitter.dto.request.SubmitterCreateRequest;
 import com.pickple.server.api.submitter.repository.SubmitterRepository;
 import com.pickple.server.api.user.domain.Role;
-import com.pickple.server.global.exception.BadRequestException;
 import com.pickple.server.global.exception.CustomException;
 import com.pickple.server.global.response.enums.ErrorCode;
 import jakarta.transaction.Transactional;
@@ -28,7 +27,10 @@ public class SubmitterCommandService {
 
     public void createSubmitter(Long guestId, SubmitterCreateRequest request) {
         Guest guest = guestRepository.findGuestByIdOrThrow(guestId);
+
+        isDuplicatedSubmission(guest);
         isDuplicatedNickname(request.nickname());
+
         Submitter submitter = Submitter.builder()
                 .guest(guest)
                 .intro(request.intro())
@@ -40,7 +42,7 @@ public class SubmitterCommandService {
                 .userKeyword(request.userKeyword())
                 .submitterState(SubmitterState.PENDING.getSubmitterState())
                 .build();
-        isDuplicatedSubmission(submitter);
+
         submitterRepository.save(submitter);
     }
 
@@ -64,9 +66,12 @@ public class SubmitterCommandService {
         hostRepository.save(host);
     }
 
-    private void isDuplicatedSubmission(Submitter submitter) {
-        if (submitterRepository.existsByGuestAndSubmitterState(submitter.getGuest(), submitter.getSubmitterState())) {
-            throw new BadRequestException(ErrorCode.DUPLICATION_SUBMITTER);
+    private void isDuplicatedSubmission(Guest guest) {
+        if (submitterRepository.existsByGuestAndSubmitterState(guest, SubmitterState.APPROVE.getSubmitterState())) {
+            throw new CustomException(ErrorCode.DUPLICATION_APPROVE_SUBMITTER);
+        } else if (submitterRepository.existsByGuestAndSubmitterState(guest,
+                SubmitterState.PENDING.getSubmitterState())) {
+            throw new CustomException(ErrorCode.DUPLICATION_PENDING_SUBMITTER);
         }
     }
 

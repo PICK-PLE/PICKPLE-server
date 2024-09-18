@@ -28,8 +28,8 @@ public class SubmitterController implements SubmitterControllerDocs {
     private final SubmitterQueryService submitterQueryService;
 
     @PostMapping("/v2/submitter")
-    public ApiResponseDto postSubmitter(@GuestId final Long guestId,
-                                        @RequestBody @Valid SubmitterCreateRequest submitterCreateRequest) {
+    public ApiResponseDto createSubmitter(@GuestId final Long guestId,
+                                          @RequestBody @Valid SubmitterCreateRequest submitterCreateRequest) {
         submitterCommandService.createSubmitter(guestId, submitterCreateRequest);
         return ApiResponseDto.success(SuccessCode.SUBMITTER_POST_SUCCESS);
     }

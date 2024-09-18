@@ -4,6 +4,7 @@ import com.pickple.server.api.guest.domain.Guest;
 import com.pickple.server.api.guest.repository.GuestRepository;
 import com.pickple.server.api.host.domain.Host;
 import com.pickple.server.api.host.repository.HostRepository;
+import com.pickple.server.api.submitter.domain.SubmitterState;
 import com.pickple.server.api.submitter.repository.SubmitterRepository;
 import com.pickple.server.global.common.annotation.HostId;
 import com.pickple.server.global.exception.BadRequestException;
@@ -53,8 +54,8 @@ public class HostIdResolver implements HandlerMethodArgumentResolver {
     }
 
     private void isDuplicatedSubmission(Guest guest) {
-        if (submitterRepository.existsByGuestAndSubmitterState(guest, "pending")) {
-            throw new BadRequestException(ErrorCode.DUPLICATION_SUBMITTER);
+        if (submitterRepository.existsByGuestAndSubmitterState(guest, SubmitterState.PENDING.getSubmitterState())) {
+            throw new BadRequestException(ErrorCode.DUPLICATION_PENDING_SUBMITTER);
         }
     }
 
