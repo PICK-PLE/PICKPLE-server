@@ -46,4 +46,5 @@ public class Review extends BaseTimeEntity {
     private String content;
 
     private String imageUrl;
+
 }

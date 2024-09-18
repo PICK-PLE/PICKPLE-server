@@ -1,16 +1,14 @@
 package com.pickple.server.api.host.service;
 
-import com.pickple.server.api.guest.domain.Guest;
-import com.pickple.server.api.guest.repository.GuestRepository;
 import com.pickple.server.api.host.domain.Host;
 import com.pickple.server.api.host.dto.response.HostByMoimResponse;
 import com.pickple.server.api.host.dto.response.HostGetResponse;
 import com.pickple.server.api.host.dto.response.HostIntroGetResponse;
 import com.pickple.server.api.host.repository.HostRepository;
 import com.pickple.server.api.moim.domain.Moim;
+import com.pickple.server.api.moim.domain.enums.MoimState;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository;
-import com.pickple.server.api.submitter.repository.SubmitterRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -25,12 +23,8 @@ public class HostQueryService {
     private final HostRepository hostRepository;
     private final MoimRepository moimRepository;
     private final MoimSubmissionRepository moimSubmissionRepository;
-    private final SubmitterRepository submitterRepository;
-    private final GuestRepository guestRepository;
 
-    public HostGetResponse getHost(Long hostId, Long guestId) {
-        Guest guest = guestRepository.findGuestByIdOrThrow(guestId);
-
+    public HostGetResponse getHost(Long hostId) {
         Host host = hostRepository.findHostByIdOrThrow(hostId);
 
         return HostGetResponse.builder()
@@ -40,7 +34,8 @@ public class HostQueryService {
                 .hostLink(host.getLink())
                 .keyword(host.getUserKeyword())
                 .attendeeCount(attendeeCounter(hostId))
-                .moimCount(moimCounter(hostId))
+                .moimCount(moimRepository.countByHostIdAndMoimState(hostId, MoimState.COMPLETED.getMoimState()))
+                .isVeteran(checkVeteran(hostId))
                 .build();
     }
 
@@ -50,9 +45,9 @@ public class HostQueryService {
         return HostByMoimResponse.builder()
                 .hostNickName(host.getNickname())
                 .hostImageUrl(host.getImageUrl())
-                .count(moimRepository.countByHostId(hostId))
                 .keyword(host.getUserKeyword())
                 .description(host.getDescription())
+                .isVeteran(checkVeteran(hostId))
                 .build();
     }
 
@@ -62,10 +57,10 @@ public class HostQueryService {
         return HostIntroGetResponse.builder()
                 .nickName(host.getNickname())
                 .profileUrl(host.getImageUrl())
-                .count(moimRepository.countByHostId(hostId))
                 .keyword(host.getUserKeyword())
                 .description(host.getDescription())
                 .socialLink(host.getLink())
+                .isVeteran(checkVeteran(hostId))
                 .build();
     }
 
@@ -79,8 +74,9 @@ public class HostQueryService {
         return moimSubmissionRepository.countApprovedSubmissionsByMoimIds(moimIds);
     }
 
-    private int moimCounter(Long hostId) {
-        return moimRepository.CompletedMoimNumber(hostId);
+    private boolean checkVeteran(Long hostId) {
+        int count = moimRepository.countByHostIdAndMoimState(hostId, MoimState.COMPLETED.getMoimState());
+        return count >= 2;
     }
 
 }

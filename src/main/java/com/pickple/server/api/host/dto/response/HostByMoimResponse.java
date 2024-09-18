@@ -9,10 +9,10 @@ public record HostByMoimResponse(
 
         String hostImageUrl,    // 호스트 프로필 사진 url
 
-        int count,           // 호스트의 모임 횟수(두자릿수)
-
         String keyword,
 
-        String description
+        String description,
+
+        boolean isVeteran
 ) {
 }

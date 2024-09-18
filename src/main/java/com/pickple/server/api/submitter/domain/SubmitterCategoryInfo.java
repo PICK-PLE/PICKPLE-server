@@ -16,4 +16,5 @@ public class SubmitterCategoryInfo {
     private final String category2;
 
     private final String category3;
+
 }
