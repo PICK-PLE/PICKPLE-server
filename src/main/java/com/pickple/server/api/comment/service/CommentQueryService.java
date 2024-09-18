@@ -29,23 +29,23 @@ public class CommentQueryService {
     public List<CommentGetResponse> getCommentListByNotice(Long noticeId) {
         Notice notice = noticeRepository.findNoticeByIdOrThrow(noticeId);
         List<Comment> commentList = commentRepository.findCommentsByNoticeId(notice.getId());
-        return commentList.stream().map(comment -> {
-                    boolean isOwner = checkOwner(comment.getCommenter().getId(), noticeId);
-                    return buildCommentGetResponse(comment, checkOwner(comment.getCommenter().getId(), noticeId),
-                            getCommenterInfo(comment.getCommenter().getId(), isOwner));
-                })
-                .collect(Collectors.toList());
-    }
 
-    private CommentGetResponse buildCommentGetResponse(Comment comment, boolean isOwner, CommenterInfo commenterInfo) {
-        return CommentGetResponse.builder()
-                .commentId(comment.getId())
-                .isOwner(isOwner)
-                .commenterImageUrl(commenterInfo.getProfileImageUrl())
-                .commenterNickname(commenterInfo.getProfileNickname())
-                .commentContent(comment.getCommentContent())
-                .commentDate(comment.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")))
-                .build();
+        return commentList.stream().map(comment -> {
+            Long commenterId = comment.getCommenter().getId();
+            boolean isOwner = checkOwner(commenterId, noticeId);
+
+            // getCommenterInfo를 호출하기 전에 comment에서 직접 정보를 가져올 수 있는지 확인
+            CommenterInfo commenterInfo = getCommenterInfo(commenterId, isOwner);
+
+            return CommentGetResponse.builder()
+                    .commentId(comment.getId())
+                    .isOwner(isOwner)
+                    .commenterImageUrl(commenterInfo.getProfileImageUrl())
+                    .commenterNickname(commenterInfo.getProfileNickname())
+                    .commentContent(comment.getCommentContent())
+                    .commentDate(comment.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")))
+                    .build();
+        }).collect(Collectors.toList());
     }
 
     public CommenterInfo getCommenterInfo(Long userId, boolean isOwner) {
