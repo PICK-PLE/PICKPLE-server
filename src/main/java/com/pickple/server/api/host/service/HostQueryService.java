@@ -57,10 +57,10 @@ public class HostQueryService {
         return HostIntroGetResponse.builder()
                 .nickName(host.getNickname())
                 .profileUrl(host.getImageUrl())
-                .count(moimRepository.countByHostId(hostId))
                 .keyword(host.getUserKeyword())
                 .description(host.getDescription())
                 .socialLink(host.getLink())
+                .isVeteran(checkVeteran(hostId))
                 .build();
     }
 
