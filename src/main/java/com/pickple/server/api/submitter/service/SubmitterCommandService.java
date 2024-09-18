@@ -28,7 +28,10 @@ public class SubmitterCommandService {
 
     public void createSubmitter(Long guestId, SubmitterCreateRequest request) {
         Guest guest = guestRepository.findGuestByIdOrThrow(guestId);
+
+        isDuplicatedSubmission(guest);
         isDuplicatedNickname(request.nickname());
+
         Submitter submitter = Submitter.builder()
                 .guest(guest)
                 .intro(request.intro())
@@ -40,7 +43,7 @@ public class SubmitterCommandService {
                 .userKeyword(request.userKeyword())
                 .submitterState(SubmitterState.PENDING.getSubmitterState())
                 .build();
-        isDuplicatedSubmission(submitter);
+
         submitterRepository.save(submitter);
     }
 
@@ -64,8 +67,8 @@ public class SubmitterCommandService {
         hostRepository.save(host);
     }
 
-    private void isDuplicatedSubmission(Submitter submitter) {
-        if (submitterRepository.existsByGuestAndSubmitterState(submitter.getGuest(), submitter.getSubmitterState())) {
+    private void isDuplicatedSubmission(Guest guest) {
+        if (submitterRepository.existsByGuestAndSubmitterState(guest, SubmitterState.PENDING.getSubmitterState())) {
             throw new BadRequestException(ErrorCode.DUPLICATION_SUBMITTER);
         }
     }
