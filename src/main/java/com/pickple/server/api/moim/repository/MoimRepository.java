@@ -38,4 +38,5 @@ public interface MoimRepository extends JpaRepository<Moim, Long> {
 
     List<Moim> findMoimByHostId(Long hostId);
 
+    int countByHostIdAndMoimState(Long hostId, String moimState);
 }

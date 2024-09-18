@@ -7,6 +7,7 @@ import com.pickple.server.api.host.dto.response.HostGetResponse;
 import com.pickple.server.api.host.dto.response.HostIntroGetResponse;
 import com.pickple.server.api.host.repository.HostRepository;
 import com.pickple.server.api.moim.domain.Moim;
+import com.pickple.server.api.moim.domain.enums.MoimState;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository;
 import com.pickple.server.api.submitter.repository.SubmitterRepository;
@@ -47,9 +48,9 @@ public class HostQueryService {
         return HostByMoimResponse.builder()
                 .hostNickName(host.getNickname())
                 .hostImageUrl(host.getImageUrl())
-                .count(moimRepository.countByHostId(hostId))
                 .keyword(host.getUserKeyword())
                 .description(host.getDescription())
+                .isVeteran(checkVeteran(hostId))
                 .build();
     }
 
@@ -78,6 +79,11 @@ public class HostQueryService {
 
     private int moimCounter(Long hostId) {
         return moimRepository.CompletedMoimNumber(hostId);
+    }
+
+    private boolean checkVeteran(Long hostId) {
+        int count = moimRepository.countByHostIdAndMoimState(hostId, MoimState.COMPLETED.getMoimState());
+        return count >= 2;
     }
 
 }
