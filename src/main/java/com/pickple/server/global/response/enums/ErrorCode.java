@@ -22,7 +22,7 @@ public enum ErrorCode {
     DUPLICATION_REVIEW(40010, HttpStatus.BAD_REQUEST, "해당 사용자가 이미 작성한 리뷰가 존재합니다"),
     NO_SUBMISSION_FOUND_FOR_REVIEW(40011, HttpStatus.BAD_REQUEST, "리뷰를 작성할 수 있는 신청이 없습니다"),
     NOT_AUTHOR(40012, HttpStatus.BAD_REQUEST, "해당 댓글의 작성자가 아닙니다."),
-    DUPLICATION_APPROVE_SUBMITTER(400013, HttpStatus.BAD_REQUEST, "이미 호스트입니다."),
+    DUPLICATION_APPROVE_SUBMITTER(40013, HttpStatus.BAD_REQUEST, "이미 호스트입니다."),
 
     // 401 Unauthorized
     ACCESS_TOKEN_EXPIRED(40100, HttpStatus.UNAUTHORIZED, "액세스 토큰이 만료되었습니다."),
