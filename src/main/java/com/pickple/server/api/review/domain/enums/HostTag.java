@@ -32,4 +32,5 @@ public enum HostTag {
     WELL_REFLECTED_FEEDBACK("👀 참여자의 반응을 잘 반영해요");
 
     private final String description;
+
 }

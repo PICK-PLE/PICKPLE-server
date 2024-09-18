@@ -12,4 +12,5 @@ public enum MoimState {
     COMPLETED("completed"); //완료
 
     public final String moimState;
+
 }

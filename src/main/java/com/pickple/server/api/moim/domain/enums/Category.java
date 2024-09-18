@@ -28,4 +28,5 @@ public enum Category {
     IT("it");   //it
 
     public final String category;
+
 }

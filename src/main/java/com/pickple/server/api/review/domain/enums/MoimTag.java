@@ -32,4 +32,5 @@ public enum MoimTag {
     MANY_EXAMPLES("💡 실제 사례가 많아요");
 
     private final String description;
+
 }

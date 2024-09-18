@@ -1,6 +1,5 @@
 package com.pickple.server.api.host.service;
 
-import com.pickple.server.api.guest.domain.Guest;
 import com.pickple.server.api.guest.repository.GuestRepository;
 import com.pickple.server.api.host.domain.Host;
 import com.pickple.server.api.host.dto.response.HostByMoimResponse;
@@ -28,9 +27,7 @@ public class HostQueryService {
     private final SubmitterRepository submitterRepository;
     private final GuestRepository guestRepository;
 
-    public HostGetResponse getHost(Long hostId, Long guestId) {
-        Guest guest = guestRepository.findGuestByIdOrThrow(guestId);
-
+    public HostGetResponse getHost(Long hostId) {
         Host host = hostRepository.findHostByIdOrThrow(hostId);
 
         return HostGetResponse.builder()

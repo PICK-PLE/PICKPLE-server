@@ -16,4 +16,5 @@ public class AnswerInfo {
 
     @Size(max = 200, message = "200자 이내로 작성해주세요.")
     private String answer3;
+
 }

@@ -14,4 +14,5 @@ public class AccountInfo {
 
     @NotBlank(message = "계좌번호가 비어있습니다.")
     private String accountNumber;
+
 }

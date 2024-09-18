@@ -14,4 +14,5 @@ public enum SubmitterState {
     REJECT("reject");
 
     public final String submitterState;
+
 }

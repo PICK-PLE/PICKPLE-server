@@ -22,4 +22,5 @@ public enum MoimSubmissionState {
     COMPLETED("completed"); //완료
 
     public final String moimSubmissionState;
+
 }

@@ -60,4 +60,5 @@ public class Host extends BaseTimeEntity {
         this.description = description;
         this.link = link;
     }
+
 }
