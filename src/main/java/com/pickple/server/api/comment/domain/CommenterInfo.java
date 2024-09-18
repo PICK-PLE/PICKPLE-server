@@ -6,7 +6,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class CommenterInfo {
+
     private String profileImageUrl;
 
     private String profileNickname;
+
 }
