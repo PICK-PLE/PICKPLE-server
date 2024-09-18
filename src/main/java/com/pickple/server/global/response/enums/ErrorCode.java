@@ -12,7 +12,7 @@ public enum ErrorCode {
     ENUM_VALUE_BAD_REQUEST(40000, HttpStatus.BAD_REQUEST, "요청한 값이 유효하지 않습니다."),
     AUTHENTICATION_CODE_EXPIRED(40001, HttpStatus.BAD_REQUEST, "인가 코드가 만료되었습니다."),
     SOCIAL_TYPE_BAD_REQUEST(40002, HttpStatus.BAD_REQUEST, "로그인 요청이 유효하지 않습니다."),
-    DUPLICATION_SUBMITTER(40003, HttpStatus.BAD_REQUEST, "대기중인 호스트 승인 신청이 있습니다."),
+    DUPLICATION_PENDING_SUBMITTER(40003, HttpStatus.BAD_REQUEST, "대기중인 호스트 승인 신청이 있습니다."),
     BAD_REQUEST(40004, HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
     MISSING_REQUIRED_HEADER(40005, HttpStatus.BAD_REQUEST, "필수 헤더가 누락되었습니다."),
     MISSING_REQUIRED_PARAMETER(40006, HttpStatus.BAD_REQUEST, "필수 파라미터가 누락되었습니다."),
@@ -22,6 +22,7 @@ public enum ErrorCode {
     DUPLICATION_REVIEW(40010, HttpStatus.BAD_REQUEST, "해당 사용자가 이미 작성한 리뷰가 존재합니다"),
     NO_SUBMISSION_FOUND_FOR_REVIEW(40011, HttpStatus.BAD_REQUEST, "리뷰를 작성할 수 있는 신청이 없습니다"),
     NOT_AUTHOR(40012, HttpStatus.BAD_REQUEST, "해당 댓글의 작성자가 아닙니다."),
+    DUPLICATION_APPROVE_SUBMITTER(400013, HttpStatus.BAD_REQUEST, "이미 호스트입니다."),
 
     // 401 Unauthorized
     ACCESS_TOKEN_EXPIRED(40100, HttpStatus.UNAUTHORIZED, "액세스 토큰이 만료되었습니다."),
