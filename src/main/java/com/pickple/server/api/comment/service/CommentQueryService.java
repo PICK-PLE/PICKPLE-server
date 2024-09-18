@@ -8,6 +8,8 @@ import com.pickple.server.api.guest.domain.Guest;
 import com.pickple.server.api.guest.repository.GuestRepository;
 import com.pickple.server.api.host.domain.Host;
 import com.pickple.server.api.host.repository.HostRepository;
+import com.pickple.server.api.moim.domain.enums.MoimState;
+import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.notice.domain.Notice;
 import com.pickple.server.api.notice.repository.NoticeRepository;
 import java.time.format.DateTimeFormatter;
@@ -21,10 +23,12 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class CommentQueryService {
+
     private final NoticeRepository noticeRepository;
     private final CommentRepository commentRepository;
     private final HostRepository hostRepository;
     private final GuestRepository guestRepository;
+    private final MoimRepository moimRepository;
 
     public List<CommentGetResponse> getCommentListByNotice(Long noticeId) {
         Notice notice = noticeRepository.findNoticeByIdOrThrow(noticeId);
@@ -44,6 +48,8 @@ public class CommentQueryService {
                     .commenterNickname(commenterInfo.getProfileNickname())
                     .commentContent(comment.getCommentContent())
                     .commentDate(comment.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")))
+                    .isVeteran(checkVeteran(isOwner,
+                            hostRepository.findHostByUserId(comment.getCommenter().getId()).getId()))
                     .build();
         }).collect(Collectors.toList());
     }
@@ -61,5 +67,13 @@ public class CommentQueryService {
     public boolean checkOwner(Long userId, Long noticeId) {
         Notice notice = noticeRepository.findNoticeByIdOrThrow(noticeId);
         return notice.getMoim().getHost().getUser().getId().equals(userId);
+    }
+
+    private boolean checkVeteran(boolean isOwner, Long hostId) {
+        if (isOwner) {
+            int count = moimRepository.countByHostIdAndMoimState(hostId, MoimState.COMPLETED.getMoimState());
+            return count >= 2;
+        }
+        return false;
     }
 }
