@@ -19,4 +19,6 @@ public interface SubmitterRepository extends JpaRepository<Submitter, Long> {
     }
 
     boolean existsByNicknameAndSubmitterState(String nickname, String submitterState);
+
+    Submitter findSubmitterByGuestId(Long guestId);
 }
