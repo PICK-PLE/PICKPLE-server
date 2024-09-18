@@ -23,10 +23,11 @@ public interface SubmitterControllerDocs {
             value = {
                     @ApiResponse(responseCode = "20005", description = "호스트 승인 신청 성공"),
                     @ApiResponse(responseCode = "40003", description = "대기중인 호스트 승인 신청이 있습니다."),
-                    @ApiResponse(responseCode = "40403", description = "존재하지 않는 게스트입니다.")
+                    @ApiResponse(responseCode = "40403", description = "존재하지 않는 게스트입니다."),
+                    @ApiResponse(responseCode = "40013", description = "이미 호스트 입니다.")
             }
     )
-    ApiResponseDto postSubmitter(
+    ApiResponseDto createSubmitter(
             @Parameter(schema = @Schema(implementation = String.class), in = ParameterIn.PATH)
             @GuestId final Long guestId,
             @RequestBody SubmitterCreateRequest submitterCreateRequest
