@@ -15,9 +15,7 @@ public record CommentGetResponse(
 
         String commentContent,
 
-        String commentDate,
-
-        boolean isVeteran
+        String commentDate
 
 ) {
 }
