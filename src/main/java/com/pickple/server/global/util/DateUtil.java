@@ -12,12 +12,6 @@ public class DateUtil {
         return dday;
     }
 
-    public static int calculateCompletedDay(LocalDate date) {
-        LocalDate today = LocalDate.now();
-        int day = (int) ChronoUnit.DAYS.between(today, date);
-        return day;
-    }
-
     public static String refineDate(LocalDate localDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
         return localDate.format(formatter);
