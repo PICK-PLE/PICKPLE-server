@@ -16,7 +16,6 @@ import com.pickple.server.api.review.repository.ReviewRepository;
 import com.pickple.server.global.exception.CustomException;
 import com.pickple.server.global.response.enums.ErrorCode;
 import com.pickple.server.global.util.DateTimeUtil;
-import com.pickple.server.global.util.DateUtil;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -194,7 +193,6 @@ public class MoimSubmissionQueryService {
 
     public boolean isOngoing(Long moimId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
-        int day = DateUtil.calculateCompletedDay(moim.getDateList().getDate());
-        return day >= 0;
+        return moim.getMoimState().equals("ongoing");
     }
 }
