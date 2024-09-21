@@ -1,6 +1,7 @@
 package com.pickple.server.api.moimsubmission.dto.response;
 
 import com.pickple.server.api.moim.domain.QuestionInfo;
+import com.pickple.server.api.moimsubmission.domain.AccountInfo;
 import com.pickple.server.api.moimsubmission.domain.AnswerInfo;
 import lombok.Builder;
 
@@ -16,6 +17,7 @@ public record MoimSubmissionAllResponse(
         String moimTitle,            //모임명
         String hostNickname,         //스픽커명
         QuestionInfo questionList,   //질문 리스트
-        AnswerInfo answerList        //질문에 해당하는 답변리스트
+        AnswerInfo answerList,       //질문에 해당하는 답변리스트
+        AccountInfo accountList      //계좌 리스트
 ) {
 }

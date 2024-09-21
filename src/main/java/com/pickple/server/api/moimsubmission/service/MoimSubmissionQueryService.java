@@ -140,6 +140,7 @@ public class MoimSubmissionQueryService {
                 .guestNickname(guest.getNickname())
                 .questionList(moimSubmission.getMoim().getQuestionList())
                 .answerList(moimSubmission.getAnswerList())
+                .accountList(moimSubmission.getAccountList())
                 .build();
     }
 
