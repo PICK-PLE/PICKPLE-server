@@ -15,6 +15,7 @@ public class Token {
     @Id
     private Long id;
 
+    @Indexed
     private String refreshToken;
 
     public static Token of(final Long id, final String refreshToken) {
