@@ -20,7 +20,13 @@ public enum ErrorCode {
     DUPLICATION_NICKNAME(40008, HttpStatus.BAD_REQUEST, "이미 존재하는 닉네임입니다."),
     MISSING_IMAGE_URL(40009, HttpStatus.BAD_REQUEST, "필수 이미지가 없습니다."),
     DUPLICATION_REVIEW(40010, HttpStatus.BAD_REQUEST, "해당 사용자가 이미 작성한 리뷰가 존재합니다"),
-    NO_SUBMISSION_FOUN함
+    NO_SUBMISSION_FOUND_FOR_REVIEW(40011, HttpStatus.BAD_REQUEST, "리뷰를 작성할 수 있는 신청이 없습니다"),
+    NOT_AUTHOR(40012, HttpStatus.BAD_REQUEST, "해당 댓글의 작성자가 아닙니다."),
+    DUPLICATION_APPROVE_SUBMITTER(40013, HttpStatus.BAD_REQUEST, "이미 호스트입니다."),
+    
+    // 401 Unauthorized
+    ACCESS_TOKEN_EXPIRED(40100, HttpStatus.UNAUTHORIZED, "액세스 토큰이 만료되었습니다."),    //code 건들지 말것, 클라 분기처리함
+    TOKEN_INCORRECT_ERROR(40101, HttpStatus.UNAUTHORIZED, "리프레시 토큰이 유효하지 않습니다."),    //code 건들지 말것, 클라 분기처리함
     EMPTY_PRINCIPAL(40103, HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다."),
 
     //403 Forbidden
