@@ -26,8 +26,9 @@ public enum ErrorCode {
 
     // 401 Unauthorized
     ACCESS_TOKEN_EXPIRED(40100, HttpStatus.UNAUTHORIZED, "액세스 토큰이 만료되었습니다."),    //code 건들지 말것, 클라 분기처리함
-    TOKEN_INCORRECT_ERROR(40101, HttpStatus.UNAUTHORIZED, "리프레시 토큰이 유효하지 않습니다."),    //code 건들지 말것, 클라 분기처리함
-    EMPTY_PRINCIPAL(40102, HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다."),
+    REFRESH_TOKEN_EXPIRED(40101, HttpStatus.UNAUTHORIZED, "리프레시 토큰이 만료되었습니다."),    //code 건들지 말것, 클라 분기처리함
+    TOKEN_INCORRECT_ERROR(40102, HttpStatus.UNAUTHORIZED, "리프레시 토큰이 유효하지 않습니다."),
+    EMPTY_PRINCIPAL(40103, HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다."),
 
     //403 Forbidden
     NOT_ADMIN(40301, HttpStatus.UNAUTHORIZED, "관리자 계정이 아닙니다."),

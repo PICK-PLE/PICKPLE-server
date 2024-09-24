@@ -1,5 +1,7 @@
 package com.pickple.server.api.user.service;
 
+import static com.pickple.server.global.auth.jwt.provider.JwtValidationType.EXPIRED_JWT_TOKEN;
+
 import com.pickple.server.api.guest.domain.Guest;
 import com.pickple.server.api.guest.repository.GuestRepository;
 import com.pickple.server.api.host.domain.Host;
@@ -98,6 +100,11 @@ public class UserService {
     public AccessTokenGetSuccess refreshToken(
             final String refreshToken
     ) {
+        if (jwtTokenProvider.validateToken(refreshToken) == EXPIRED_JWT_TOKEN) {
+            // 리프레시 토큰이 만료된 경우
+            throw new CustomException(ErrorCode.REFRESH_TOKEN_EXPIRED);
+        }
+
         Long userId = jwtTokenProvider.getUserFromJwt(refreshToken);
         if (!userId.equals(tokenService.findIdByRefreshToken(refreshToken))) {
             throw new CustomException(ErrorCode.TOKEN_INCORRECT_ERROR);
