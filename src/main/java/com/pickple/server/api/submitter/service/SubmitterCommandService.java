@@ -10,6 +10,8 @@ import com.pickple.server.api.submitter.domain.SubmitterState;
 import com.pickple.server.api.submitter.dto.request.SubmitterCreateRequest;
 import com.pickple.server.api.submitter.repository.SubmitterRepository;
 import com.pickple.server.api.user.domain.Role;
+import com.pickple.server.global.auth.jwt.repository.TokenRepository;
+import com.pickple.server.global.auth.redis.domain.Token;
 import com.pickple.server.global.exception.CustomException;
 import com.pickple.server.global.response.enums.ErrorCode;
 import jakarta.transaction.Transactional;
@@ -24,6 +26,7 @@ public class SubmitterCommandService {
     private final GuestRepository guestRepository;
     private final SubmitterRepository submitterRepository;
     private final HostRepository hostRepository;
+    private final TokenRepository tokenRepository;
 
     public void createSubmitter(Long guestId, SubmitterCreateRequest request) {
         Guest guest = guestRepository.findGuestByIdOrThrow(guestId);
@@ -64,6 +67,13 @@ public class SubmitterCommandService {
                 .build();
 
         hostRepository.save(host);
+
+        //재로그인으로 연결을 위한 리프레시 토큰 만료
+        Token token = tokenRepository.findById(submitter.getGuest().getId())
+                .orElseThrow(
+                        () -> new CustomException(ErrorCode.REFRESH_TOKEN_NOT_FOUND)
+                );
+        tokenRepository.delete(token);
     }
 
     private void isDuplicatedSubmission(Guest guest) {
