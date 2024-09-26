@@ -22,9 +22,8 @@ import org.springframework.stereotype.Service;
 public class JwtTokenProvider {
 
     private static final String MEMBER_ID = "memberId";
-    private static final Long ACCESS_TOKEN_EXPIRATION_TIME =
-            365 * 24 * 60 * 60 * 1000L; // 1년 , 기존 : 24 * 60 * 60 * 1000L;
-    private static final Long REFRESH_TOKEN_EXPIRATION_TIME = 60 * 60 * 24 * 1000L * 14; // 14일
+    private static final Long ACCESS_TOKEN_EXPIRATION_TIME = 2 * 60 * 60 * 1000L;  // 2시간
+    private static final Long REFRESH_TOKEN_EXPIRATION_TIME = 14 * 24 * 60 * 60 * 1000L;  // 2주일
 
     @Value("${jwt.secret}")
     private String JWT_SECRET;
