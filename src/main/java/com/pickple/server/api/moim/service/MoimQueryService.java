@@ -62,7 +62,14 @@ public class MoimQueryService {
     }
 
     public List<MoimByCategoryResponse> getMoimListByCategory(final String category) {
-        List<Moim> moimList = moimRepository.findMoimListByCategory(category);
+        List<Moim> moimList;
+
+        if (category.equals("all")) {
+            moimList = moimRepository.findAll();
+        } else {
+            moimList = moimRepository.findMoimListByCategory(category);
+        }
+
         return moimList.stream()
                 .map(oneMoim -> MoimByCategoryResponse.builder()
                         .moimId(oneMoim.getId())
