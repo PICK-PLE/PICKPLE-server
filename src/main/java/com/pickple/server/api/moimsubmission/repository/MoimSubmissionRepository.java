@@ -38,8 +38,8 @@ public interface MoimSubmissionRepository extends JpaRepository<MoimSubmission, 
     @Query("SELECT COUNT(ms) FROM MoimSubmission ms WHERE ms.moim.id = :moimId AND ms.moimSubmissionState = 'approved'")
     long countApprovedMoimSubmissions(@Param("moimId") Long moimId);
 
-    @Query("SELECT COUNT(ms) FROM MoimSubmission ms WHERE ms.moim.id IN :moimIds AND ms.moimSubmissionState = 'approved'")
-    int countApprovedSubmissionsByMoimIds(@Param("moimIds") List<Long> moimIds);
+    @Query("SELECT COUNT(ms) FROM MoimSubmission ms WHERE ms.moim.id IN :moimIds AND ms.moimSubmissionState = 'completed'")
+    int countCompletedSubmissionsByMoimIds(@Param("moimIds") List<Long> moimIds);
 
     boolean existsByMoimIdAndGuestIdAndMoimSubmissionState(Long moimId, Long guestId, String MoimSubmissionState);
 
