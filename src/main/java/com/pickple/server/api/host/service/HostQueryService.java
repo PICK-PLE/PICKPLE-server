@@ -71,7 +71,7 @@ public class HostQueryService {
                 .map(Moim::getId) // Moim 엔티티에서 id를 추출
                 .collect(Collectors.toList());
 
-        return moimSubmissionRepository.countApprovedSubmissionsByMoimIds(moimIds);
+        return moimSubmissionRepository.countCompletedSubmissionsByMoimIds(moimIds);
     }
 
     private boolean checkVeteran(Long hostId) {

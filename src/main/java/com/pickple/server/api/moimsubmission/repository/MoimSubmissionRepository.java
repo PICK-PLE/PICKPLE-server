@@ -27,21 +27,19 @@ public interface MoimSubmissionRepository extends JpaRepository<MoimSubmission, 
 
     MoimSubmission findByMoimIdAndGuestId(Long moimId, Long guestId);
 
-    List<MoimSubmission> findBymoimId(Long moimId);
+    List<MoimSubmission> findMoimSubmissionByMoimId(Long moimId);
 
-    List<MoimSubmission> findMoimListByMoimId(Long moimId);
-
-    @Query("SELECT ms FROM MoimSubmission ms WHERE ms.moim.id = :moimId AND ms.moimSubmissionState IN ('pendingApproval', 'approved', 'rejected')")
+    @Query("SELECT ms FROM MoimSubmission ms WHERE ms.moim.id = :moimId AND ms.moimSubmissionState IN ('pendingApproval', 'approved', 'rejected','completed')")
     List<MoimSubmission> findMoimListByMoimIdAndMoimSubmissionState(@Param("moimId") Long moimId);
 
     @Query("SELECT ms FROM MoimSubmission ms WHERE ms.guestId = :guestId AND ms.moimSubmissionState = 'completed'")
     List<MoimSubmission> findCompletedMoimSubmissionsByGuest(@Param("guestId") Long guestId);
 
-    @Query(value = "SELECT COUNT(*) FROM moim_submissions WHERE moim_id = :moimId AND moim_submission_state = 'approved'", nativeQuery = true)
+    @Query("SELECT COUNT(ms) FROM MoimSubmission ms WHERE ms.moim.id = :moimId AND ms.moimSubmissionState = 'approved'")
     long countApprovedMoimSubmissions(@Param("moimId") Long moimId);
 
-    @Query("SELECT COUNT(ms) FROM MoimSubmission ms WHERE ms.moim.id IN :moimIds AND ms.moimSubmissionState = 'approved'")
-    int countApprovedSubmissionsByMoimIds(@Param("moimIds") List<Long> moimIds);
+    @Query("SELECT COUNT(ms) FROM MoimSubmission ms WHERE ms.moim.id IN :moimIds AND ms.moimSubmissionState = 'completed'")
+    int countCompletedSubmissionsByMoimIds(@Param("moimIds") List<Long> moimIds);
 
     boolean existsByMoimIdAndGuestIdAndMoimSubmissionState(Long moimId, Long guestId, String MoimSubmissionState);
 
