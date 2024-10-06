@@ -178,8 +178,7 @@ public class MoimSubmissionQueryService {
     }
 
     public boolean isMoimSubmissonApproved(Long moimId) {
-        Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
-        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimListByMoimId(moimId);
+        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimSubmissionByMoimId(moimId);
 
         //모임에 해당하는 신청 내역 중 approved or rejected가 있는 경우 true 리턴
         for (MoimSubmission moimSubmission : moimSubmissionList) {

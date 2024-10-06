@@ -42,7 +42,7 @@ public class MoimSubmissionCommandService {
     }
 
     public void updateSubmissionState(Long moimId, List<Long> submitterIdList) {
-        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findBymoimId(moimId);
+        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimSubmissionByMoimId(moimId);
 
         for (MoimSubmission moimSubmission : moimSubmissionList) {
             if (submitterIdList.contains(moimSubmission.getGuestId())) {
