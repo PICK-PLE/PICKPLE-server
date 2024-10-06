@@ -137,7 +137,7 @@ public class MoimQueryService {
 
     private Long calculateApprovedGuest(Long moimId) {
         try {
-            return moimSubmissionRepository.countApprovedMoimSubmissions(moimId);
+            return moimSubmissionRepository.countValidMoimSubmissions(moimId);
         } catch (InvalidDataAccessResourceUsageException e) {
             // 테이블이 존재하지 않아서 발생한 예외일 경우 0 반환
             return 0L;
