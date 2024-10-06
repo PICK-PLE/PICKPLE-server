@@ -97,8 +97,8 @@ public class MoimSubmissionQueryService {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
 
         // moimSubmissionList 가져오기
-        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimListByMoimIdAndMoimSubmissionState(
-                moimId);
+        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository
+                .findMoimListByMoimIdAndMoimSubmissionState(moimId);
 
         // guestId를 이용하여 SubmitterInfo 객체 생성 후 리스트에 저장
         List<SubmitterInfo> submitterInfoList = moimSubmissionList.stream()
