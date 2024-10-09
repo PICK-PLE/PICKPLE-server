@@ -34,7 +34,7 @@ public interface UserControllerDocs {
             value = {
                     @ApiResponse(responseCode = "20001", description = "액세스 토큰 재발급 성공"),
                     @ApiResponse(responseCode = "40102", description = "리프레시 토큰이 유효하지 않습니다."),
-                    @ApiResponse(responseCode = "40404", description = "해당 유저의 리프레시 토큰이 존재하지 않습니다."),
+                    @ApiResponse(responseCode = "40104", description = "해당 유저의 리프레시 토큰이 존재하지 않습니다."),
                     @ApiResponse(responseCode = "50000", description = "서버 내부 오류입니다.")
             }
     )
@@ -58,7 +58,7 @@ public interface UserControllerDocs {
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "20003", description = "로그아웃이 완료되었습니다."),
-                    @ApiResponse(responseCode = "40402", description = "해당 유저의 리프레시 토큰이 존재하지 않습니다.")
+                    @ApiResponse(responseCode = "40104", description = "해당 유저의 리프레시 토큰이 존재하지 않습니다.")
             }
     )
     ApiResponseDto logout(

@@ -24,11 +24,12 @@ public enum ErrorCode {
     NOT_AUTHOR(40012, HttpStatus.BAD_REQUEST, "해당 댓글의 작성자가 아닙니다."),
     DUPLICATION_APPROVE_SUBMITTER(40013, HttpStatus.BAD_REQUEST, "이미 호스트입니다."),
 
-    // 401 Unauthorized
+    // 401 Unauthorized >> code 건들지 말것, 클라 분기처리함
     ACCESS_TOKEN_EXPIRED(40100, HttpStatus.UNAUTHORIZED, "액세스 토큰이 만료되었습니다."),    //code 건들지 말것, 클라 분기처리함
     REFRESH_TOKEN_EXPIRED(40101, HttpStatus.UNAUTHORIZED, "리프레시 토큰이 만료되었습니다."),    //code 건들지 말것, 클라 분기처리함
     TOKEN_INCORRECT_ERROR(40102, HttpStatus.UNAUTHORIZED, "리프레시 토큰이 유효하지 않습니다."),
     EMPTY_PRINCIPAL(40103, HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다."),
+    REFRESH_TOKEN_NOT_FOUND(40104, HttpStatus.UNAUTHORIZED, "해당 유저의 리프레시 토큰이 존재하지 않습니다."),
 
     //403 Forbidden
     NOT_ADMIN(40301, HttpStatus.UNAUTHORIZED, "관리자 계정이 아닙니다."),
@@ -37,7 +38,6 @@ public enum ErrorCode {
     // 404 Not Found
     NOT_FOUND_END_POINT(40400, HttpStatus.NOT_FOUND, "존재하지 않는 API입니다."),
     USER_NOT_FOUND(40401, HttpStatus.NOT_FOUND, "해당 유저는 존재하지 않습니다."),
-    REFRESH_TOKEN_NOT_FOUND(40402, HttpStatus.NOT_FOUND, "해당 유저의 리프레시 토큰이 존재하지 않습니다."),
     GUEST_NOT_FOUND(40403, HttpStatus.NOT_FOUND, "존재하지 않는 게스트입니다"),
     MOIM_NOT_FOUND(40404, HttpStatus.NOT_FOUND, "존재하지 않는 모임입니다."),
     HOST_NOT_FOUND(40405, HttpStatus.NOT_FOUND, "존재하지 않는 호스트입니다"),
