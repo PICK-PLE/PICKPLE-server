@@ -144,19 +144,24 @@ public class MoimSubmissionQueryService {
                 .build();
     }
 
-
     private boolean isApprovable(Moim moim) {
         // 모임일
         LocalDate date = moim.getDateList().getDate();
 
-        // 마감일: 신청일 + 3일의 자정
-        LocalDateTime deadline = date.minusDays(3).atTime(LocalTime.MIDNIGHT);
+        // 모임 시작 시간
+        LocalTime startTime = moim.getDateList().getStartTime();
+
+        // 승인 가능 시작 시간: 모임일 전날 자정 (모임일 하루 전 자정)
+        LocalDateTime approvalStartTime = date.minusDays(1).atStartOfDay();
+
+        // 승인 가능 종료 시간: 모임일의 시작 시간
+        LocalDateTime approvalEndTime = date.atTime(startTime);
 
         // 현재 시간
         LocalDateTime now = LocalDateTime.now();
 
-        // 승인 가능 여부: 현재 시간이 마감일 이후인지 확인
-        return now.isAfter(deadline);
+        // 승인 가능 여부: 현재 시간이 승인 시작 시간 이후 또는 같은 시간이고, 승인 종료 시간 이전인지 확인
+        return (now.isEqual(approvalStartTime) || now.isAfter(approvalStartTime)) && now.isBefore(approvalEndTime);
     }
 
     public SubmitterInfo getSubmitterInfo(Long guestId, Long moimId) {
