@@ -46,4 +46,7 @@ public interface MoimSubmissionRepository extends JpaRepository<MoimSubmission, 
     @Query("SELECT ms FROM MoimSubmission ms WHERE ms.guestId = :guestId AND ms.moimSubmissionState IN ('pendingPayment','pendingApproval', 'approved', 'rejected','refunded')")
     List<MoimSubmission> findAllSubmittedMoimSubmission(@Param("guestId") Long guestId);
 
+    @Query("SELECT ms FROM MoimSubmission ms WHERE ms.moimSubmissionState = 'approved'")
+    List<MoimSubmission> findAllApprovedMoimSubmissions();
+
 }
