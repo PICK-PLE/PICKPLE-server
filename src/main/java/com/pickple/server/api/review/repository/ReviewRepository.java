@@ -8,6 +8,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     boolean existsByMoimIdAndGuestId(Long moimId, Long guestId);
 
-    List<Review> findReviewListByMoimIdOrderByCreatedAt(Long moimId);
+    List<Review> findReviewsByMoimIdOrderByCreatedAt(Long moimId);
 
 }

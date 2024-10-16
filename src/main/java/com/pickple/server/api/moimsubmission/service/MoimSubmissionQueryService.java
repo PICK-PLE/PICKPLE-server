@@ -41,9 +41,9 @@ public class MoimSubmissionQueryService {
         List<MoimSubmission> moimSubmissionList;
 
         if (moimSubmissionState.equals(MoimSubmissionState.ALL.getMoimSubmissionState())) {
-            moimSubmissionList = moimSubmissionRepository.findSubmittedMoimSubmissionList(guest.getId());
+            moimSubmissionList = moimSubmissionRepository.findSubmittedMoimSubmissions(guest.getId());
         } else {
-            moimSubmissionList = moimSubmissionRepository.findMoimSubmissionByGuestIdAndMoimSubmissionState
+            moimSubmissionList = moimSubmissionRepository.findMoimSubmissionsByGuestIdAndMoimSubmissionState
                     (guestId, moimSubmissionState);
         }
 
@@ -98,7 +98,7 @@ public class MoimSubmissionQueryService {
 
         // moimSubmissionList 가져오기
         List<MoimSubmission> moimSubmissionList = moimSubmissionRepository
-                .findMoimSubmissionListByMoimIdAndMoimSubmissionState(moimId);
+                .findMoimSubmissionsByMoimIdAndMoimSubmissionState(moimId);
 
         // guestId를 이용하여 SubmitterInfo 객체 생성 후 리스트에 저장
         List<SubmitterInfo> submitterInfoList = moimSubmissionList.stream()
@@ -183,7 +183,7 @@ public class MoimSubmissionQueryService {
     }
 
     public boolean isMoimSubmissonApproved(Long moimId) {
-        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimSubmissionByMoimId(moimId);
+        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimSubmissionsByMoimId(moimId);
 
         //모임에 해당하는 신청 내역 중 approved or rejected가 있는 경우 true 리턴
         for (MoimSubmission moimSubmission : moimSubmissionList) {

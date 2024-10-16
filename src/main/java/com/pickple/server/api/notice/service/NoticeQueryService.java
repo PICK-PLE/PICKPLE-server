@@ -31,7 +31,7 @@ public class NoticeQueryService {
 
     public List<NoticeListGetByMoimResponse> getNoticeListByMoimId(Long moimId, Long guestId) {
         Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
-        List<Notice> noticeList = noticeRepository.findNoticeByMoimIdOrderByCreatedAtDesc(moimId);
+        List<Notice> noticeList = noticeRepository.findNoticesByMoimIdOrderByCreatedAtDesc(moimId);
 
         boolean isAppliedUser = isUserAppliedToMoim(moimId, guestId);
 

@@ -37,7 +37,7 @@ public class ReviewQueryService {
     }
 
     public List<ReviewListGetByMoimResponse> getReviewListByMoim(Long moimId) {
-        List<Review> reviews = reviewRepository.findReviewListByMoimIdOrderByCreatedAt(moimId);
+        List<Review> reviews = reviewRepository.findReviewsByMoimIdOrderByCreatedAt(moimId);
 
         return reviews.stream()
                 .map(review -> ReviewListGetByMoimResponse.builder()
@@ -52,10 +52,10 @@ public class ReviewQueryService {
     }
 
     public List<ReviewListGetByHostResponse> getReviewListByHost(Long hostId) {
-        List<Moim> moimList = moimRepository.findMoimByHostId(hostId);
+        List<Moim> moimList = moimRepository.findMoimsByHostId(hostId);
 
         return moimList.stream()
-                .flatMap(oneMoim -> reviewRepository.findReviewListByMoimIdOrderByCreatedAt(oneMoim.getId()).stream()
+                .flatMap(oneMoim -> reviewRepository.findReviewsByMoimIdOrderByCreatedAt(oneMoim.getId()).stream()
                         .map(review -> ReviewListGetByHostResponse.builder()
                                 .moimId(oneMoim.getId())
                                 .moimTitle(oneMoim.getTitle())
