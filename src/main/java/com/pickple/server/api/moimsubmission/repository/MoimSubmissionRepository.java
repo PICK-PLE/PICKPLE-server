@@ -1,6 +1,5 @@
 package com.pickple.server.api.moimsubmission.repository;
 
-import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.global.exception.CustomException;
 import com.pickple.server.global.response.enums.ErrorCode;
@@ -18,8 +17,6 @@ public interface MoimSubmissionRepository extends JpaRepository<MoimSubmission, 
         return findMoimSubmissionById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.MOIM_SUBMISSION_NOT_FOUND));
     }
-
-    boolean existsByMoimAndGuestId(Moim moim, Long guestId);
 
     boolean existsByMoimIdAndGuestId(Long moimId, Long guestId);
 

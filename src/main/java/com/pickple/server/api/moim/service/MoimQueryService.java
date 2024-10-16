@@ -43,7 +43,7 @@ public class MoimQueryService {
                 .fee(moim.getFee())
                 .imageList(moim.getImageList())
                 .hostId(moim.getHost().getId())
-                .isSubmitted(moimSubmissionRepository.existsByMoimAndGuestId(moim, guestId))
+                .isSubmitted(moimSubmissionRepository.existsByMoimIdAndGuestId(moimId, guestId))
                 .build();
     }
 
