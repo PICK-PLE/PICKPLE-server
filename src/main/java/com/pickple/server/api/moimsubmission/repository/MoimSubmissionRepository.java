@@ -1,6 +1,5 @@
 package com.pickple.server.api.moimsubmission.repository;
 
-import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.global.exception.CustomException;
 import com.pickple.server.global.response.enums.ErrorCode;
@@ -19,18 +18,16 @@ public interface MoimSubmissionRepository extends JpaRepository<MoimSubmission, 
                 .orElseThrow(() -> new CustomException(ErrorCode.MOIM_SUBMISSION_NOT_FOUND));
     }
 
-    boolean existsByMoimAndGuestId(Moim moim, Long guestId);
-
     boolean existsByMoimIdAndGuestId(Long moimId, Long guestId);
 
-    List<MoimSubmission> findAllByGuestIdAndMoimSubmissionState(Long guestId, String moimSubmissionState);
+    List<MoimSubmission> findMoimSubmissionsByGuestIdAndMoimSubmissionState(Long guestId, String moimSubmissionState);
 
-    MoimSubmission findByMoimIdAndGuestId(Long moimId, Long guestId);
+    MoimSubmission findMoimSubmissionByMoimIdAndGuestId(Long moimId, Long guestId);
 
-    List<MoimSubmission> findMoimSubmissionByMoimId(Long moimId);
+    List<MoimSubmission> findMoimSubmissionsByMoimId(Long moimId);
 
     @Query("SELECT ms FROM MoimSubmission ms WHERE ms.moim.id = :moimId AND ms.moimSubmissionState IN ('pendingApproval', 'approved', 'rejected','completed')")
-    List<MoimSubmission> findMoimListByMoimIdAndMoimSubmissionState(@Param("moimId") Long moimId);
+    List<MoimSubmission> findMoimSubmissionsByMoimIdAndMoimSubmissionState(@Param("moimId") Long moimId);
 
     @Query("SELECT ms FROM MoimSubmission ms WHERE ms.guestId = :guestId AND ms.moimSubmissionState = 'completed'")
     List<MoimSubmission> findCompletedMoimSubmissionsByGuest(@Param("guestId") Long guestId);
@@ -44,6 +41,5 @@ public interface MoimSubmissionRepository extends JpaRepository<MoimSubmission, 
     boolean existsByMoimIdAndGuestIdAndMoimSubmissionState(Long moimId, Long guestId, String MoimSubmissionState);
 
     @Query("SELECT ms FROM MoimSubmission ms WHERE ms.guestId = :guestId AND ms.moimSubmissionState IN ('pendingPayment','pendingApproval', 'approved', 'rejected','refunded')")
-    List<MoimSubmission> findAllSubmittedMoimSubmission(@Param("guestId") Long guestId);
-
+    List<MoimSubmission> findSubmittedMoimSubmissions(@Param("guestId") Long guestId);
 }

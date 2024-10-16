@@ -30,19 +30,19 @@ public class MoimSubmissionCommandService {
                 .accountList(request.accountList())
                 .moimSubmissionState(MoimSubmissionState.PENDING_PAYMENT.getMoimSubmissionState())
                 .build();
-        isDuplicatedMoimSubmission(moimSubmission);
+        isDuplicatedMoimSubmission(moimId, guestId);
         moimSubmissionRepository.save(moimSubmission);
     }
 
-    private void isDuplicatedMoimSubmission(MoimSubmission moimSubmission) {
-        if (moimSubmissionRepository.existsByMoimAndGuestId(moimSubmission.getMoim(),
-                moimSubmission.getGuestId())) {
+    private void isDuplicatedMoimSubmission(Long moimId, Long guestId) {
+        if (moimSubmissionRepository.existsByMoimIdAndGuestId(moimId,
+                guestId)) {
             throw new CustomException(ErrorCode.DUPLICATION_MOIM_SUBMISSION);
         }
     }
 
     public void updateSubmissionState(Long moimId, List<Long> submitterIdList) {
-        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimSubmissionByMoimId(moimId);
+        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimSubmissionsByMoimId(moimId);
 
         for (MoimSubmission moimSubmission : moimSubmissionList) {
             if (submitterIdList.contains(moimSubmission.getGuestId())) {

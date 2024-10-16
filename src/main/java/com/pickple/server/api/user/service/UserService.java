@@ -91,7 +91,7 @@ public class UserService {
             final Long socialId,
             final SocialType socialType
     ) {
-        User user = userRepository.findBySocialTypeAndSocialId(socialId, socialType).orElseThrow(
+        User user = userRepository.findUserBySocialTypeAndSocialId(socialId, socialType).orElseThrow(
                 () -> new CustomException(ErrorCode.USER_NOT_FOUND)
         );
         return user;
@@ -171,7 +171,7 @@ public class UserService {
             final Long socialId,
             final SocialType socialType
     ) {
-        return userRepository.findBySocialTypeAndSocialId(socialId, socialType).isPresent();
+        return userRepository.findUserBySocialTypeAndSocialId(socialId, socialType).isPresent();
     }
 
     private boolean isExistingHost(final Long userId) {

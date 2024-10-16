@@ -5,5 +5,5 @@ import com.pickple.server.api.user.domain.User;
 import java.util.Optional;
 
 public interface UserRepositoryCustom {
-    Optional<User> findBySocialTypeAndSocialId(final Long socialId, final SocialType socialType);
+    Optional<User> findUserBySocialTypeAndSocialId(final Long socialId, final SocialType socialType);
 }
