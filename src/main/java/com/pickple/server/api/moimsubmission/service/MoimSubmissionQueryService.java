@@ -61,7 +61,7 @@ public class MoimSubmissionQueryService {
     }
 
     public SubmittionDetailResponse getSubmissionDetail(Long moimId, Long guestId) {
-        MoimSubmission submission = moimSubmissionRepository.findByMoimIdAndGuestId(moimId, guestId);
+        MoimSubmission submission = moimSubmissionRepository.findMoimSubmissionByMoimIdAndGuestId(moimId, guestId);
 
         if (submission == null) {
             throw new CustomException(ErrorCode.MOIM_SUBMISSION_NOT_FOUND);
@@ -170,7 +170,7 @@ public class MoimSubmissionQueryService {
                 .orElseThrow(() -> new CustomException(ErrorCode.GUEST_NOT_FOUND));
 
         //MoimSubmission 객체를 가져옴
-        MoimSubmission moimSubmission = moimSubmissionRepository.findByMoimIdAndGuestId(moimId, guestId);
+        MoimSubmission moimSubmission = moimSubmissionRepository.findMoimSubmissionByMoimIdAndGuestId(moimId, guestId);
 
         // SubmitterInfo 객체 생성
         return new SubmitterInfo(

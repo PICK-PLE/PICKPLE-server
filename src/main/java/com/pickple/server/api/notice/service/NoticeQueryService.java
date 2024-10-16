@@ -79,7 +79,8 @@ public class NoticeQueryService {
                 .equals(guestRepository.findGuestByIdOrThrow(guestId).getUser())) {
             return true;
         } else if (moimSubmissionRepository.existsByMoimIdAndGuestId(moimId, guestId)) {
-            MoimSubmission moimSubmission = moimSubmissionRepository.findByMoimIdAndGuestId(moimId, guestId);
+            MoimSubmission moimSubmission = moimSubmissionRepository.findMoimSubmissionByMoimIdAndGuestId
+                    (moimId, guestId);
 
             // 참가한 상태일 경우(승인된 상태 - approved , completed
             return moimSubmission.getMoimSubmissionState()
