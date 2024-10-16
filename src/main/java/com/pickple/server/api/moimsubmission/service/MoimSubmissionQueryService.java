@@ -41,10 +41,10 @@ public class MoimSubmissionQueryService {
         List<MoimSubmission> moimSubmissionList;
 
         if (moimSubmissionState.equals(MoimSubmissionState.ALL.getMoimSubmissionState())) {
-            moimSubmissionList = moimSubmissionRepository.findAllSubmittedMoimSubmission(guest.getId());
+            moimSubmissionList = moimSubmissionRepository.findSubmittedMoimSubmissionList(guest.getId());
         } else {
-            moimSubmissionList = moimSubmissionRepository.findAllByGuestIdAndMoimSubmissionState(guestId,
-                    moimSubmissionState);
+            moimSubmissionList = moimSubmissionRepository.findMoimSubmissionByGuestIdAndMoimSubmissionState
+                    (guestId, moimSubmissionState);
         }
 
         return moimSubmissionList.stream()
@@ -98,7 +98,7 @@ public class MoimSubmissionQueryService {
 
         // moimSubmissionList 가져오기
         List<MoimSubmission> moimSubmissionList = moimSubmissionRepository
-                .findMoimListByMoimIdAndMoimSubmissionState(moimId);
+                .findMoimSubmissionListByMoimIdAndMoimSubmissionState(moimId);
 
         // guestId를 이용하여 SubmitterInfo 객체 생성 후 리스트에 저장
         List<SubmitterInfo> submitterInfoList = moimSubmissionList.stream()
