@@ -17,8 +17,6 @@ public interface MoimRepository extends JpaRepository<Moim, Long> {
                 .orElseThrow(() -> new CustomException(ErrorCode.MOIM_NOT_FOUND));
     }
 
-    int countByHostId(Long hostId);
-
     List<Moim> findMoimByhostIdAndMoimState(Long hostId, String moimState);
 
     @Query(value = "SELECT * FROM moims WHERE EXISTS (" +

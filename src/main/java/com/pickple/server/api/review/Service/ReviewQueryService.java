@@ -55,7 +55,7 @@ public class ReviewQueryService {
         List<Moim> moimList = moimRepository.findMoimByHostId(hostId);
 
         return moimList.stream()
-                .flatMap(oneMoim -> reviewRepository.findReviewByMoimId(oneMoim.getId()).stream()
+                .flatMap(oneMoim -> reviewRepository.findReviewListByMoimIdOrderByCreatedAt(oneMoim.getId()).stream()
                         .map(review -> ReviewListGetByHostResponse.builder()
                                 .moimId(oneMoim.getId())
                                 .moimTitle(oneMoim.getTitle())

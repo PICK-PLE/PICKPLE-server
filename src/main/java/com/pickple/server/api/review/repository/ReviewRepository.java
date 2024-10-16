@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
+
     boolean existsByMoimIdAndGuestId(Long moimId, Long guestId);
 
     List<Review> findReviewListByMoimIdOrderByCreatedAt(Long moimId);
 
-    List<Review> findReviewByMoimId(Long moimId);
 }
