@@ -37,7 +37,7 @@ public class ReviewQueryService {
     }
 
     public List<ReviewListGetByMoimResponse> getReviewListByMoim(Long moimId) {
-        List<Review> reviews = reviewRepository.findReviewListByMoimId(moimId);
+        List<Review> reviews = reviewRepository.findReviewListByMoimIdOrderByCreatedAt(moimId);
 
         return reviews.stream()
                 .map(review -> ReviewListGetByMoimResponse.builder()
