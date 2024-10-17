@@ -7,6 +7,8 @@ import com.pickple.server.api.moim.domain.enums.MoimState;
 import com.pickple.server.api.moim.dto.request.MoimCreateRequest;
 import com.pickple.server.api.moim.dto.response.MoimCreateResponse;
 import com.pickple.server.api.moim.repository.MoimRepository;
+import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
+import com.pickple.server.api.moimsubmission.repository.MoimSubmissionRepository;
 import com.pickple.server.global.util.DateUtil;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -23,6 +25,7 @@ public class MoimCommandService {
 
     private final HostRepository hostRepository;
     private final MoimRepository moimRepository;
+    private final MoimSubmissionRepository moimSubmissionRepository;
 
     public MoimCreateResponse createMoim(Long hostId, MoimCreateRequest request) {
         Host host = hostRepository.findHostByIdOrThrow(hostId);
@@ -57,6 +60,11 @@ public class MoimCommandService {
         for (Moim moim : moimList) {
             if (moim.getDateList().getEndTime().isBefore(LocalTime.now())) {
                 moim.updateMoimState("completed");
+                List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findApprovedMoimSubmissionsByMoimId(
+                        moim.getId());
+                for (MoimSubmission moimSubmission : moimSubmissionList) {
+                    moimSubmission.updateMoimSubmissionState("completed");
+                }
             }
         }
     }
