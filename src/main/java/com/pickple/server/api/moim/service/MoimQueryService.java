@@ -43,7 +43,7 @@ public class MoimQueryService {
                 .fee(moim.getFee())
                 .imageList(moim.getImageList())
                 .hostId(moim.getHost().getId())
-                .isSubmitted(moimSubmissionRepository.existsByMoimAndGuestId(moim, guestId))
+                .isSubmitted(moimSubmissionRepository.existsByMoimIdAndGuestId(moimId, guestId))
                 .build();
     }
 
@@ -67,7 +67,7 @@ public class MoimQueryService {
         if (category.equals("all")) {
             moimList = moimRepository.findAll();
         } else {
-            moimList = moimRepository.findMoimListByCategory(category);
+            moimList = moimRepository.findMoimsByCategory(category);
         }
 
         return moimList.stream()
@@ -106,7 +106,7 @@ public class MoimQueryService {
     }
 
     public List<MoimListByHostAndMoimStateGetResponse> getMoimListByHostAndMoimState(Long hostId, String moimState) {
-        List<Moim> moimList = moimRepository.findMoimByhostIdAndMoimState(hostId, moimState);
+        List<Moim> moimList = moimRepository.findMoimsByhostIdAndMoimState(hostId, moimState);
 
         return moimList.stream()
                 .map(oneMoim -> MoimListByHostAndMoimStateGetResponse.builder()
@@ -120,7 +120,7 @@ public class MoimQueryService {
     }
 
     public List<MoimListByHostGetResponse> getMoimListByHost(Long hostId) {
-        List<Moim> moimList = moimRepository.findMoimByHostId(hostId);
+        List<Moim> moimList = moimRepository.findMoimsByHostId(hostId);
 
         return moimList.stream()
                 .map(oneMoim -> MoimListByHostGetResponse.builder()

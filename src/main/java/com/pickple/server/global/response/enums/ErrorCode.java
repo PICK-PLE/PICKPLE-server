@@ -45,6 +45,7 @@ public enum ErrorCode {
     SUBMITTER_NOT_FOUND(40408, HttpStatus.NOT_FOUND, "호스트 승인 신청이 존재하지 않습니다."),
     NOTICE_NOT_FOUND(40409, HttpStatus.NOT_FOUND, "존재하지 않는 공지사항입니다."),
     COMMENT_NOT_FOUND(40410, HttpStatus.NOT_FOUND, "존재하지 않는 댓글입니다."),
+    REVIEW_NOT_FOUND(40411, HttpStatus.NOT_FOUND, "존재하지 않는 리뷰입니다."),
 
     // 405 Method Not Allowed Error
     METHOD_NOT_ALLOWED(40500, HttpStatus.METHOD_NOT_ALLOWED, "지원하지 않는 메소드입니다."),

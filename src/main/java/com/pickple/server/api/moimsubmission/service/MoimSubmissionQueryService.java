@@ -41,10 +41,10 @@ public class MoimSubmissionQueryService {
         List<MoimSubmission> moimSubmissionList;
 
         if (moimSubmissionState.equals(MoimSubmissionState.ALL.getMoimSubmissionState())) {
-            moimSubmissionList = moimSubmissionRepository.findAllSubmittedMoimSubmission(guest.getId());
+            moimSubmissionList = moimSubmissionRepository.findSubmittedMoimSubmissions(guest.getId());
         } else {
-            moimSubmissionList = moimSubmissionRepository.findAllByGuestIdAndMoimSubmissionState(guestId,
-                    moimSubmissionState);
+            moimSubmissionList = moimSubmissionRepository.findMoimSubmissionsByGuestIdAndMoimSubmissionState
+                    (guestId, moimSubmissionState);
         }
 
         return moimSubmissionList.stream()
@@ -61,7 +61,7 @@ public class MoimSubmissionQueryService {
     }
 
     public SubmittionDetailResponse getSubmissionDetail(Long moimId, Long guestId) {
-        MoimSubmission submission = moimSubmissionRepository.findByMoimIdAndGuestId(moimId, guestId);
+        MoimSubmission submission = moimSubmissionRepository.findMoimSubmissionByMoimIdAndGuestId(moimId, guestId);
 
         if (submission == null) {
             throw new CustomException(ErrorCode.MOIM_SUBMISSION_NOT_FOUND);
@@ -98,7 +98,7 @@ public class MoimSubmissionQueryService {
 
         // moimSubmissionList 가져오기
         List<MoimSubmission> moimSubmissionList = moimSubmissionRepository
-                .findMoimListByMoimIdAndMoimSubmissionState(moimId);
+                .findMoimSubmissionsByMoimIdAndMoimSubmissionState(moimId);
 
         // guestId를 이용하여 SubmitterInfo 객체 생성 후 리스트에 저장
         List<SubmitterInfo> submitterInfoList = moimSubmissionList.stream()
@@ -170,7 +170,7 @@ public class MoimSubmissionQueryService {
                 .orElseThrow(() -> new CustomException(ErrorCode.GUEST_NOT_FOUND));
 
         //MoimSubmission 객체를 가져옴
-        MoimSubmission moimSubmission = moimSubmissionRepository.findByMoimIdAndGuestId(moimId, guestId);
+        MoimSubmission moimSubmission = moimSubmissionRepository.findMoimSubmissionByMoimIdAndGuestId(moimId, guestId);
 
         // SubmitterInfo 객체 생성
         return new SubmitterInfo(
@@ -183,7 +183,7 @@ public class MoimSubmissionQueryService {
     }
 
     public boolean isMoimSubmissonApproved(Long moimId) {
-        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimSubmissionByMoimId(moimId);
+        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findMoimSubmissionsByMoimId(moimId);
 
         //모임에 해당하는 신청 내역 중 approved or rejected가 있는 경우 true 리턴
         for (MoimSubmission moimSubmission : moimSubmissionList) {

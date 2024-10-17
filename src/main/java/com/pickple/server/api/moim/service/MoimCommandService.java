@@ -55,7 +55,7 @@ public class MoimCommandService {
     public void changeMoimStateOfDday() {
         LocalDate date = LocalDate.now();
         String formattedDate = DateUtil.refineDate(date);
-        List<Moim> moimList = moimRepository.findByDate(formattedDate);
+        List<Moim> moimList = moimRepository.findMoimsByDate(formattedDate);
 
         for (Moim moim : moimList) {
             if (moim.getDateList().getEndTime().isBefore(LocalTime.now())) {
