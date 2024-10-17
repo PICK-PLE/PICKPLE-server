@@ -13,8 +13,8 @@ import org.springframework.data.jpa.repository.Query;
 public interface UserRepository extends JpaRepository<User, Long>, UserRepositoryCustom {
 
     @Query("SELECT u FROM User u WHERE u.socialId = :socialId AND u.socialType = :socialType")
-    Optional<User> findBySocialTypeAndSocialId(@Param("socialId") Long socialId,
-                                               @Param("socialType") SocialType socialType);
+    Optional<User> findUserBySocialTypeAndSocialId(@Param("socialId") Long socialId,
+                                                   @Param("socialType") SocialType socialType);
 
     Optional<User> findUserById(Long id);
 

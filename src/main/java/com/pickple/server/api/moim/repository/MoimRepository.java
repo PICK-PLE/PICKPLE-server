@@ -17,23 +17,21 @@ public interface MoimRepository extends JpaRepository<Moim, Long> {
                 .orElseThrow(() -> new CustomException(ErrorCode.MOIM_NOT_FOUND));
     }
 
-    int countByHostId(Long hostId);
-
-    List<Moim> findMoimByhostIdAndMoimState(Long hostId, String moimState);
+    List<Moim> findMoimsByhostIdAndMoimState(Long hostId, String moimState);
 
     @Query(value = "SELECT * FROM moims WHERE EXISTS (" +
             "SELECT 1 FROM jsonb_each_text(category_list) AS categories " +
             "WHERE categories.value = :category)",
             nativeQuery = true)
-    List<Moim> findMoimListByCategory(@Param("category") String category);
+    List<Moim> findMoimsByCategory(@Param("category") String category);
 
     @Query(value = "SELECT * FROM moims WHERE date_list->>'date' = :date AND moim_state = 'ongoing'", nativeQuery = true)
-    List<Moim> findByDate(String date);
+    List<Moim> findMoimsByDate(String date);
 
     @Query("SELECT m FROM Moim m WHERE m.host.id = :hostId AND m.moimState = 'completed'")
     List<Moim> findCompletedMoimsByHostId(@Param("hostId") Long hostId);
 
-    List<Moim> findMoimByHostId(Long hostId);
+    List<Moim> findMoimsByHostId(Long hostId);
 
     int countByHostIdAndMoimState(Long hostId, String moimState);
 }

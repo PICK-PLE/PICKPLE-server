@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface NoticeRepository extends JpaRepository<Notice, Long> {
 
-    List<Notice> findNoticeByMoimIdOrderByCreatedAtDesc(Long moimId);
+    List<Notice> findNoticesByMoimIdOrderByCreatedAtDesc(Long moimId);
 
     Optional<Notice> findNoticeById(Long id);
 
