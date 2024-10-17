@@ -1,7 +1,6 @@
 package com.pickple.server.api.moimsubmission.service;
 
 import com.pickple.server.api.moim.domain.Moim;
-import com.pickple.server.api.moim.domain.enums.MoimState;
 import com.pickple.server.api.moim.repository.MoimRepository;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmission;
 import com.pickple.server.api.moimsubmission.domain.MoimSubmissionState;
@@ -11,7 +10,6 @@ import com.pickple.server.global.exception.CustomException;
 import com.pickple.server.global.response.enums.ErrorCode;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,16 +70,6 @@ public class MoimSubmissionCommandService {
             moimSubmission.updateMoimSubmissionState(MoimSubmissionState.PENDING_APPROVAL.getMoimSubmissionState());
         } else {
             throw new CustomException(ErrorCode.MOIM_SUBMISSION_STATE_TRANSITION_NOT_ALLOWED);
-        }
-    }
-
-    @Scheduled(cron = "0 1 0/1 * * *", zone = "Asia/Seoul")
-    public void changeMoimSubmissionStateOfEndTime() {
-        List<MoimSubmission> moimSubmissionList = moimSubmissionRepository.findAllApprovedMoimSubmissions();
-        for (MoimSubmission moimSubmission : moimSubmissionList) {
-            if (moimSubmission.getMoim().getMoimState().equals(MoimState.COMPLETED.getMoimState())) {
-                moimSubmission.updateMoimSubmissionState(MoimSubmissionState.COMPLETED.getMoimSubmissionState());
-            }
         }
     }
 }
