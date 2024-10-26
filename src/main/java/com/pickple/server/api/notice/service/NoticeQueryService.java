@@ -30,8 +30,7 @@ public class NoticeQueryService {
     private final GuestRepository guestRepository;
 
     public List<NoticeListGetByMoimResponse> getNoticeListByMoimId(Long moimId, Long guestId) {
-        Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
-        List<Notice> noticeList = noticeRepository.findNoticesByMoimIdOrderByCreatedAtDesc(moimId);
+        List<Notice> noticeList = noticeRepository.findNoticesByMoimId(moimId);
 
         boolean isAppliedUser = isUserAppliedToMoim(moimId, guestId);
 
@@ -39,14 +38,14 @@ public class NoticeQueryService {
                 .filter(notice -> canAccessNotice(notice, isAppliedUser))
                 .map(oneNotice -> NoticeListGetByMoimResponse.builder()
                         .noticeId(oneNotice.getId())
-                        .hostNickName(moim.getHost().getNickname())
-                        .hostImageUrl(moim.getHost().getImageUrl())
+                        .hostNickName(oneNotice.getMoim().getHost().getNickname())
+                        .hostImageUrl(oneNotice.getMoim().getHost().getImageUrl())
                         .title(oneNotice.getTitle())
                         .content(oneNotice.getContent())
                         .date(DateTimeUtil.refineDateAndTime(oneNotice.getCreatedAt()))
                         .noticeImageUrl(oneNotice.getImageUrl())
-                        .hostId(moim.getHost().getId())
-                        .commentNumber(commentRepository.countCommentByNoticeId(oneNotice.getId()))
+                        .hostId(oneNotice.getMoim().getHost().getId())
+                        .commentNumber(oneNotice.getComments().size())
                         .isPrivate(oneNotice.isPrivate())
                         .build())
                 .collect(Collectors.toList());

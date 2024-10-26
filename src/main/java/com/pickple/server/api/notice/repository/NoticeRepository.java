@@ -6,10 +6,13 @@ import com.pickple.server.global.response.enums.ErrorCode;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface NoticeRepository extends JpaRepository<Notice, Long> {
 
-    List<Notice> findNoticesByMoimIdOrderByCreatedAtDesc(Long moimId);
+    @Query("SELECT DISTINCT n FROM Notice n JOIN FETCH n.moim m JOIN FETCH m.host "
+            + "LEFT JOIN FETCH n.comments WHERE m.id = :moimId ORDER BY n.createdAt DESC")
+    List<Notice> findNoticesByMoimId(Long moimId);
 
     Optional<Notice> findNoticeById(Long id);
 
