@@ -1,6 +1,5 @@
 package com.pickple.server.api.notice.service;
 
-import com.pickple.server.api.comment.repository.CommentRepository;
 import com.pickple.server.api.guest.repository.GuestRepository;
 import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.repository.MoimRepository;
@@ -25,7 +24,6 @@ public class NoticeQueryService {
 
     private final MoimRepository moimRepository;
     private final NoticeRepository noticeRepository;
-    private final CommentRepository commentRepository;
     private final MoimSubmissionRepository moimSubmissionRepository;
     private final GuestRepository guestRepository;
 
@@ -52,19 +50,18 @@ public class NoticeQueryService {
     }
 
     public NoticeDetailGetResponse getNoticeDetail(Long userId, Long moimId, Long noticeId) {
-        Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
         Notice notice = noticeRepository.findNoticeByIdOrThrow(noticeId);
 
         return NoticeDetailGetResponse.builder()
-                .hostImageUrl(moim.getHost().getImageUrl())
-                .hostNickname(moim.getHost().getNickname())
+                .hostImageUrl(notice.getMoim().getHost().getImageUrl())
+                .hostNickname(notice.getMoim().getHost().getNickname())
                 .title(notice.getTitle())
                 .content(notice.getContent())
                 .noticeImageUrl(notice.getImageUrl())
                 .dateTime(DateTimeUtil.refineDateAndTime(notice.getCreatedAt()))
-                .commentNumber(commentRepository.countCommentByNoticeId(noticeId))
+                .commentNumber(notice.getComments().size())
                 .isPrivate(notice.isPrivate())
-                .isOwner(checkOwner(userId, moim.getId()))
+                .isOwner(checkOwner(userId, notice.getMoim().getId()))
                 .build();
     }
 
