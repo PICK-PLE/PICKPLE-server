@@ -28,8 +28,7 @@ public class CommentQueryService {
     private final GuestRepository guestRepository;
 
     public List<CommentGetResponse> getCommentListByNotice(Long noticeId) {
-        Notice notice = noticeRepository.findNoticeByIdOrThrow(noticeId);
-        List<Comment> commentList = commentRepository.findCommentsByNoticeId(notice.getId());
+        List<Comment> commentList = commentRepository.findCommentsByNoticeId(noticeId);
 
         return commentList.stream().map(comment -> {
             Long commenterId = comment.getCommenter().getId();

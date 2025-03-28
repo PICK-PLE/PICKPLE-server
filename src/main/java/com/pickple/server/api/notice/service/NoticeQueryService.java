@@ -1,6 +1,5 @@
 package com.pickple.server.api.notice.service;
 
-import com.pickple.server.api.comment.repository.CommentRepository;
 import com.pickple.server.api.guest.repository.GuestRepository;
 import com.pickple.server.api.moim.domain.Moim;
 import com.pickple.server.api.moim.repository.MoimRepository;
@@ -25,13 +24,11 @@ public class NoticeQueryService {
 
     private final MoimRepository moimRepository;
     private final NoticeRepository noticeRepository;
-    private final CommentRepository commentRepository;
     private final MoimSubmissionRepository moimSubmissionRepository;
     private final GuestRepository guestRepository;
 
     public List<NoticeListGetByMoimResponse> getNoticeListByMoimId(Long moimId, Long guestId) {
-        Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
-        List<Notice> noticeList = noticeRepository.findNoticesByMoimIdOrderByCreatedAtDesc(moimId);
+        List<Notice> noticeList = noticeRepository.findNoticesByMoimId(moimId);
 
         boolean isAppliedUser = isUserAppliedToMoim(moimId, guestId);
 
@@ -39,33 +36,32 @@ public class NoticeQueryService {
                 .filter(notice -> canAccessNotice(notice, isAppliedUser))
                 .map(oneNotice -> NoticeListGetByMoimResponse.builder()
                         .noticeId(oneNotice.getId())
-                        .hostNickName(moim.getHost().getNickname())
-                        .hostImageUrl(moim.getHost().getImageUrl())
+                        .hostNickName(oneNotice.getMoim().getHost().getNickname())
+                        .hostImageUrl(oneNotice.getMoim().getHost().getImageUrl())
                         .title(oneNotice.getTitle())
                         .content(oneNotice.getContent())
                         .date(DateTimeUtil.refineDateAndTime(oneNotice.getCreatedAt()))
                         .noticeImageUrl(oneNotice.getImageUrl())
-                        .hostId(moim.getHost().getId())
-                        .commentNumber(commentRepository.countCommentByNoticeId(oneNotice.getId()))
+                        .hostId(oneNotice.getMoim().getHost().getId())
+                        .commentNumber(oneNotice.getComments().size())
                         .isPrivate(oneNotice.isPrivate())
                         .build())
                 .collect(Collectors.toList());
     }
 
     public NoticeDetailGetResponse getNoticeDetail(Long userId, Long moimId, Long noticeId) {
-        Moim moim = moimRepository.findMoimByIdOrThrow(moimId);
         Notice notice = noticeRepository.findNoticeByIdOrThrow(noticeId);
 
         return NoticeDetailGetResponse.builder()
-                .hostImageUrl(moim.getHost().getImageUrl())
-                .hostNickname(moim.getHost().getNickname())
+                .hostImageUrl(notice.getMoim().getHost().getImageUrl())
+                .hostNickname(notice.getMoim().getHost().getNickname())
                 .title(notice.getTitle())
                 .content(notice.getContent())
                 .noticeImageUrl(notice.getImageUrl())
                 .dateTime(DateTimeUtil.refineDateAndTime(notice.getCreatedAt()))
-                .commentNumber(commentRepository.countCommentByNoticeId(noticeId))
+                .commentNumber(notice.getComments().size())
                 .isPrivate(notice.isPrivate())
-                .isOwner(checkOwner(userId, moim.getId()))
+                .isOwner(checkOwner(userId, notice.getMoim().getId()))
                 .build();
     }
 
